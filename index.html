@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brian Ferguson | Infrastructure Automation Portfolio</title>
+  <meta
+    name="description"
+    content="Professional portfolio for Brian Ferguson, focused on infrastructure automation, operational tooling, and reliable operator-facing systems."
+  >
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="./">BF</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#approach">Approach</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Infrastructure Automation Portfolio</p>
+          <h1>Brian Ferguson builds operator-focused tooling for infrastructure and systems work.</h1>
+          <p class="lede">
+            Solo-maintained projects spanning Python, PowerShell, validation tooling, and lab automation.
+            This site is a concise hiring-facing view of the work, with project context and source links.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#projects">View Projects</a>
+            <a class="button button-secondary" href="https://github.com/bferguson-dev" target="_blank" rel="noreferrer">GitHub Profile</a>
+          </div>
+        </div>
+        <aside class="hero-panel" aria-label="Professional summary">
+          <p class="panel-label">Target Direction</p>
+          <h2>Infrastructure automation, platform tooling, and operations engineering roles.</h2>
+          <ul class="signal-list">
+            <li>Builds tools intended to be auditable, maintainable, and usable by operators.</li>
+            <li>Works across Python, PowerShell, CI, local lab environments, and systems workflows.</li>
+            <li>Favors honest project positioning over inflated claims.</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section class="section" id="about">
+        <div class="section-heading">
+          <p class="eyebrow">About</p>
+          <h2>Professional focus</h2>
+        </div>
+        <div class="two-column-copy">
+          <p>
+            My work centers on making infrastructure tasks more repeatable and easier to reason about:
+            turning operational intent into tools, checks, and workflows that reduce ambiguity.
+          </p>
+          <p>
+            The projects featured here are independent builds. They emphasize practical delivery,
+            controlled validation, and clear documentation rather than vague product language.
+          </p>
+        </div>
+        <div class="focus-grid">
+          <article class="focus-card">
+            <h3>Automation with guardrails</h3>
+            <p>Validation, explicit workflows, and artifacts that support trust in execution.</p>
+          </article>
+          <article class="focus-card">
+            <h3>Operator-friendly tooling</h3>
+            <p>Projects designed to support real usage, not just demonstrate a pattern.</p>
+          </article>
+          <article class="focus-card">
+            <h3>Evidence-driven quality</h3>
+            <p>Unit tests, controlled integration coverage, and CI where it adds real value.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="projects">
+        <div class="section-heading">
+          <p class="eyebrow">Selected Work</p>
+          <h2>Featured projects</h2>
+        </div>
+        <div class="project-grid">
+          <article class="project-card project-card-featured">
+            <div class="project-meta">
+              <span class="pill">Featured</span>
+              <span class="pill pill-muted">Python</span>
+              <span class="pill pill-muted">Infrastructure</span>
+            </div>
+            <h3>FailWarden Orchestrator</h3>
+            <p>
+              A constrained YAML runbook executor for infrastructure remediation over SSH with
+              compile-time validation, audit logging, notification support, dry-run previews, and shipped runbooks.
+            </p>
+            <ul class="project-points">
+              <li>Current tagged release: v0.2.0</li>
+              <li>V1 and V1.5 are implemented</li>
+              <li>Validated with strong unit and controlled local integration coverage</li>
+            </ul>
+            <div class="project-links">
+              <a class="text-link" href="projects/failwarden-orchestrator/">Project page</a>
+              <a class="text-link" href="https://github.com/bferguson-dev/FailWarden-Orchestrator" target="_blank" rel="noreferrer">GitHub repo</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-meta">
+              <span class="pill pill-muted">PowerShell</span>
+              <span class="pill pill-muted">Desktop Tooling</span>
+            </div>
+            <h3>Loadout</h3>
+            <p>
+              A Windows workstation setup tool for infrastructure professionals, built as a portable
+              PowerShell and WPF app for installing, updating, and removing a curated toolset.
+            </p>
+            <div class="project-links">
+              <a class="text-link" href="projects/loadout/">Project page</a>
+              <a class="text-link" href="https://github.com/bferguson-dev/Loadout" target="_blank" rel="noreferrer">GitHub repo</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-meta">
+              <span class="pill pill-muted">Python</span>
+              <span class="pill pill-muted">Validation</span>
+            </div>
+            <h3>ReadyCheck</h3>
+            <p>
+              A CLI for repeatable, audit-friendly connectivity validation that compares observed
+              network behavior to declared allow or deny intent and generates review artifacts.
+            </p>
+            <div class="project-links">
+              <a class="text-link" href="projects/readycheck/">Project page</a>
+              <a class="text-link" href="https://github.com/bferguson-dev/ReadyCheck" target="_blank" rel="noreferrer">GitHub repo</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-meta">
+              <span class="pill pill-muted">Ansible</span>
+              <span class="pill pill-muted">Homelab</span>
+            </div>
+            <h3>My Lab Setup</h3>
+            <p>
+              A sanitized Proxmox lab automation repo covering provisioning phases, guest baseline
+              configuration, media handling, and snapshot or clone workflows.
+            </p>
+            <div class="project-links">
+              <a class="text-link" href="projects/my-lab-setup/">Project page</a>
+              <a class="text-link" href="https://github.com/bferguson-dev/My-Lab-Setup" target="_blank" rel="noreferrer">GitHub repo</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-meta">
+              <span class="pill pill-muted">Python</span>
+              <span class="pill pill-muted">Windows Compliance</span>
+            </div>
+            <h3>YMC</h3>
+            <p>
+              An agentless Windows Server compliance scanner that connects over WinRM, runs security
+              checks remotely, and produces audit-ready HTML and JSON reports with evidence.
+            </p>
+            <div class="project-links">
+              <a class="text-link" href="projects/ymc/">Project page</a>
+              <a class="text-link" href="https://github.com/bferguson-dev/YMC" target="_blank" rel="noreferrer">GitHub repo</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="approach">
+        <div class="section-heading">
+          <p class="eyebrow">Working Style</p>
+          <h2>How the projects are built</h2>
+        </div>
+        <div class="approach-grid">
+          <article class="approach-card">
+            <h3>Honest scope</h3>
+            <p>Project pages separate what is implemented, what is validated locally, and what remains future work.</p>
+          </article>
+          <article class="approach-card">
+            <h3>Practical quality</h3>
+            <p>CI, local test gates, and release notes are added where they improve maintainability for a solo-maintainer workflow.</p>
+          </article>
+          <article class="approach-card">
+            <h3>Readable documentation</h3>
+            <p>README and portfolio content are written for fast review by engineers, recruiters, and hiring managers.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section-contact" id="contact">
+        <div class="section-heading">
+          <p class="eyebrow">Contact</p>
+          <h2>Current links</h2>
+        </div>
+        <div class="contact-card">
+          <p>
+            This first pass includes the links you provided. LinkedIn, resume, and direct email can be added
+            cleanly once you decide which contact points you want public on the site.
+          </p>
+          <div class="contact-links">
+            <a class="button button-primary" href="https://github.com/bferguson-dev" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="button button-secondary" href="https://github.com/bferguson-dev/FailWarden-Orchestrator" target="_blank" rel="noreferrer">Featured repo</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Brian Ferguson</p>
+      <p>Infrastructure automation and operations tooling portfolio</p>
+    </footer>
+  </div>
+  <script src="assets/js/site.js"></script>
+</body>
+</html>
