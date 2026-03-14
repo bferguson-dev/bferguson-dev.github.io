@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guided Overview Preview | Byron Ferguson</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --panel: #ffffff;
+      --text: #1a2530;
+      --muted: #64717c;
+      --accent: #365fc7;
+      --accent-soft: #e6ecff;
+      --line: rgba(26,37,48,0.09);
+      --max: 1160px;
+      --body: "Avenir Next", "Segoe UI", Arial, sans-serif;
+      --heading: "Avenir Next", "Segoe UI", Arial, sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:radial-gradient(circle at 18% 12%, rgba(54,95,199,0.08), transparent 18%),linear-gradient(180deg,#fafcff 0%,#eef3fb 100%);color:var(--text);font-family:var(--body);line-height:1.56}
+    a{color:inherit}
+    .wrap{width:min(calc(100% - 2rem),var(--max));margin:0 auto;padding:1.2rem 0 3rem}
+    .top,.hero,.card,.feature{background:var(--panel);border:1px solid var(--line);border-radius:26px}
+    .top{display:flex;justify-content:space-between;align-items:center;padding:0.95rem 1.15rem;margin-bottom:1rem}
+    .brand,.button,.text-link{text-decoration:none}
+    .brand{display:inline-flex;align-items:center;justify-content:center;width:2.5rem;height:2.5rem;border-radius:50%;background:#223e84;color:#f5f8ff;font-weight:800}
+    .nav{display:flex;gap:1rem;flex-wrap:wrap;color:var(--muted)}
+    .hero-wrap,.path,.projects{display:grid;gap:1rem}
+    .hero-wrap{grid-template-columns:1.25fr 0.75fr;margin-bottom:1rem}
+    .path{grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:1rem}
+    .projects{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .hero,.card,.feature{padding:1.4rem}
+    .eyebrow{margin:0 0 0.75rem;color:var(--accent);font-size:0.8rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase}
+    h1,h2,h3{margin-top:0;font-family:var(--heading);line-height:1.03}
+    h1{font-size:clamp(2.4rem,8vw,4.6rem);font-weight:800;max-width:11ch}
+    h2,h3{font-weight:800}
+    .muted{color:var(--muted)}
+    .actions{display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1rem}
+    .button{display:inline-flex;align-items:center;justify-content:center;min-height:2.85rem;padding:0.7rem 1rem;border-radius:999px;font-weight:700;border:1px solid rgba(34,62,132,0.16)}
+    .button.primary{background:#223e84;color:#f5f8ff;border-color:transparent}
+    .step{display:inline-flex;align-items:center;justify-content:center;width:1.8rem;height:1.8rem;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-weight:800;margin-bottom:0.75rem}
+    .feature{background:linear-gradient(135deg,#223e84 0%,#365fc7 100%);color:#f6f8ff}
+    .feature .muted,.feature .text-link{color:rgba(246,248,255,0.86)}
+    ul{padding-left:1.1rem;margin:0.75rem 0 0}
+    @media (max-width:900px){.hero-wrap,.path,.projects{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="../">BF</a>
+      <nav class="nav">
+        <a href="../">Current site</a>
+        <a href="clear-signal.html">Clear Signal</a>
+        <a href="consulting-profile.html">Consulting</a>
+      </nav>
+    </header>
+    <section class="hero-wrap">
+      <article class="hero">
+        <p class="eyebrow">Guided Overview</p>
+        <h1>One page that works for both fast scans and deeper reading.</h1>
+        <p class="muted">This version is structured around decision paths. A recruiter can stop at the top and still understand the role fit. An engineering manager can keep going and get enough substance without opening three more tabs.</p>
+        <div class="actions">
+          <a class="button primary" href="../">Back to current site</a>
+          <a class="button" href="../projects/failwarden-orchestrator/">Open project detail</a>
+        </div>
+      </article>
+      <article class="card">
+        <p class="eyebrow">Intent</p>
+        <ul>
+          <li>Not blog-like</li>
+          <li>Not paper-like</li>
+          <li>Fast top-level read with optional depth built in</li>
+        </ul>
+      </article>
+    </section>
+    <section class="path">
+      <article class="card"><div class="step">1</div><h2>See what you do</h2><p class="muted">Infrastructure automation and operations tooling, stated directly.</p></article>
+      <article class="card"><div class="step">2</div><h2>See proof fast</h2><p class="muted">A featured project with release and maturity context up front.</p></article>
+      <article class="card"><div class="step">3</div><h2>Choose depth</h2><p class="muted">Project pages and sections support deeper review without cluttering the first screen.</p></article>
+    </section>
+    <section class="projects">
+      <article class="feature"><h2>Featured Project</h2><h3>FailWarden Orchestrator</h3><p class="muted">Runbook execution, auditability, shipped scope, and careful validation language in one featured block.</p></article>
+      <article class="card"><h2>Supporting Projects</h2><ul><li>YMC for compliance evidence collection</li><li>Loadout for workstation tooling</li><li>ReadyCheck for validation workflows</li><li>My Lab Setup for lab automation context</li></ul></article>
+    </section>
+  </div>
+</body>
+</html>

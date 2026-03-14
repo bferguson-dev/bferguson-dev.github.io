@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Console Lite Preview | Byron Ferguson</title>
+  <style>
+    :root {
+      --bg: #f0f6f8;
+      --panel: #ffffff;
+      --text: #162028;
+      --muted: #61717a;
+      --accent: #287f8d;
+      --accent-2: #8cc7d0;
+      --line: rgba(22,32,40,0.1);
+      --max: 1180px;
+      --body: "Avenir Next", "Segoe UI", Arial, sans-serif;
+      --mono: "IBM Plex Mono", monospace;
+      --heading: "Avenir Next", "Segoe UI", Arial, sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,#f8fcfd 0%,#e9f2f4 100%);color:var(--text);font-family:var(--body);line-height:1.56}
+    a{color:inherit}
+    .wrap{width:min(calc(100% - 2rem),var(--max));margin:0 auto;padding:1.2rem 0 3rem}
+    .top,.panel,.card{background:var(--panel);border:1px solid var(--line);border-radius:24px}
+    .top{display:flex;justify-content:space-between;align-items:center;padding:0.95rem 1.15rem;margin-bottom:1rem}
+    .brand,.button{text-decoration:none}
+    .brand{display:inline-flex;align-items:center;justify-content:center;width:2.5rem;height:2.5rem;border-radius:50%;background:#163843;color:#eef9fb;font-weight:800}
+    .nav{display:flex;gap:1rem;flex-wrap:wrap;color:var(--muted)}
+    .hero,.stats,.projects{display:grid;gap:1rem}
+    .hero{grid-template-columns:1.2fr 0.8fr;margin-bottom:1rem}
+    .stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:1rem}
+    .projects{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .panel,.card{padding:1.35rem}
+    .eyebrow{margin:0 0 0.75rem;color:var(--accent);font-family:var(--mono);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.12em}
+    h1,h2,h3{margin-top:0;font-family:var(--heading);line-height:1.02}
+    h1{font-size:clamp(2.4rem,8vw,4.7rem);font-weight:800;max-width:11ch}
+    h2,h3{font-weight:800}
+    .muted{color:var(--muted)}
+    .actions{display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1rem}
+    .button{display:inline-flex;align-items:center;justify-content:center;min-height:2.85rem;padding:0.7rem 1rem;border-radius:999px;border:1px solid rgba(22,56,67,0.14);font-weight:700}
+    .button.primary{background:#163843;color:#eef9fb;border-color:transparent}
+    .metric{font-family:var(--mono);font-size:0.8rem;color:var(--muted);margin-bottom:0.55rem}
+    .pill{display:inline-flex;align-items:center;min-height:1.9rem;padding:0.18rem 0.6rem;border-radius:999px;background:#e4f2f5;color:#1f6c78;font-family:var(--mono);font-size:0.78rem}
+    ul{padding-left:1.1rem;margin:0.75rem 0 0}
+    @media (max-width:900px){.hero,.stats,.projects{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="../">BF</a>
+      <nav class="nav">
+        <a href="../">Current site</a>
+        <a href="clear-signal.html">Clear Signal</a>
+        <a href="guided-overview.html">Guided Overview</a>
+      </nav>
+    </header>
+    <section class="hero">
+      <article class="panel">
+        <p class="eyebrow">Modern Console Lite</p>
+        <h1>Operator-console energy without the industrial weight.</h1>
+        <p class="muted">This keeps the direct, compact, high-signal language of the console idea, but moves into a lighter, fresher palette and a cleaner executive-friendly presentation.</p>
+        <div class="actions">
+          <a class="button primary" href="../">Back to current site</a>
+          <a class="button" href="../projects/failwarden-orchestrator/">Inspect featured project</a>
+        </div>
+      </article>
+      <article class="panel">
+        <p class="eyebrow">Tone</p>
+        <p><span class="pill">fast read</span> <span class="pill">manager friendly</span> <span class="pill">technical enough</span></p>
+        <ul>
+          <li>Feels modern instead of retro</li>
+          <li>Still clearly aimed at infrastructure work</li>
+          <li>Better for a first impression than the darker console version</li>
+        </ul>
+      </article>
+    </section>
+    <section class="stats">
+      <article class="card"><div class="metric">focus</div><h2>Automation</h2><p class="muted">Operator-facing tooling and workflow clarity.</p></article>
+      <article class="card"><div class="metric">featured</div><h2>FailWarden</h2><p class="muted">Runbook execution and validation boundaries.</p></article>
+      <article class="card"><div class="metric">supporting</div><h2>YMC</h2><p class="muted">Compliance and evidence collection.</p></article>
+      <article class="card"><div class="metric">range</div><h2>More</h2><p class="muted">Loadout, ReadyCheck, My Lab Setup.</p></article>
+    </section>
+    <section class="projects">
+      <article class="card"><h2>What the reader learns immediately</h2><p class="muted">Who you are, what kind of work you do, and which project is the best evidence.</p></article>
+      <article class="card"><h2>What they can do next</h2><p class="muted">Open a project page for more depth without needing to navigate a maze of subpages.</p></article>
+    </section>
+  </div>
+</body>
+</html>

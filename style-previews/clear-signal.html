@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clear Signal Preview | Byron Ferguson</title>
+  <style>
+    :root {
+      --bg: #edf4f7;
+      --panel: rgba(255,255,255,0.84);
+      --text: #17252f;
+      --muted: #5b6b73;
+      --accent: #1b6a82;
+      --accent-soft: #dcecf2;
+      --line: rgba(23,37,47,0.11);
+      --max: 1160px;
+      --body: "Avenir Next", "Segoe UI", Arial, sans-serif;
+      --heading: "Iowan Old Style", Georgia, serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;color:var(--text);font-family:var(--body);line-height:1.58;background:radial-gradient(circle at 15% 15%, rgba(27,106,130,0.12), transparent 18%),radial-gradient(circle at 85% 12%, rgba(129,177,196,0.18), transparent 18%),linear-gradient(180deg,#f5fafb 0%,#e8f0f3 100%)}
+    a{color:inherit}
+    .wrap{width:min(calc(100% - 2rem),var(--max));margin:0 auto;padding:1.2rem 0 3rem}
+    .top,.panel,.card{background:var(--panel);border:1px solid var(--line);border-radius:26px;backdrop-filter:blur(12px)}
+    .top{display:flex;justify-content:space-between;align-items:center;padding:0.95rem 1.15rem;margin-bottom:1rem}
+    .brand,.button,.text-link{text-decoration:none}
+    .brand{display:inline-flex;align-items:center;justify-content:center;width:2.5rem;height:2.5rem;border-radius:50%;background:#123947;color:#f3fbfd;font-weight:800}
+    .nav{display:flex;gap:1rem;flex-wrap:wrap;color:var(--muted)}
+    .hero,.grid,.projects{display:grid;gap:1rem}
+    .hero{grid-template-columns:1.35fr 0.85fr;margin-bottom:1rem}
+    .grid{grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:1rem}
+    .projects{grid-template-columns:1.15fr 0.85fr}
+    .panel,.card{padding:1.45rem}
+    .eyebrow{margin:0 0 0.75rem;color:var(--accent);font-size:0.8rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase}
+    h1,h2,h3{margin-top:0;font-family:var(--heading);line-height:1.03}
+    h1{font-size:clamp(2.5rem,8vw,4.8rem);max-width:10ch}
+    .muted{color:var(--muted)}
+    .actions,.meta{display:flex;gap:0.75rem;flex-wrap:wrap}
+    .actions{margin-top:1rem}
+    .meta{margin-top:1.1rem}
+    .chip{display:inline-flex;align-items:center;min-height:1.9rem;padding:0.2rem 0.7rem;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:0.82rem;font-weight:700}
+    .button{display:inline-flex;align-items:center;justify-content:center;min-height:2.85rem;padding:0.7rem 1rem;border-radius:999px;font-weight:700;border:1px solid transparent}
+    .button.primary{background:#123947;color:#f3fbfd}
+    .button.secondary{border-color:rgba(18,57,71,0.16);color:#123947}
+    ul{padding-left:1.1rem;margin:0.75rem 0 0}
+    li{margin-bottom:0.55rem}
+    .footer{margin-top:1rem;color:var(--muted)}
+    @media (max-width:900px){.hero,.grid,.projects{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="../">BF</a>
+      <nav class="nav">
+        <a href="../">Current site</a>
+        <a href="operator-console.html">Console</a>
+        <a href="executive-brief.html">Executive</a>
+      </nav>
+    </header>
+    <section class="hero">
+      <article class="panel">
+        <p class="eyebrow">Clear Signal</p>
+        <h1>Tell the reader what you do in one pass.</h1>
+        <p class="muted">This version is built for first-impression speed. It keeps the direct, strong text feel you liked from Operator Console, but swaps the industrial palette for something cleaner and more current.</p>
+        <div class="meta">
+          <span class="chip">Infrastructure automation</span>
+          <span class="chip">Operations tooling</span>
+          <span class="chip">Engineer-readable</span>
+        </div>
+        <div class="actions">
+          <a class="button primary" href="../">Back to current site</a>
+          <a class="button secondary" href="../projects/failwarden-orchestrator/">Open featured project</a>
+        </div>
+      </article>
+      <aside class="panel">
+        <p class="eyebrow">Why it fits</p>
+        <ul>
+          <li>Fast to skim for recruiters</li>
+          <li>Still gives engineering managers useful signal</li>
+          <li>Feels sharper than a blog without reading like a whitepaper</li>
+        </ul>
+      </aside>
+    </section>
+    <section class="grid">
+      <article class="card"><h2>What I Do</h2><p class="muted">Build practical tools for infrastructure, validation, remediation, and operator workflow.</p></article>
+      <article class="card"><h2>How I Work</h2><p class="muted">Clear scope, honest maturity statements, and quality gates that support trust.</p></article>
+      <article class="card"><h2>Where to Go Deeper</h2><p class="muted">Featured project up front, with supporting projects one click away.</p></article>
+    </section>
+    <section class="projects">
+      <article class="card"><h2>Featured Case</h2><h3>FailWarden Orchestrator</h3><p class="muted">The best single proof point for infrastructure context, practical engineering, and credible communication about maturity.</p></article>
+      <article class="card"><h2>Supporting Depth</h2><p class="muted">YMC, Loadout, ReadyCheck, and My Lab Setup show range without forcing the reader through multiple layers first.</p></article>
+    </section>
+    <footer class="footer"><p>Preview only. Focused on first-impression clarity.</p></footer>
+  </div>
+</body>
+</html>
