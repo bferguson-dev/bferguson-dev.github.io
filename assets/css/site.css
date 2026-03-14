@@ -215,6 +215,29 @@ a {
   color: var(--accent-strong);
 }
 
+.hero-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin-top: 1.5rem;
+}
+
+.fact {
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  background: rgba(255, 252, 246, 0.75);
+}
+
+.fact-label {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
 .signal-list,
 .project-points,
 .detail-list,
@@ -249,14 +272,17 @@ a {
 .two-column-copy,
 .focus-grid,
 .approach-grid,
-.project-grid {
+.project-grid,
+.snapshot-grid,
+.style-grid {
   display: grid;
   gap: 1rem;
 }
 
 .two-column-copy,
 .focus-grid,
-.approach-grid {
+.approach-grid,
+.snapshot-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
@@ -267,7 +293,9 @@ a {
 
 .focus-card,
 .approach-card,
-.project-card {
+.project-card,
+.snapshot-card,
+.style-card {
   padding: 1.3rem;
   border-radius: var(--radius-md);
   border: 1px solid var(--line);
@@ -276,6 +304,14 @@ a {
 
 .project-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.style-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.snapshot-card:first-child {
+  grid-column: span 2;
 }
 
 .project-card-featured {
@@ -416,11 +452,18 @@ a {
   .two-column-copy,
   .focus-grid,
   .approach-grid,
-  .project-grid {
+  .project-grid,
+  .snapshot-grid,
+  .style-grid,
+  .hero-facts {
     grid-template-columns: 1fr;
   }
 
   .project-card-featured {
+    grid-column: auto;
+  }
+
+  .snapshot-card:first-child {
     grid-column: auto;
   }
 

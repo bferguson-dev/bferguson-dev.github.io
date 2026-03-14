@@ -1,6 +1,6 @@
 # bferguson-dev.github.io
 
-Static GitHub Pages portfolio site for Brian Ferguson.
+Static GitHub Pages portfolio site for Byron Ferguson.
 
 ## Why this repo structure
 

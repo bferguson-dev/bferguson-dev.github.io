@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brian Ferguson | Infrastructure Automation Portfolio</title>
+  <title>Byron Ferguson | Infrastructure Automation and Operations Tooling</title>
   <meta
     name="description"
-    content="Professional portfolio for Brian Ferguson, focused on infrastructure automation, operational tooling, and reliable operator-facing systems."
+    content="Professional portfolio for Byron Ferguson, focused on infrastructure automation, operations tooling, and operator-facing systems."
   >
   <link rel="stylesheet" href="assets/css/site.css">
 </head>
@@ -16,8 +16,9 @@
       <a class="brand" href="./">BF</a>
       <nav class="site-nav" aria-label="Primary">
         <a href="#about">About</a>
+        <a href="#snapshot">Snapshot</a>
         <a href="#projects">Projects</a>
-        <a href="#approach">Approach</a>
+        <a href="#styles">Styles</a>
         <a href="#contact">Contact</a>
       </nav>
     </header>
@@ -26,23 +27,38 @@
       <section class="hero">
         <div class="hero-copy">
           <p class="eyebrow">Infrastructure Automation Portfolio</p>
-          <h1>Brian Ferguson builds operator-focused tooling for infrastructure and systems work.</h1>
+          <h1>Byron Ferguson builds practical tooling for infrastructure and operations work.</h1>
           <p class="lede">
-            Solo-maintained projects spanning Python, PowerShell, validation tooling, and lab automation.
-            This site is a concise hiring-facing view of the work, with project context and source links.
+            I build operator-facing tools that make systems work more repeatable, more auditable,
+            and easier to hand off. The focus is on usable automation, validation, and clear
+            documentation rather than inflated platform language.
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="#projects">View Projects</a>
             <a class="button button-secondary" href="https://github.com/bferguson-dev" target="_blank" rel="noreferrer">GitHub Profile</a>
           </div>
+          <div class="hero-facts">
+            <div class="fact">
+              <span class="fact-label">Focus</span>
+              <strong>Infrastructure automation and operations tooling</strong>
+            </div>
+            <div class="fact">
+              <span class="fact-label">Primary stack</span>
+              <strong>Python, PowerShell, CI, lab automation</strong>
+            </div>
+            <div class="fact">
+              <span class="fact-label">Working style</span>
+              <strong>Solo-maintained, documentation-heavy, honest about scope</strong>
+            </div>
+          </div>
         </div>
         <aside class="hero-panel" aria-label="Professional summary">
-          <p class="panel-label">Target Direction</p>
-          <h2>Infrastructure automation, platform tooling, and operations engineering roles.</h2>
+          <p class="panel-label">Target Roles</p>
+          <h2>Infrastructure automation, platform tooling, systems engineering, and operations engineering.</h2>
           <ul class="signal-list">
-            <li>Builds tools intended to be auditable, maintainable, and usable by operators.</li>
-            <li>Works across Python, PowerShell, CI, local lab environments, and systems workflows.</li>
-            <li>Favors honest project positioning over inflated claims.</li>
+            <li>Builds tools for real operator workflows, not just demos.</li>
+            <li>Combines implementation, testing discipline, release hygiene, and readable docs.</li>
+            <li>Positions project maturity carefully, including validation boundaries.</li>
           </ul>
         </aside>
       </section>
@@ -54,26 +70,48 @@
         </div>
         <div class="two-column-copy">
           <p>
-            My work centers on making infrastructure tasks more repeatable and easier to reason about:
-            turning operational intent into tools, checks, and workflows that reduce ambiguity.
+            My work is centered on infrastructure tasks that are usually documented but still handled
+            manually: remediation steps, compliance checks, workstation setup, connectivity validation,
+            and repeatable lab operations. I am most interested in roles where that kind of work can be
+            turned into durable internal tooling.
           </p>
           <p>
-            The projects featured here are independent builds. They emphasize practical delivery,
-            controlled validation, and clear documentation rather than vague product language.
+            The projects here are all presented conservatively. Where a tool has strong unit coverage but
+            limited production validation, the site says so directly. That is intentional and part of how
+            I approach engineering communication.
           </p>
         </div>
-        <div class="focus-grid">
-          <article class="focus-card">
-            <h3>Automation with guardrails</h3>
-            <p>Validation, explicit workflows, and artifacts that support trust in execution.</p>
+      </section>
+
+      <section class="section" id="snapshot">
+        <div class="section-heading">
+          <p class="eyebrow">Resume Snapshot</p>
+          <h2>What a hiring team should see quickly</h2>
+        </div>
+        <div class="snapshot-grid">
+          <article class="snapshot-card">
+            <h3>What I build</h3>
+            <ul class="detail-list">
+              <li>Infrastructure automation tools with explicit guardrails and execution artifacts</li>
+              <li>CLI and desktop tooling for operators, auditors, and platform-adjacent workflows</li>
+              <li>Supporting CI, release, and local quality gates that keep solo-maintained repos credible</li>
+            </ul>
           </article>
-          <article class="focus-card">
-            <h3>Operator-friendly tooling</h3>
-            <p>Projects designed to support real usage, not just demonstrate a pattern.</p>
+          <article class="snapshot-card">
+            <h3>What shows up in the repos</h3>
+            <ul class="detail-list">
+              <li>Python and PowerShell implementation across multiple projects</li>
+              <li>Controlled local integration coverage where real external validation is not yet appropriate</li>
+              <li>README and project-page content written for fast technical review</li>
+            </ul>
           </article>
-          <article class="focus-card">
-            <h3>Evidence-driven quality</h3>
-            <p>Unit tests, controlled integration coverage, and CI where it adds real value.</p>
+          <article class="snapshot-card">
+            <h3>What I optimize for</h3>
+            <ul class="detail-list">
+              <li>Readable operational behavior over clever abstractions</li>
+              <li>Scope control, maintainability, and trust in outputs</li>
+              <li>Honest maturity statements instead of vague production-ready claims</li>
+            </ul>
           </article>
         </div>
       </section>
@@ -93,16 +131,31 @@
             <h3>FailWarden Orchestrator</h3>
             <p>
               A constrained YAML runbook executor for infrastructure remediation over SSH with
-              compile-time validation, audit logging, notification support, dry-run previews, and shipped runbooks.
+              compile-time validation, audit logging, notifier support, dry-run previews, and shipped runbooks.
             </p>
             <ul class="project-points">
               <li>Current tagged release: v0.2.0</li>
               <li>V1 and V1.5 are implemented</li>
-              <li>Validated with strong unit and controlled local integration coverage</li>
+              <li>Strong unit and controlled local integration coverage</li>
             </ul>
             <div class="project-links">
               <a class="text-link" href="projects/failwarden-orchestrator/">Project page</a>
               <a class="text-link" href="https://github.com/bferguson-dev/FailWarden-Orchestrator" target="_blank" rel="noreferrer">GitHub repo</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-meta">
+              <span class="pill pill-muted">Python</span>
+              <span class="pill pill-muted">Windows Compliance</span>
+            </div>
+            <h3>YMC</h3>
+            <p>
+              An agentless Windows Server compliance scanner over WinRM with framework-mapped checks and audit-ready reporting.
+            </p>
+            <div class="project-links">
+              <a class="text-link" href="projects/ymc/">Project page</a>
+              <a class="text-link" href="https://github.com/bferguson-dev/YMC" target="_blank" rel="noreferrer">GitHub repo</a>
             </div>
           </article>
 
@@ -113,8 +166,7 @@
             </div>
             <h3>Loadout</h3>
             <p>
-              A Windows workstation setup tool for infrastructure professionals, built as a portable
-              PowerShell and WPF app for installing, updating, and removing a curated toolset.
+              A Windows workstation setup tool for infrastructure professionals, built as a portable PowerShell and WPF application.
             </p>
             <div class="project-links">
               <a class="text-link" href="projects/loadout/">Project page</a>
@@ -129,8 +181,7 @@
             </div>
             <h3>ReadyCheck</h3>
             <p>
-              A CLI for repeatable, audit-friendly connectivity validation that compares observed
-              network behavior to declared allow or deny intent and generates review artifacts.
+              A connectivity validation CLI that compares observed network behavior to declared allow or deny intent and emits review artifacts.
             </p>
             <div class="project-links">
               <a class="text-link" href="projects/readycheck/">Project page</a>
@@ -145,50 +196,39 @@
             </div>
             <h3>My Lab Setup</h3>
             <p>
-              A sanitized Proxmox lab automation repo covering provisioning phases, guest baseline
-              configuration, media handling, and snapshot or clone workflows.
+              A sanitized Proxmox and Ansible lab automation repo covering provisioning phases, guest baselining, and clone workflows.
             </p>
             <div class="project-links">
               <a class="text-link" href="projects/my-lab-setup/">Project page</a>
               <a class="text-link" href="https://github.com/bferguson-dev/My-Lab-Setup" target="_blank" rel="noreferrer">GitHub repo</a>
             </div>
           </article>
-
-          <article class="project-card">
-            <div class="project-meta">
-              <span class="pill pill-muted">Python</span>
-              <span class="pill pill-muted">Windows Compliance</span>
-            </div>
-            <h3>YMC</h3>
-            <p>
-              An agentless Windows Server compliance scanner that connects over WinRM, runs security
-              checks remotely, and produces audit-ready HTML and JSON reports with evidence.
-            </p>
-            <div class="project-links">
-              <a class="text-link" href="projects/ymc/">Project page</a>
-              <a class="text-link" href="https://github.com/bferguson-dev/YMC" target="_blank" rel="noreferrer">GitHub repo</a>
-            </div>
-          </article>
         </div>
       </section>
 
-      <section class="section" id="approach">
+      <section class="section" id="styles">
         <div class="section-heading">
-          <p class="eyebrow">Working Style</p>
-          <h2>How the projects are built</h2>
+          <p class="eyebrow">Style Options</p>
+          <h2>Alternate homepage directions</h2>
         </div>
-        <div class="approach-grid">
-          <article class="approach-card">
-            <h3>Honest scope</h3>
-            <p>Project pages separate what is implemented, what is validated locally, and what remains future work.</p>
+        <div class="style-grid">
+          <article class="style-card">
+            <p class="panel-label">Current</p>
+            <h3>Polished Corporate</h3>
+            <p>Warm editorial palette, layered cards, and a hiring-manager-friendly presentation.</p>
+            <a class="text-link" href="./">This homepage</a>
           </article>
-          <article class="approach-card">
-            <h3>Practical quality</h3>
-            <p>CI, local test gates, and release notes are added where they improve maintainability for a solo-maintainer workflow.</p>
+          <article class="style-card">
+            <p class="panel-label">Preview</p>
+            <h3>Minimal</h3>
+            <p>Sharper, quieter, and more resume-like. Better if you want less visual texture.</p>
+            <a class="text-link" href="style-previews/minimal.html">Open minimal preview</a>
           </article>
-          <article class="approach-card">
-            <h3>Readable documentation</h3>
-            <p>README and portfolio content are written for fast review by engineers, recruiters, and hiring managers.</p>
+          <article class="style-card">
+            <p class="panel-label">Preview</p>
+            <h3>Bold</h3>
+            <p>Higher contrast, stronger typography, and a more assertive project-forward presentation.</p>
+            <a class="text-link" href="style-previews/bold.html">Open bold preview</a>
           </article>
         </div>
       </section>
@@ -196,23 +236,22 @@
       <section class="section section-contact" id="contact">
         <div class="section-heading">
           <p class="eyebrow">Contact</p>
-          <h2>Current links</h2>
+          <h2>Current public links</h2>
         </div>
         <div class="contact-card">
           <p>
-            This first pass includes the links you provided. LinkedIn, resume, and direct email can be added
-            cleanly once you decide which contact points you want public on the site.
+            GitHub is the only public contact point included for now. Resume, email, and LinkedIn can
+            be added later without changing the site structure.
           </p>
           <div class="contact-links">
             <a class="button button-primary" href="https://github.com/bferguson-dev" target="_blank" rel="noreferrer">GitHub</a>
-            <a class="button button-secondary" href="https://github.com/bferguson-dev/FailWarden-Orchestrator" target="_blank" rel="noreferrer">Featured repo</a>
           </div>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>Brian Ferguson</p>
+      <p>Byron Ferguson</p>
       <p>Infrastructure automation and operations tooling portfolio</p>
     </footer>
   </div>
