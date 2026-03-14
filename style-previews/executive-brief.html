@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Executive Brief Preview | Byron Ferguson</title>
+  <style>
+    :root {
+      --bg: #f2f4f3;
+      --paper: #ffffff;
+      --text: #112027;
+      --muted: #5c6b72;
+      --accent: #1f4e5f;
+      --line: #d7e0e1;
+      --max: 1120px;
+      --body: "Avenir Next", "Segoe UI", Arial, sans-serif;
+      --heading: "Iowan Old Style", Georgia, serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: linear-gradient(180deg, #f7f8f7 0%, #edf1ef 100%); color: var(--text); font-family: var(--body); line-height: 1.55; }
+    a { color: inherit; }
+    .wrap { width: min(calc(100% - 2rem), var(--max)); margin: 0 auto; padding: 1.5rem 0 3rem; }
+    .top, .block, .hero-card, .sidebar-card, .project { background: var(--paper); border: 1px solid var(--line); border-radius: 22px; }
+    .top { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.2rem; margin-bottom: 1rem; }
+    .brand, .button, .link { text-decoration: none; }
+    .nav { display: flex; gap: 1rem; flex-wrap: wrap; color: var(--muted); }
+    .hero { display: grid; grid-template-columns: 1.45fr 0.85fr; gap: 1rem; margin-bottom: 1rem; }
+    .hero-card, .sidebar-card, .block, .project { padding: 1.4rem; }
+    .eyebrow { margin: 0 0 0.75rem; color: var(--accent); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; }
+    h1, h2, h3 { margin-top: 0; font-family: var(--heading); line-height: 1.05; }
+    h1 { font-size: clamp(2.5rem, 8vw, 4.7rem); max-width: 10ch; }
+    .lede, .muted { color: var(--muted); }
+    .actions { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.25rem; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 2.8rem; padding: 0.7rem 1rem; border-radius: 999px; font-weight: 700; border: 1px solid transparent; }
+    .button.primary { background: var(--accent); color: #f5f8f7; }
+    .button.secondary { border-color: var(--line); color: var(--accent); }
+    .grid, .projects { display: grid; gap: 1rem; }
+    .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 1rem; }
+    .projects { grid-template-columns: 1.2fr 0.8fr; }
+    ul { padding-left: 1.1rem; margin: 0.75rem 0 0; }
+    li { margin-bottom: 0.55rem; }
+    .footer { margin-top: 1rem; color: var(--muted); }
+    @media (max-width: 900px) { .hero, .grid, .projects { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="../">BYRON FERGUSON</a>
+      <nav class="nav">
+        <a href="../">Current site</a>
+        <a href="minimal.html">Minimal</a>
+        <a href="bold.html">Bold</a>
+      </nav>
+    </header>
+    <section class="hero">
+      <article class="hero-card">
+        <p class="eyebrow">Executive Brief</p>
+        <h1>Fast signal for recruiters and hiring managers.</h1>
+        <p class="lede">This direction treats the homepage like a concise leadership brief: role fit, core strengths, featured work, and credibility markers without much visual overhead.</p>
+        <div class="actions">
+          <a class="button primary" href="../">Back to current site</a>
+          <a class="button secondary" href="../projects/failwarden-orchestrator/">Featured project</a>
+        </div>
+      </article>
+      <aside class="sidebar-card">
+        <p class="eyebrow">Best Use</p>
+        <ul>
+          <li>Highest recruiter readability</li>
+          <li>Feels polished and senior without being flashy</li>
+          <li>Easy to extend with resume links later</li>
+        </ul>
+      </aside>
+    </section>
+    <section class="grid">
+      <article class="block"><h2>Role Direction</h2><p class="muted">Infrastructure automation, platform tooling, systems engineering, and operations engineering.</p></article>
+      <article class="block"><h2>Core Value</h2><p class="muted">Turns documented but manual operational work into clearer tools and repeatable workflows.</p></article>
+      <article class="block"><h2>Proof</h2><p class="muted">Solo-maintained repos with release discipline, local quality gates, CI, and explicit maturity notes.</p></article>
+    </section>
+    <section class="projects">
+      <article class="project">
+        <h2>Featured Case</h2>
+        <h3>FailWarden Orchestrator</h3>
+        <p class="muted">Constrained YAML runbook execution for infrastructure remediation over SSH, with honest validation boundaries and strong local evidence.</p>
+      </article>
+      <article class="project">
+        <h2>Supporting Projects</h2>
+        <ul>
+          <li>YMC for agentless Windows compliance scanning</li>
+          <li>Loadout for workstation setup tooling</li>
+          <li>ReadyCheck for connectivity validation</li>
+        </ul>
+      </article>
+    </section>
+    <footer class="footer"><p>Preview only. This variant is not currently the published homepage.</p></footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operator Console Preview | Byron Ferguson</title>
+  <style>
+    :root {
+      --bg: #0f171b;
+      --panel: #141f24;
+      --panel-2: #18262d;
+      --text: #d8e5e6;
+      --muted: #8ca4a6;
+      --accent: #4bc3a8;
+      --warn: #e7b15c;
+      --line: rgba(216, 229, 230, 0.12);
+      --max: 1200px;
+      --body: "IBM Plex Sans", "Segoe UI", Arial, sans-serif;
+      --mono: "IBM Plex Mono", monospace;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: radial-gradient(circle at top right, rgba(75, 195, 168, 0.12), transparent 22%), linear-gradient(180deg, #0d1519 0%, #111b20 100%); color: var(--text); font-family: var(--body); line-height: 1.55; }
+    a { color: inherit; }
+    .wrap { width: min(calc(100% - 2rem), var(--max)); margin: 0 auto; padding: 1.25rem 0 3rem; }
+    .bar, .panel, .stat, .project { background: var(--panel); border: 1px solid var(--line); }
+    .bar { display: flex; justify-content: space-between; align-items: center; padding: 0.95rem 1.1rem; margin-bottom: 1rem; font-family: var(--mono); }
+    .nav { display: flex; gap: 1rem; flex-wrap: wrap; color: var(--muted); }
+    .hero, .stats, .projects { display: grid; gap: 1rem; }
+    .hero { grid-template-columns: 1.15fr 0.85fr; margin-bottom: 1rem; }
+    .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: 1rem; }
+    .projects { grid-template-columns: 1.1fr 0.9fr; }
+    .panel, .stat, .project { padding: 1.25rem; border-radius: 18px; }
+    .eyebrow { margin: 0 0 0.75rem; color: var(--accent); font-family: var(--mono); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em; }
+    h1, h2, h3 { margin-top: 0; }
+    h1 { font-size: clamp(2.4rem, 8vw, 4.5rem); line-height: 1.02; max-width: 11ch; }
+    .muted { color: var(--muted); }
+    .actions { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 2.7rem; padding: 0.65rem 1rem; border-radius: 999px; border: 1px solid var(--line); text-decoration: none; }
+    .button.primary { background: var(--accent); color: #082019; border-color: transparent; font-weight: 700; }
+    .tag { display: inline-block; margin-right: 0.5rem; padding: 0.18rem 0.55rem; border-radius: 999px; font-family: var(--mono); font-size: 0.78rem; background: var(--panel-2); }
+    .ok { color: var(--accent); }
+    .warn { color: var(--warn); }
+    ul { padding-left: 1.1rem; margin: 0.75rem 0 0; }
+    @media (max-width: 900px) { .hero, .stats, .projects { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="bar">
+      <div>BYRON_FERGUSON.PORTFOLIO</div>
+      <nav class="nav">
+        <a href="../">CURRENT</a>
+        <a href="technical-dossier.html">DOSSIER</a>
+        <a href="consulting-profile.html">CONSULTING</a>
+      </nav>
+    </header>
+    <section class="hero">
+      <article class="panel">
+        <p class="eyebrow">Operator Console</p>
+        <h1>Infra and ops aesthetics, kept under control.</h1>
+        <p class="muted">This direction borrows from console and status-board language without turning the site into a gimmick. It works if you want the portfolio to feel unmistakably systems-oriented.</p>
+        <div class="actions">
+          <a class="button primary" href="../">Back to current site</a>
+          <a class="button" href="../projects/failwarden-orchestrator/">Inspect FailWarden</a>
+        </div>
+      </article>
+      <article class="panel">
+        <p class="eyebrow">Signal</p>
+        <p><span class="tag ok">implemented</span><span class="tag">python</span><span class="tag">powershell</span><span class="tag warn">honest-validation</span></p>
+        <ul>
+          <li>Distinctive for platform and SRE-adjacent roles</li>
+          <li>Needs restraint to stay professional</li>
+          <li>Works best when paired with concise copy</li>
+        </ul>
+      </article>
+    </section>
+    <section class="stats">
+      <article class="stat"><p class="eyebrow">featured</p><h2>FailWarden</h2><p class="muted">runbook execution</p></article>
+      <article class="stat"><p class="eyebrow">project type</p><h2>tooling</h2><p class="muted">operator-facing</p></article>
+      <article class="stat"><p class="eyebrow">quality pattern</p><h2>CI + gates</h2><p class="muted">repeatable checks</p></article>
+      <article class="stat"><p class="eyebrow">validation</p><h2>controlled</h2><p class="muted">not overstated</p></article>
+    </section>
+    <section class="projects">
+      <article class="project">
+        <h2>Primary panel</h2>
+        <p class="muted">Use this space for the featured repo with release version, maturity, and validation notes presented like operational status indicators.</p>
+      </article>
+      <article class="project">
+        <h2>Secondary panel</h2>
+        <p class="muted">Other projects stack naturally as smaller system cards: YMC, ReadyCheck, Loadout, and lab automation.</p>
+      </article>
+    </section>
+  </div>
+</body>
+</html>

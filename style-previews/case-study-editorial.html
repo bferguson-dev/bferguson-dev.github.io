@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case Study Editorial Preview | Byron Ferguson</title>
+  <style>
+    :root {
+      --bg: #efe7dc;
+      --paper: #fffaf2;
+      --text: #1d1a18;
+      --muted: #655a50;
+      --accent: #8a4d2f;
+      --line: rgba(29, 26, 24, 0.12);
+      --max: 1180px;
+      --body: "Avenir Next", "Segoe UI", Arial, sans-serif;
+      --heading: "Baskerville", "Iowan Old Style", Georgia, serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: radial-gradient(circle at top right, rgba(138, 77, 47, 0.12), transparent 25%), linear-gradient(180deg, #f6f0e7 0%, #efe7dc 100%); color: var(--text); font-family: var(--body); line-height: 1.65; }
+    a { color: inherit; }
+    .wrap { width: min(calc(100% - 2rem), var(--max)); margin: 0 auto; padding: 1.25rem 0 3rem; }
+    .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+    .brand, .button { text-decoration: none; }
+    .nav { display: flex; gap: 1rem; flex-wrap: wrap; color: var(--muted); }
+    .hero, .story, .projects { display: grid; gap: 1rem; }
+    .hero { grid-template-columns: 1.1fr 0.9fr; margin-bottom: 1rem; }
+    .story { grid-template-columns: 0.8fr 1.2fr; margin-bottom: 1rem; }
+    .projects { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .card, .hero-card, .image-card { background: rgba(255, 250, 242, 0.82); border: 1px solid var(--line); border-radius: 28px; padding: 1.5rem; }
+    .image-card { min-height: 320px; background: linear-gradient(145deg, rgba(138, 77, 47, 0.2), rgba(255, 250, 242, 0.7)); display: flex; align-items: end; }
+    .eyebrow { margin: 0 0 0.75rem; color: var(--accent); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; }
+    h1, h2, h3 { margin-top: 0; font-family: var(--heading); line-height: 1.02; }
+    h1 { font-size: clamp(2.5rem, 8vw, 5rem); max-width: 11ch; }
+    .muted { color: var(--muted); }
+    .actions { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 2.8rem; padding: 0.7rem 1rem; border-radius: 999px; border: 1px solid rgba(138, 77, 47, 0.28); }
+    .button.primary { background: var(--accent); color: #fff7f0; border-color: transparent; }
+    @media (max-width: 900px) { .hero, .story, .projects { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="../">BYRON FERGUSON</a>
+      <nav class="nav">
+        <a href="../">Current site</a>
+        <a href="executive-brief.html">Executive Brief</a>
+        <a href="consulting-profile.html">Consulting Profile</a>
+      </nav>
+    </header>
+    <section class="hero">
+      <article class="hero-card">
+        <p class="eyebrow">Case Study Editorial</p>
+        <h1>A more authored way to present engineering work.</h1>
+        <p class="muted">This direction makes the homepage feel like a set of selected stories: fewer sections, deeper narrative, and more emphasis on why the work matters.</p>
+        <div class="actions">
+          <a class="button primary" href="../">Back to current site</a>
+          <a class="button" href="../projects/failwarden-orchestrator/">Open featured project</a>
+        </div>
+      </article>
+      <article class="image-card">
+        <p class="muted">Large visual or quote area for a project thesis, operator insight, or short professional statement.</p>
+      </article>
+    </section>
+    <section class="story">
+      <article class="card">
+        <p class="eyebrow">Angle</p>
+        <h2>Less like a resume. More like a portfolio publication.</h2>
+      </article>
+      <article class="card">
+        <p class="muted">Best if you want the site to feel thoughtful and intentional rather than strictly corporate. Strong option if the project pages are part of the pitch and not just supporting links.</p>
+      </article>
+    </section>
+    <section class="projects">
+      <article class="card"><h3>FailWarden</h3><p class="muted">The anchor case study, with scope, release maturity, and validation notes.</p></article>
+      <article class="card"><h3>YMC</h3><p class="muted">Windows compliance scanning framed around evidence and audit workflows.</p></article>
+      <article class="card"><h3>Loadout</h3><p class="muted">Tooling for practical workstation setup and operator readiness.</p></article>
+    </section>
+  </div>
+</body>
+</html>
