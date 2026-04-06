@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Warm Paper Preview | Byron Ferguson</title>
+  <style>
+    :root {
+      --bg: #f7f2eb;
+      --surface: #ffffff;
+      --border: rgba(28,20,14,0.09);
+      --text: #1c1410;
+      --muted: #7a6a5c;
+      --accent: #b5522e;
+      --accent-soft: rgba(181,82,46,0.08);
+      --accent-mid: rgba(181,82,46,0.18);
+      --max: 1160px;
+      --sans: "Avenir Next", "Segoe UI", Arial, sans-serif;
+      --heading: "Iowan Old Style", "Georgia", "Times New Roman", serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.62;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      width: min(calc(100% - 2rem), var(--max));
+      margin: 0 auto;
+      padding: 1.25rem 0 4rem;
+    }
+
+    /* Header */
+    .hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.85rem 1.1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 1.25rem;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.35rem;
+      height: 2.35rem;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 900;
+      font-size: 0.88rem;
+    }
+    .nav { display: flex; gap: 1.35rem; color: var(--muted); font-size: 0.88rem; }
+    .nav a:hover { color: var(--text); }
+
+    /* Hero */
+    .hero-section {
+      display: grid;
+      grid-template-columns: 1fr 0.55fr;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .hero-main {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2.5rem;
+    }
+    .hero-aside {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .aside-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.35rem;
+      flex: 1;
+    }
+
+    .eyebrow {
+      display: block;
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-family: var(--heading);
+      font-size: clamp(2.6rem, 6vw, 4.4rem);
+      font-weight: 700;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      font-family: var(--heading);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .lede { color: var(--muted); margin-bottom: 1.75rem; max-width: 50ch; }
+    .divider {
+      width: 3rem;
+      height: 3px;
+      background: var(--accent);
+      margin: 0 0 1.5rem;
+      border-radius: 2px;
+    }
+
+    .btn-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.65rem 1.15rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      border: 1px solid transparent;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-outline { border-color: var(--border); color: var(--muted); }
+    .btn-outline:hover { color: var(--text); }
+
+    .role-list { list-style: none; padding: 0; }
+    .role-list li {
+      display: flex;
+      gap: 0.6rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+    .role-list li:last-child { border-bottom: none; }
+    .role-list li::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      margin-top: 0.45rem;
+    }
+
+    .stack-row { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .stack-tag {
+      display: inline-flex;
+      padding: 0.2rem 0.6rem;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-mid);
+      border-radius: 4px;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    /* Content area */
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .content-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.35rem;
+    }
+    .content-card p { color: var(--muted); font-size: 0.88rem; margin-top: 0.4rem; }
+
+    /* Projects */
+    .project-section {
+      display: grid;
+      grid-template-columns: 1fr 0.72fr;
+      gap: 1.25rem;
+    }
+    .project-featured {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 1.75rem;
+    }
+    .proj-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.85rem; }
+    .proj-tag {
+      display: inline-flex;
+      padding: 0.15rem 0.5rem;
+      background: var(--accent-soft);
+      border-radius: 4px;
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .proj-desc { color: var(--muted); font-size: 0.88rem; margin: 0.5rem 0 0.85rem; }
+    .proj-points { list-style: none; padding: 0; margin: 0 0 1.1rem; }
+    .proj-points li {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.22rem 0;
+      font-size: 0.85rem;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+    .proj-points li:last-child { border-bottom: none; }
+    .proj-points li::before { content: "\2014"; color: var(--accent); flex-shrink: 0; }
+    .link-row { display: flex; gap: 1.1rem; }
+    .text-link { color: var(--accent); font-size: 0.88rem; font-weight: 600; }
+    .text-link:hover { text-decoration: underline; }
+
+    .support-col { display: flex; flex-direction: column; gap: 1rem; }
+    .support-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.15rem;
+    }
+    .support-name { font-weight: 700; font-size: 0.88rem; margin-bottom: 0.2rem; }
+    .support-desc { color: var(--muted); font-size: 0.8rem; }
+
+    @media (max-width: 860px) {
+      .hero-section, .content-grid, .project-section { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hdr">
+      <a class="brand" href="../">BF</a>
+      <nav class="nav">
+        <a href="../">Current site</a>
+        <a href="warm-dark.html">Warm Dark</a>
+        <a href="split-anchor.html">Split Anchor</a>
+      </nav>
+    </header>
+
+    <section class="hero-section">
+      <article class="hero-main">
+        <span class="eyebrow">Infrastructure Automation Portfolio</span>
+        <h1>Byron Ferguson</h1>
+        <div class="divider"></div>
+        <p class="lede">
+          I build operator-facing tools for infrastructure remediation, compliance, and repeatable
+          workflows. Practical scope. Honest maturity. Documentation that holds up under review.
+        </p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="#projects">View Projects</a>
+          <a class="btn btn-outline" href="https://github.com/bferguson-dev" target="_blank" rel="noreferrer">GitHub Profile</a>
+        </div>
+      </article>
+      <div class="hero-aside">
+        <article class="aside-card">
+          <span class="eyebrow">Target roles</span>
+          <ul class="role-list">
+            <li>Infrastructure automation engineering</li>
+            <li>Platform and systems engineering</li>
+            <li>Operations tooling</li>
+          </ul>
+        </article>
+        <article class="aside-card">
+          <span class="eyebrow">Stack</span>
+          <div class="stack-row">
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">PowerShell</span>
+            <span class="stack-tag">Ansible</span>
+            <span class="stack-tag">CI</span>
+            <span class="stack-tag">SSH</span>
+            <span class="stack-tag">WinRM</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="content-grid">
+      <article class="content-card">
+        <h2>What I build</h2>
+        <p>Infrastructure automation with explicit guardrails, audit artifacts, and documentation that matches what actually ships.</p>
+      </article>
+      <article class="content-card">
+        <h2>How I work</h2>
+        <p>Scope-controlled, tested, and honest about validation limits. No vague production-ready claims.</p>
+      </article>
+      <article class="content-card">
+        <h2>Why it matters</h2>
+        <p>Operator-first tooling that is repeatable, auditable, and safe to hand off without tribal knowledge.</p>
+      </article>
+    </section>
+
+    <section class="project-section" id="projects">
+      <article class="project-featured">
+        <div class="proj-tags">
+          <span class="proj-tag">Featured</span>
+          <span class="proj-tag">Python</span>
+          <span class="proj-tag">Infrastructure</span>
+        </div>
+        <h2>FailWarden Orchestrator</h2>
+        <p class="proj-desc">
+          A constrained YAML runbook executor for infrastructure remediation over SSH.
+          Compile-time validation, audit logging, notifier support, dry-run mode, and shipped runbooks.
+        </p>
+        <ul class="proj-points">
+          <li>Current release: v0.2.0</li>
+          <li>V1 and V1.5 implemented</li>
+          <li>Strong unit and controlled local integration coverage</li>
+          <li>Not yet validated against live production infrastructure</li>
+        </ul>
+        <div class="link-row">
+          <a class="text-link" href="../projects/failwarden-orchestrator/">Project page &rarr;</a>
+          <a class="text-link" href="https://github.com/bferguson-dev/FailWarden-Orchestrator" target="_blank" rel="noreferrer">GitHub &rarr;</a>
+        </div>
+      </article>
+      <div class="support-col">
+        <article class="support-card">
+          <p class="support-name">YMC</p>
+          <p class="support-desc">Agentless Windows compliance scanner with framework-mapped checks and audit-ready reporting.</p>
+        </article>
+        <article class="support-card">
+          <p class="support-name">Loadout</p>
+          <p class="support-desc">Portable PowerShell and WPF workstation setup tool for infrastructure professionals.</p>
+        </article>
+        <article class="support-card">
+          <p class="support-name">ReadyCheck</p>
+          <p class="support-desc">Connectivity validation CLI comparing observed network behavior to declared intent.</p>
+        </article>
+        <article class="support-card">
+          <p class="support-name">My Lab Setup</p>
+          <p class="support-desc">Sanitized Proxmox and Ansible lab automation covering provisioning and clone workflows.</p>
+        </article>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
