@@ -179,13 +179,16 @@
     }
 
     /* ── ~/home ── */
-    .hero-name {
+    .ascii-art {
       font-family: var(--mono);
-      font-size: clamp(1.6rem, 4vw, 2.6rem);
-      font-weight: 700;
+      font-size: clamp(0.38rem, 1.05vw, 0.65rem);
+      font-weight: 400;
       color: var(--amber-bright);
-      line-height: 1.1;
-      margin-bottom: 0.25rem;
+      line-height: 1.22;
+      white-space: pre;
+      overflow-x: auto;
+      margin-bottom: 0.75rem;
+      display: block;
     }
     .hero-role {
       font-family: var(--mono);
@@ -500,7 +503,18 @@
             <span class="section-path">~/home</span>
             <span class="section-comment">// where I live</span>
           </div>
-          <div class="hero-name">BYRON_FERGUSON</div>
+          <pre class="ascii-art"> ██████╗ ██╗   ██╗██████╗  ██████╗ ███╗   ██╗
+ ██╔══██╗╚██╗ ██╔╝██╔══██╗██╔═══██╗████╗  ██║
+ ██████╔╝ ╚████╔╝ ██████╔╝██║   ██║██╔██╗ ██║
+ ██╔══██╗  ╚██╔╝  ██╔══██╗██║   ██║██║╚██╗██║
+ ██████╔╝   ██║   ██║  ██║╚██████╔╝██║ ╚████║
+ ╚═════╝    ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+ ███████╗███████╗██████╗  ██████╗ ██╗   ██╗███████╗ ██████╗ ███╗   ██╗
+ ██╔════╝██╔════╝██╔══██╗██╔════╝ ██║   ██║██╔════╝██╔═══██╗████╗  ██║
+ █████╗  █████╗  ██████╔╝██║  ███╗██║   ██║███████╗██║   ██║██╔██╗ ██║
+ ██╔══╝  ██╔══╝  ██╔══██╗██║   ██║██║   ██║╚════██║██║   ██║██║╚██╗██║
+ ██║     ███████╗██║  ██║╚██████╔╝╚██████╔╝███████║╚██████╔╝██║ ╚████║
+ ╚═╝     ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝ ╚═════╝ ╚═╝  ╚═══╝</pre>
           <div class="hero-role">role: infrastructure_automation_engineer</div>
           <p class="hero-lede">
             I build <strong>operator-facing tools</strong> for infrastructure remediation, compliance,
