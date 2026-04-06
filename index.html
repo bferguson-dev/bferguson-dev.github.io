@@ -10,28 +10,36 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --sidebar-bg: #13161a;
-      --sidebar-border: rgba(255,255,255,0.06);
-      --sidebar-text: #f0ebe4;
-      --sidebar-muted: rgba(240,235,228,0.45);
-      --sidebar-accent: #e09940;
-      --sidebar-accent-dim: rgba(224,153,64,0.1);
-      --sidebar-accent-border: rgba(224,153,64,0.2);
+      /* CRT amber — P3 phosphor */
+      --amber:        #ffaa00;
+      --amber-dim:    rgba(255,170,0,0.1);
+      --amber-border: rgba(255,170,0,0.22);
+      --amber-bright: #ffc040;
+      /* CRT green — P1 phosphor */
+      --green:        #39e87a;
+      --green-dim:    rgba(57,232,122,0.1);
+      --green-border: rgba(57,232,122,0.22);
+      /* Surfaces */
+      --sidebar-bg:   #0e1012;
+      --sidebar-border: rgba(255,170,0,0.08);
+      --main-bg:      #13161a;
+      --surface:      #1a1e22;
+      --border:       rgba(255,255,255,0.07);
+      /* Text — brighter, more phosphor-like */
+      --text:         #e8dfc8;
+      --text-bright:  #f5eedb;
+      --muted:        #b8a888;
+      --dim:          #7a6e5c;
+      /* Sidebar specifics */
+      --sidebar-text:   #e8dfc8;
+      --sidebar-muted:  rgba(232,223,200,0.5);
       --sidebar-w: 272px;
-      --main-bg: #16191c;
-      --surface: #1e2226;
-      --border: rgba(255,255,255,0.07);
-      --text: #f0ebe4;
-      --muted: #8c8378;
-      --accent: #e09940;
-      --accent-dim: rgba(224,153,64,0.1);
-      --accent-border: rgba(224,153,64,0.22);
-      --ok: #5cb87e;
-      --warn: #e09940;
+      /* Fonts */
       --sans: "IBM Plex Sans", "Segoe UI", Arial, sans-serif;
       --mono: "IBM Plex Mono", monospace;
       --max-content: 860px;
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: var(--main-bg); color: var(--text); font-family: var(--sans); line-height: 1.6; }
     a { color: inherit; text-decoration: none; }
@@ -55,12 +63,11 @@
       gap: 1.75rem;
     }
 
-    .brand-block {}
     .brand-title {
       font-family: var(--mono);
       font-size: 0.82rem;
       font-weight: 700;
-      color: var(--sidebar-accent);
+      color: var(--amber);
       letter-spacing: 0.04em;
       line-height: 1.3;
     }
@@ -76,14 +83,15 @@
       font-family: var(--mono);
       font-size: 0.64rem;
       font-weight: 700;
-      color: var(--sidebar-muted);
+      color: var(--green);
       letter-spacing: 0.18em;
       text-transform: uppercase;
       margin-bottom: 0.4rem;
+      opacity: 0.8;
     }
 
     .path-nav { display: flex; flex-direction: column; gap: 0.05rem; }
-    .path-nav a {
+    .path-nav button {
       font-family: var(--mono);
       font-size: 0.85rem;
       color: var(--sidebar-muted);
@@ -92,9 +100,14 @@
       display: flex;
       align-items: center;
       gap: 0.4rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
     }
-    .path-nav a:hover { background: var(--sidebar-accent-dim); color: var(--sidebar-text); }
-    .path-nav a.active { color: var(--sidebar-accent); background: var(--sidebar-accent-dim); }
+    .path-nav button:hover { background: var(--amber-dim); color: var(--sidebar-text); }
+    .path-nav button.active { color: var(--amber); background: var(--amber-dim); }
 
     .sidebar-fact {
       padding: 0.5rem 0;
@@ -104,18 +117,18 @@
       gap: 0.1rem;
     }
     .sidebar-fact:last-child { border-bottom: none; }
-    .sidebar-fact-label { font-family: var(--mono); font-size: 0.65rem; color: var(--sidebar-muted); }
-    .sidebar-fact-value { font-family: var(--mono); font-size: 0.78rem; font-weight: 600; }
+    .sidebar-fact-label { font-family: var(--mono); font-size: 0.65rem; color: var(--green); opacity: 0.7; }
+    .sidebar-fact-value { font-family: var(--mono); font-size: 0.78rem; font-weight: 600; color: var(--text); }
 
     .stack-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
     .s-tag {
       font-family: var(--mono);
       font-size: 0.68rem;
       padding: 0.15rem 0.45rem;
-      background: var(--sidebar-accent-dim);
-      border: 1px solid var(--sidebar-accent-border);
+      background: var(--amber-dim);
+      border: 1px solid var(--amber-border);
       border-radius: 3px;
-      color: var(--sidebar-accent);
+      color: var(--amber);
     }
 
     .sidebar-footer { margin-top: auto; }
@@ -125,73 +138,71 @@
       justify-content: center;
       width: 100%;
       padding: 0.55rem;
-      background: var(--sidebar-accent);
-      color: #111;
+      background: var(--amber);
+      color: #0e0c08;
       font-family: var(--mono);
       font-size: 0.78rem;
       font-weight: 700;
       border-radius: 5px;
       letter-spacing: 0.04em;
     }
-    .gh-btn:hover { opacity: 0.9; }
+    .gh-btn:hover { background: var(--amber-bright); }
 
     /* ── Main ── */
     .main-content { flex: 1; min-width: 0; padding: 2rem 2.5rem 5rem; }
     .content-inner { max-width: var(--max-content); }
 
-    /* ── Eyebrow ── */
-    .eyebrow {
-      display: block;
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: var(--accent);
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      margin-bottom: 0.85rem;
-    }
+    /* Sections hidden by default; JS shows active one */
+    .page { display: none; }
+    .page.active { display: block; }
 
-    /* ── Section common ── */
-    .section { margin-bottom: 3rem; padding-top: 1rem; }
+    /* ── Section header ── */
     .section-hdr {
       display: flex;
       align-items: baseline;
       gap: 1rem;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
       padding-bottom: 0.6rem;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--amber-border);
     }
-    .section-hdr h2 { font-size: 1.05rem; font-weight: 700; }
-    .section-hdr-path {
+    .section-path {
+      font-family: var(--mono);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--amber);
+    }
+    .section-comment {
       font-family: var(--mono);
       font-size: 0.78rem;
-      color: var(--muted);
+      color: var(--green);
+      opacity: 0.8;
     }
 
-    /* ── /home ── */
+    /* ── ~/home ── */
     .hero-name {
       font-family: var(--mono);
       font-size: clamp(1.6rem, 4vw, 2.6rem);
       font-weight: 700;
-      color: var(--accent);
+      color: var(--amber-bright);
       line-height: 1.1;
       margin-bottom: 0.25rem;
     }
-    .hero-title {
+    .hero-role {
       font-family: var(--mono);
       font-size: 0.85rem;
-      color: var(--muted);
+      color: var(--green);
       margin-bottom: 1.5rem;
+      opacity: 0.9;
     }
-    .hero-title span { color: var(--sidebar-accent); }
     .hero-lede {
       font-size: 1rem;
       color: var(--muted);
       max-width: 54ch;
       margin-bottom: 1.5rem;
-      line-height: 1.7;
+      line-height: 1.72;
     }
-    .hero-lede strong { color: var(--text); font-weight: 600; }
+    .hero-lede strong { color: var(--text-bright); font-weight: 600; }
+
     .btn-row { display: flex; gap: 0.65rem; flex-wrap: wrap; margin-bottom: 1.75rem; }
     .btn {
       font-family: var(--mono);
@@ -201,60 +212,64 @@
       border-radius: 5px;
       border: 1px solid transparent;
       letter-spacing: 0.03em;
+      cursor: pointer;
     }
-    .btn-primary { background: var(--accent); color: #111; }
-    .btn-primary:hover { opacity: 0.9; }
+    .btn-primary { background: var(--amber); color: #0e0c08; }
+    .btn-primary:hover { background: var(--amber-bright); }
     .btn-ghost { border-color: var(--border); color: var(--muted); }
-    .btn-ghost:hover { color: var(--text); }
+    .btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.15); }
 
-    .status-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-    .status-chip {
+    .status-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .chip {
       display: inline-flex;
       align-items: center;
-      gap: 0.3rem;
-      padding: 0.2rem 0.55rem;
+      gap: 0.35rem;
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      padding: 0.22rem 0.6rem;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 3px;
+      color: var(--muted);
     }
     .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-    .dot-ok { background: var(--ok); }
-    .dot-warn { background: var(--warn); }
+    .dot-ok   { background: var(--green); }
+    .dot-warn { background: var(--amber); }
 
-    /* ── /lib (about body) ── */
+    /* ── ~/lib ── */
     .about-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-    .about-cols p { color: var(--muted); font-size: 0.92rem; line-height: 1.72; }
+    .about-cols p { color: var(--muted); font-size: 0.92rem; line-height: 1.75; }
 
-    /* ── /usr (projects) ── */
+    /* ── ~/usr ── */
     .project-featured {
       background: var(--surface);
-      border: 1px solid var(--accent-border);
+      border: 1px solid var(--amber-border);
       border-radius: 8px;
       padding: 1.5rem;
       margin-bottom: 0.85rem;
     }
-    .proj-tag-row { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.85rem; }
-    .proj-tag {
+    .tag-row { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.85rem; }
+    .tag {
       font-family: var(--mono);
       font-size: 0.68rem;
       font-weight: 700;
       padding: 0.15rem 0.5rem;
       border-radius: 3px;
-      background: var(--accent-dim);
-      color: var(--accent);
+      background: var(--amber-dim);
+      color: var(--amber);
       letter-spacing: 0.04em;
       text-transform: uppercase;
     }
-    .proj-tag.ok { background: rgba(92,184,126,0.1); color: var(--ok); }
-    .proj-tag.warn { background: rgba(224,153,64,0.1); color: var(--warn); }
-    .proj-desc { color: var(--muted); font-size: 0.9rem; margin: 0.5rem 0 0.85rem; line-height: 1.65; }
+    .tag.green { background: var(--green-dim); color: var(--green); border: 1px solid var(--green-border); }
+    .tag.warn  { background: var(--amber-dim); color: var(--amber); border: 1px solid var(--amber-border); }
+    .proj-name {
+      font-family: var(--mono);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-bright);
+      margin-bottom: 0.4rem;
+    }
+    .proj-desc { color: var(--muted); font-size: 0.9rem; margin: 0 0 0.85rem; line-height: 1.65; }
     .proj-points { list-style: none; padding: 0; margin: 0 0 1.1rem; }
     .proj-points li {
       font-family: var(--mono);
@@ -264,15 +279,15 @@
       display: flex;
       gap: 0.5rem;
     }
-    .proj-points li::before { content: ">>"; color: var(--accent); flex-shrink: 0; }
+    .proj-points li::before { content: ">>"; color: var(--green); flex-shrink: 0; opacity: 0.85; }
     .link-row { display: flex; gap: 1rem; }
     .text-link {
       font-family: var(--mono);
       font-size: 0.8rem;
       font-weight: 600;
-      color: var(--accent);
+      color: var(--amber);
     }
-    .text-link:hover { text-decoration: underline; }
+    .text-link:hover { color: var(--amber-bright); text-decoration: underline; }
 
     .support-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
     .support-card {
@@ -285,12 +300,13 @@
       font-family: var(--mono);
       font-weight: 700;
       font-size: 0.85rem;
-      color: var(--text);
+      color: var(--amber);
       margin-bottom: 0.25rem;
     }
     .support-desc { color: var(--muted); font-size: 0.8rem; }
+    .support-links { margin-top: 0.6rem; display: flex; gap: 0.75rem; }
 
-    /* ── /etc (contact) ── */
+    /* ── ~/etc ── */
     .contact-block {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -299,7 +315,7 @@
     }
     .contact-block p { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.1rem; max-width: 52ch; }
 
-    /* ── Mobile hamburger ── */
+    /* ── Mobile bar ── */
     .mobile-bar {
       display: none;
       position: sticky;
@@ -311,12 +327,7 @@
       justify-content: space-between;
       align-items: center;
     }
-    .mobile-brand {
-      font-family: var(--mono);
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--sidebar-accent);
-    }
+    .mobile-brand { font-family: var(--mono); font-size: 0.78rem; font-weight: 700; color: var(--amber); }
     .hamburger {
       display: flex;
       flex-direction: column;
@@ -332,19 +343,16 @@
       height: 2px;
       background: var(--sidebar-muted);
       border-radius: 2px;
-      transition: background 0.15s;
     }
-    .hamburger:hover span { background: var(--sidebar-text); }
+    .hamburger:hover span { background: var(--amber); }
 
+    /* ── Mobile overlay menu ── */
     .mobile-menu {
       display: none;
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      inset: 0;
       z-index: 200;
-      background: rgba(13,14,16,0.92);
+      background: rgba(10,11,13,0.96);
       backdrop-filter: blur(6px);
       flex-direction: column;
       padding: 1.5rem;
@@ -365,26 +373,33 @@
       cursor: pointer;
       padding: 4px 8px;
     }
-    .mobile-close:hover { color: var(--text); }
-    .mobile-nav { display: flex; flex-direction: column; gap: 0.25rem; margin-bottom: 2rem; }
-    .mobile-nav a {
+    .mobile-close:hover { color: var(--amber); }
+    .mobile-nav { display: flex; flex-direction: column; gap: 0.15rem; margin-bottom: 2rem; }
+    .mobile-nav button {
       font-family: var(--mono);
       font-size: 1.1rem;
       color: var(--sidebar-muted);
       padding: 0.75rem 0.5rem;
       border-bottom: 1px solid var(--sidebar-border);
+      background: none;
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      text-align: left;
+      cursor: pointer;
+      width: 100%;
     }
-    .mobile-nav a:hover { color: var(--sidebar-accent); }
+    .mobile-nav button:hover { color: var(--amber); }
     .mobile-facts { display: flex; flex-direction: column; gap: 0.75rem; }
-    .mobile-fact-label { font-family: var(--mono); font-size: 0.65rem; color: var(--sidebar-muted); }
-    .mobile-fact-value { font-family: var(--mono); font-size: 0.82rem; font-weight: 600; }
+    .mobile-fact-label { font-family: var(--mono); font-size: 0.65rem; color: var(--green); opacity: 0.75; }
+    .mobile-fact-value { font-family: var(--mono); font-size: 0.82rem; font-weight: 600; color: var(--text); }
 
     @media (max-width: 760px) {
       .layout { flex-direction: column; }
       .sidebar { display: none; }
       .mobile-bar { display: flex; }
       .main-content { padding: 1.5rem 1.1rem 4rem; }
-      .about-cols { grid-template-columns: 1fr; }
+      .about-cols  { grid-template-columns: 1fr; }
       .support-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -394,22 +409,22 @@
   <!-- Mobile top bar -->
   <div class="mobile-bar">
     <span class="mobile-brand">BYRON_FERGUSON.PORTFOLIO</span>
-    <button class="hamburger" id="menuOpen" aria-label="Open menu">
+    <button class="hamburger" id="menuOpen" aria-label="Open navigation">
       <span></span><span></span><span></span><span></span>
     </button>
   </div>
 
-  <!-- Mobile slide-down menu -->
-  <div class="mobile-menu" id="mobileMenu">
+  <!-- Mobile overlay menu -->
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation">
     <div class="mobile-menu-top">
       <span class="mobile-brand">BYRON_FERGUSON.PORTFOLIO</span>
       <button class="mobile-close" id="menuClose">[ close ]</button>
     </div>
     <nav class="mobile-nav">
-      <a href="#home" onclick="closeMenu()">~/home</a>
-      <a href="#lib"  onclick="closeMenu()">~/lib</a>
-      <a href="#usr"  onclick="closeMenu()">~/usr</a>
-      <a href="#etc"  onclick="closeMenu()">~/etc</a>
+      <button data-target="home">~/home</button>
+      <button data-target="lib">~/lib</button>
+      <button data-target="usr">~/usr</button>
+      <button data-target="etc">~/etc</button>
     </nav>
     <div class="mobile-facts">
       <div>
@@ -418,7 +433,7 @@
       </div>
       <div>
         <div class="mobile-fact-label">// stack</div>
-        <div class="mobile-fact-value">python · powershell · ansible · ci</div>
+        <div class="mobile-fact-value">python &middot; powershell &middot; ansible &middot; ci</div>
       </div>
     </div>
   </div>
@@ -435,10 +450,10 @@
       <div class="sidebar-section">
         <p class="sidebar-label">// navigate</p>
         <nav class="path-nav">
-          <a href="#home">~/home</a>
-          <a href="#lib">~/lib</a>
-          <a href="#usr">~/usr</a>
-          <a href="#etc">~/etc</a>
+          <button data-target="home" class="active">~/home</button>
+          <button data-target="lib">~/lib</button>
+          <button data-target="usr">~/usr</button>
+          <button data-target="etc">~/etc</button>
         </nav>
       </div>
 
@@ -479,35 +494,35 @@
     <main class="main-content">
       <div class="content-inner">
 
-        <!-- /home -->
-        <section class="section" id="home">
+        <!-- ~/home -->
+        <section class="page active" id="page-home">
           <div class="section-hdr">
-            <h2 class="section-hdr-path">~/home</h2>
-            <span class="section-hdr-path">// where I live</span>
+            <span class="section-path">~/home</span>
+            <span class="section-comment">// where I live</span>
           </div>
           <div class="hero-name">BYRON_FERGUSON</div>
-          <div class="hero-title">role: <span>infrastructure_automation_engineer</span></div>
+          <div class="hero-role">role: infrastructure_automation_engineer</div>
           <p class="hero-lede">
             I build <strong>operator-facing tools</strong> for infrastructure remediation, compliance,
             and repeatable workflows. The kind of work that usually lives in a shared doc nobody updates —
             I turn it into something you can actually run, audit, and hand off.
           </p>
           <div class="btn-row">
-            <a class="btn btn-primary" href="#usr">ls /usr</a>
+            <button class="btn btn-primary" data-target="usr">ls /usr</button>
             <a class="btn btn-ghost" href="https://github.com/bferguson-dev" target="_blank" rel="noreferrer">$ open github</a>
           </div>
           <div class="status-row">
-            <span class="status-chip"><span class="dot dot-ok"></span>open_to_work: true</span>
-            <span class="status-chip"><span class="dot dot-ok"></span>documentation: current</span>
-            <span class="status-chip"><span class="dot dot-warn"></span>prod_validated: partial</span>
+            <span class="chip"><span class="dot dot-ok"></span>open_to_work: true</span>
+            <span class="chip"><span class="dot dot-ok"></span>documentation: current</span>
+            <span class="chip"><span class="dot dot-warn"></span>prod_validated: partial</span>
           </div>
         </section>
 
-        <!-- /lib -->
-        <section class="section" id="lib">
+        <!-- ~/lib -->
+        <section class="page" id="page-lib">
           <div class="section-hdr">
-            <h2 class="section-hdr-path">~/lib</h2>
-            <span class="section-hdr-path">// shared libraries, what I'm built on</span>
+            <span class="section-path">~/lib</span>
+            <span class="section-comment">// shared libraries — what I'm built on</span>
           </div>
           <div class="about-cols">
             <p>
@@ -524,22 +539,22 @@
           </div>
         </section>
 
-        <!-- /usr -->
-        <section class="section" id="usr">
+        <!-- ~/usr -->
+        <section class="page" id="page-usr">
           <div class="section-hdr">
-            <h2 class="section-hdr-path">~/usr</h2>
-            <span class="section-hdr-path">// user-installed programs, the things I've shipped</span>
+            <span class="section-path">~/usr</span>
+            <span class="section-comment">// user-installed programs — the things I've shipped</span>
           </div>
 
           <article class="project-featured">
-            <div class="proj-tag-row">
-              <span class="proj-tag">featured</span>
-              <span class="proj-tag">python</span>
-              <span class="proj-tag">infrastructure</span>
-              <span class="proj-tag ok">v0.2.0</span>
-              <span class="proj-tag warn">prod_validated: partial</span>
+            <div class="tag-row">
+              <span class="tag">featured</span>
+              <span class="tag">python</span>
+              <span class="tag">infrastructure</span>
+              <span class="tag green">v0.2.0</span>
+              <span class="tag warn">prod_validated: partial</span>
             </div>
-            <p class="support-name" style="font-size:1rem;margin-bottom:0.35rem;">FailWarden Orchestrator</p>
+            <p class="proj-name">FailWarden Orchestrator</p>
             <p class="proj-desc">
               A constrained YAML runbook executor for infrastructure remediation over SSH.
               Compile-time validation, audit logging, notifier support, dry-run mode, and shipped runbooks.
@@ -561,27 +576,43 @@
             <article class="support-card">
               <p class="support-name">YMC</p>
               <p class="support-desc">Agentless Windows compliance scanner over WinRM. Framework-mapped checks, audit-ready output. No agent install required.</p>
+              <div class="support-links">
+                <a class="text-link" href="projects/ymc/">./project-page</a>
+                <a class="text-link" href="https://github.com/bferguson-dev/YMC" target="_blank" rel="noreferrer">github</a>
+              </div>
             </article>
             <article class="support-card">
               <p class="support-name">Loadout</p>
-              <p class="support-desc">Portable PowerShell + WPF workstation setup tool. Because manually installing your toolchain on a fresh box is a crime against your own time.</p>
+              <p class="support-desc">Portable PowerShell + WPF workstation setup tool. Because manually rebuilding your toolchain on a fresh box is a crime against your own time.</p>
+              <div class="support-links">
+                <a class="text-link" href="projects/loadout/">./project-page</a>
+                <a class="text-link" href="https://github.com/bferguson-dev/Loadout" target="_blank" rel="noreferrer">github</a>
+              </div>
             </article>
             <article class="support-card">
               <p class="support-name">ReadyCheck</p>
               <p class="support-desc">Connectivity validation CLI that compares observed network behavior against declared intent and emits review artifacts.</p>
+              <div class="support-links">
+                <a class="text-link" href="projects/readycheck/">./project-page</a>
+                <a class="text-link" href="https://github.com/bferguson-dev/ReadyCheck" target="_blank" rel="noreferrer">github</a>
+              </div>
             </article>
             <article class="support-card">
               <p class="support-name">My Lab Setup</p>
               <p class="support-desc">Sanitized Proxmox + Ansible lab automation — provisioning phases, guest baselining, and clone workflows. Where I actually break things first.</p>
+              <div class="support-links">
+                <a class="text-link" href="projects/my-lab-setup/">./project-page</a>
+                <a class="text-link" href="https://github.com/bferguson-dev/My-Lab-Setup" target="_blank" rel="noreferrer">github</a>
+              </div>
             </article>
           </div>
         </section>
 
-        <!-- /etc -->
-        <section class="section" id="etc">
+        <!-- ~/etc -->
+        <section class="page" id="page-etc">
           <div class="section-hdr">
-            <h2 class="section-hdr-path">~/etc</h2>
-            <span class="section-hdr-path">// system configuration, how to reach me</span>
+            <span class="section-path">~/etc</span>
+            <span class="section-comment">// system configuration — how to reach me</span>
           </div>
           <div class="contact-block">
             <p>
@@ -599,10 +630,35 @@
   </div>
 
   <script>
-    const menu = document.getElementById('mobileMenu');
+    const pages   = document.querySelectorAll('.page');
+    const navBtns = document.querySelectorAll('[data-target]');
+    const menu    = document.getElementById('mobileMenu');
+
+    function navigate(target) {
+      // hide all pages
+      pages.forEach(p => p.classList.remove('active'));
+      // deactivate all nav buttons
+      navBtns.forEach(b => b.classList.remove('active'));
+      // show target page
+      const page = document.getElementById('page-' + target);
+      if (page) page.classList.add('active');
+      // mark matching nav buttons active
+      document.querySelectorAll('[data-target="' + target + '"]')
+        .forEach(b => b.classList.add('active'));
+      // close mobile menu if open
+      menu.classList.remove('open');
+      // scroll content area back to top
+      window.scrollTo(0, 0);
+    }
+
+    // wire up all [data-target] buttons
+    navBtns.forEach(btn => {
+      btn.addEventListener('click', () => navigate(btn.dataset.target));
+    });
+
+    // mobile open/close
     document.getElementById('menuOpen').addEventListener('click', () => menu.classList.add('open'));
     document.getElementById('menuClose').addEventListener('click', () => menu.classList.remove('open'));
-    function closeMenu() { menu.classList.remove('open'); }
   </script>
 
 </body>
