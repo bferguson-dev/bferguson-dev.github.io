@@ -10,34 +10,29 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* CRT amber — P3 phosphor */
       --amber:        #ffaa00;
       --amber-dim:    rgba(255,170,0,0.1);
       --amber-border: rgba(255,170,0,0.22);
       --amber-bright: #ffc040;
-      /* CRT green — P1 phosphor */
       --green:        #39e87a;
       --green-dim:    rgba(57,232,122,0.1);
       --green-border: rgba(57,232,122,0.22);
-      /* Surfaces */
       --sidebar-bg:   #0e1012;
       --sidebar-border: rgba(255,170,0,0.08);
       --main-bg:      #13161a;
       --surface:      #1a1e22;
       --border:       rgba(255,255,255,0.07);
-      /* Text — brighter, more phosphor-like */
       --text:         #e8dfc8;
       --text-bright:  #f5eedb;
       --muted:        #b8a888;
-      --dim:          #7a6e5c;
-      /* Sidebar specifics */
       --sidebar-text:   #e8dfc8;
       --sidebar-muted:  rgba(232,223,200,0.5);
       --sidebar-w: 272px;
-      /* Fonts */
       --sans: "IBM Plex Sans", "Segoe UI", Arial, sans-serif;
       --mono: "IBM Plex Mono", monospace;
       --max-content: 860px;
+      --term-bar-h: 15vh;
+      --term-titlebar-h: 34px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -57,12 +52,11 @@
       top: 0;
       height: 100vh;
       overflow-y: auto;
-      padding: 1.75rem 1.4rem;
+      padding: 1.75rem 1.4rem var(--term-bar-h);
       display: flex;
       flex-direction: column;
       gap: 1.75rem;
     }
-
     .brand-title {
       font-family: var(--mono);
       font-size: 0.82rem;
@@ -71,13 +65,7 @@
       letter-spacing: 0.04em;
       line-height: 1.3;
     }
-    .brand-sub {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      color: var(--sidebar-muted);
-      margin-top: 0.25rem;
-    }
-
+    .brand-sub { font-family: var(--mono); font-size: 0.68rem; color: var(--sidebar-muted); margin-top: 0.25rem; }
     .sidebar-section { display: flex; flex-direction: column; }
     .sidebar-label {
       font-family: var(--mono);
@@ -89,7 +77,6 @@
       margin-bottom: 0.4rem;
       opacity: 0.8;
     }
-
     .path-nav { display: flex; flex-direction: column; gap: 0.05rem; }
     .path-nav button {
       font-family: var(--mono);
@@ -97,9 +84,6 @@
       color: var(--sidebar-muted);
       padding: 0.45rem 0.6rem;
       border-radius: 5px;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
       background: none;
       border: none;
       cursor: pointer;
@@ -108,135 +92,42 @@
     }
     .path-nav button:hover { background: var(--amber-dim); color: var(--sidebar-text); }
     .path-nav button.active { color: var(--amber); background: var(--amber-dim); }
-
-    .sidebar-fact {
-      padding: 0.5rem 0;
-      border-bottom: 1px solid var(--sidebar-border);
-      display: flex;
-      flex-direction: column;
-      gap: 0.1rem;
-    }
+    .sidebar-fact { padding: 0.5rem 0; border-bottom: 1px solid var(--sidebar-border); display: flex; flex-direction: column; gap: 0.1rem; }
     .sidebar-fact:last-child { border-bottom: none; }
     .sidebar-fact-label { font-family: var(--mono); font-size: 0.65rem; color: var(--green); opacity: 0.7; }
     .sidebar-fact-value { font-family: var(--mono); font-size: 0.78rem; font-weight: 600; color: var(--text); }
-
     .stack-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
-    .s-tag {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      padding: 0.15rem 0.45rem;
-      background: var(--amber-dim);
-      border: 1px solid var(--amber-border);
-      border-radius: 3px;
-      color: var(--amber);
-    }
-
+    .s-tag { font-family: var(--mono); font-size: 0.68rem; padding: 0.15rem 0.45rem; background: var(--amber-dim); border: 1px solid var(--amber-border); border-radius: 3px; color: var(--amber); }
     .sidebar-footer { margin-top: auto; }
-    .gh-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      padding: 0.55rem;
-      background: var(--amber);
-      color: #0e0c08;
-      font-family: var(--mono);
-      font-size: 0.78rem;
-      font-weight: 700;
-      border-radius: 5px;
-      letter-spacing: 0.04em;
-    }
+    .gh-btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 0.55rem; background: var(--amber); color: #0e0c08; font-family: var(--mono); font-size: 0.78rem; font-weight: 700; border-radius: 5px; letter-spacing: 0.04em; }
     .gh-btn:hover { background: var(--amber-bright); }
 
     /* ── Main ── */
-    .main-content { flex: 1; min-width: 0; padding: 2rem 2.5rem 5rem; }
+    .main-content { flex: 1; min-width: 0; padding: 2rem 2.5rem calc(var(--term-bar-h) + 2rem); }
     .content-inner { max-width: var(--max-content); }
-
-    /* Sections hidden by default; JS shows active one */
     .page { display: none; }
     .page.active { display: block; }
 
     /* ── Section header ── */
-    .section-hdr {
-      display: flex;
-      align-items: baseline;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.6rem;
-      border-bottom: 1px solid var(--amber-border);
-    }
-    .section-path {
-      font-family: var(--mono);
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--amber);
-    }
-    .section-comment {
-      font-family: var(--mono);
-      font-size: 0.78rem;
-      color: var(--green);
-      opacity: 0.8;
-    }
+    .section-hdr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--amber-border); }
+    .section-path { font-family: var(--mono); font-size: 1.05rem; font-weight: 700; color: var(--amber); }
+    .section-comment { font-family: var(--mono); font-size: 0.78rem; color: var(--green); opacity: 0.8; }
 
     /* ── ~/home ── */
-    .ascii-art {
-      font-family: var(--mono);
-      font-size: clamp(0.38rem, 1.05vw, 0.65rem);
-      font-weight: 400;
-      color: var(--amber-bright);
-      line-height: 1.22;
-      white-space: pre;
-      overflow-x: auto;
-      margin-bottom: 0.75rem;
-      display: block;
-    }
-    .hero-role {
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      color: var(--green);
-      margin-bottom: 1.5rem;
-      opacity: 0.9;
-    }
-    .hero-lede {
-      font-size: 1rem;
-      color: var(--muted);
-      max-width: 54ch;
-      margin-bottom: 1.5rem;
-      line-height: 1.72;
-    }
+    .ascii-art { font-family: var(--mono); font-size: clamp(0.38rem, 1.05vw, 0.65rem); color: var(--amber-bright); line-height: 1.22; white-space: pre; overflow-x: auto; margin-bottom: 0.75rem; display: block; }
+    .hero-role { font-family: var(--mono); font-size: 0.85rem; color: var(--green); margin-bottom: 1.5rem; opacity: 0.9; }
+    .hero-lede { font-size: 1rem; color: var(--muted); max-width: 54ch; margin-bottom: 1.5rem; line-height: 1.72; }
     .hero-lede strong { color: var(--text-bright); font-weight: 600; }
-
     .btn-row { display: flex; gap: 0.65rem; flex-wrap: wrap; margin-bottom: 1.75rem; }
-    .btn {
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      font-weight: 700;
-      padding: 0.6rem 1.05rem;
-      border-radius: 5px;
-      border: 1px solid transparent;
-      letter-spacing: 0.03em;
-      cursor: pointer;
-    }
+    .btn { font-family: var(--mono); font-size: 0.8rem; font-weight: 700; padding: 0.6rem 1.05rem; border-radius: 5px; border: 1px solid transparent; letter-spacing: 0.03em; cursor: pointer; }
     .btn-primary { background: var(--amber); color: #0e0c08; }
     .btn-primary:hover { background: var(--amber-bright); }
     .btn-ghost { border-color: var(--border); color: var(--muted); }
     .btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.15); }
-
     .status-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      font-family: var(--mono);
-      font-size: 0.74rem;
-      padding: 0.22rem 0.6rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      color: var(--muted);
-    }
+    .chip { display: inline-flex; align-items: center; gap: 0.35rem; font-family: var(--mono); font-size: 0.74rem; padding: 0.22rem 0.6rem; background: var(--surface); border: 1px solid var(--border); border-radius: 3px; color: var(--muted); }
     .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-    .dot-ok   { background: var(--green); }
+    .dot-ok { background: var(--green); }
     .dot-warn { background: var(--amber); }
 
     /* ── ~/lib ── */
@@ -244,166 +135,169 @@
     .about-cols p { color: var(--muted); font-size: 0.92rem; line-height: 1.75; }
 
     /* ── ~/usr ── */
-    .project-featured {
-      background: var(--surface);
-      border: 1px solid var(--amber-border);
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin-bottom: 0.85rem;
-    }
+    .project-featured { background: var(--surface); border: 1px solid var(--amber-border); border-radius: 8px; padding: 1.5rem; margin-bottom: 0.85rem; }
     .tag-row { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.85rem; }
-    .tag {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      font-weight: 700;
-      padding: 0.15rem 0.5rem;
-      border-radius: 3px;
-      background: var(--amber-dim);
-      color: var(--amber);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
+    .tag { font-family: var(--mono); font-size: 0.68rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 3px; background: var(--amber-dim); color: var(--amber); letter-spacing: 0.04em; text-transform: uppercase; }
     .tag.green { background: var(--green-dim); color: var(--green); border: 1px solid var(--green-border); }
     .tag.warn  { background: var(--amber-dim); color: var(--amber); border: 1px solid var(--amber-border); }
-    .proj-name {
-      font-family: var(--mono);
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--text-bright);
-      margin-bottom: 0.4rem;
-    }
+    .proj-name { font-family: var(--mono); font-size: 1rem; font-weight: 700; color: var(--text-bright); margin-bottom: 0.4rem; }
     .proj-desc { color: var(--muted); font-size: 0.9rem; margin: 0 0 0.85rem; line-height: 1.65; }
     .proj-points { list-style: none; padding: 0; margin: 0 0 1.1rem; }
-    .proj-points li {
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      color: var(--muted);
-      padding: 0.22rem 0;
-      display: flex;
-      gap: 0.5rem;
-    }
+    .proj-points li { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); padding: 0.22rem 0; display: flex; gap: 0.5rem; }
     .proj-points li::before { content: ">>"; color: var(--green); flex-shrink: 0; opacity: 0.85; }
     .link-row { display: flex; gap: 1rem; }
-    .text-link {
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--amber);
-    }
+    .text-link { font-family: var(--mono); font-size: 0.8rem; font-weight: 600; color: var(--amber); }
     .text-link:hover { color: var(--amber-bright); text-decoration: underline; }
-
     .support-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
-    .support-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 7px;
-      padding: 1rem 1.1rem;
-    }
-    .support-name {
-      font-family: var(--mono);
-      font-weight: 700;
-      font-size: 0.85rem;
-      color: var(--amber);
-      margin-bottom: 0.25rem;
-    }
+    .support-card { background: var(--surface); border: 1px solid var(--border); border-radius: 7px; padding: 1rem 1.1rem; }
+    .support-name { font-family: var(--mono); font-weight: 700; font-size: 0.85rem; color: var(--amber); margin-bottom: 0.25rem; }
     .support-desc { color: var(--muted); font-size: 0.8rem; }
     .support-links { margin-top: 0.6rem; display: flex; gap: 0.75rem; }
 
     /* ── ~/etc ── */
-    .contact-block {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.5rem;
-    }
+    .contact-block { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; }
     .contact-block p { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.1rem; max-width: 52ch; }
 
     /* ── Mobile bar ── */
-    .mobile-bar {
-      display: none;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--sidebar-bg);
-      border-bottom: 1px solid var(--sidebar-border);
-      padding: 0.85rem 1.1rem;
-      justify-content: space-between;
-      align-items: center;
-    }
+    .mobile-bar { display: none; position: sticky; top: 0; z-index: 100; background: var(--sidebar-bg); border-bottom: 1px solid var(--sidebar-border); padding: 0.85rem 1.1rem; justify-content: space-between; align-items: center; }
     .mobile-brand { font-family: var(--mono); font-size: 0.78rem; font-weight: 700; color: var(--amber); }
-    .hamburger {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 4px;
-      background: none;
-      border: none;
-    }
-    .hamburger span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: var(--sidebar-muted);
-      border-radius: 2px;
-    }
+    .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--sidebar-muted); border-radius: 2px; }
     .hamburger:hover span { background: var(--amber); }
 
     /* ── Mobile overlay menu ── */
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 200;
-      background: rgba(10,11,13,0.96);
-      backdrop-filter: blur(6px);
-      flex-direction: column;
-      padding: 1.5rem;
-    }
+    .mobile-menu { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(10,11,13,0.96); backdrop-filter: blur(6px); flex-direction: column; padding: 1.5rem; }
     .mobile-menu.open { display: flex; }
-    .mobile-menu-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 2rem;
-    }
-    .mobile-close {
-      font-family: var(--mono);
-      font-size: 0.9rem;
-      color: var(--muted);
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px 8px;
-    }
+    .mobile-menu-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    .mobile-close { font-family: var(--mono); font-size: 0.9rem; color: var(--muted); background: none; border: none; cursor: pointer; padding: 4px 8px; }
     .mobile-close:hover { color: var(--amber); }
     .mobile-nav { display: flex; flex-direction: column; gap: 0.15rem; margin-bottom: 2rem; }
-    .mobile-nav button {
-      font-family: var(--mono);
-      font-size: 1.1rem;
-      color: var(--sidebar-muted);
-      padding: 0.75rem 0.5rem;
-      border-bottom: 1px solid var(--sidebar-border);
-      background: none;
-      border-left: none;
-      border-right: none;
-      border-top: none;
-      text-align: left;
-      cursor: pointer;
-      width: 100%;
-    }
+    .mobile-nav button { font-family: var(--mono); font-size: 1.1rem; color: var(--sidebar-muted); padding: 0.75rem 0.5rem; border-bottom: 1px solid var(--sidebar-border); background: none; border-left: none; border-right: none; border-top: none; text-align: left; cursor: pointer; width: 100%; }
     .mobile-nav button:hover { color: var(--amber); }
     .mobile-facts { display: flex; flex-direction: column; gap: 0.75rem; }
     .mobile-fact-label { font-family: var(--mono); font-size: 0.65rem; color: var(--green); opacity: 0.75; }
     .mobile-fact-value { font-family: var(--mono); font-size: 0.82rem; font-weight: 600; color: var(--text); }
 
+    /* ════════════════════════════════
+       TERMINAL
+    ════════════════════════════════ */
+    .term-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 500;
+      height: var(--term-bar-h);
+      background: #020a04;
+      border-top: 1px solid rgba(57,232,122,0.18);
+      display: flex;
+      flex-direction: column;
+      transition: height 0.2s ease;
+    }
+    .term-bar.collapsed { height: var(--term-titlebar-h) !important; }
+
+    .term-titlebar {
+      height: var(--term-titlebar-h);
+      flex-shrink: 0;
+      background: #08100a;
+      border-bottom: 1px solid rgba(57,232,122,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 0.65rem;
+      cursor: pointer;
+      user-select: none;
+    }
+    .term-titlebar-left { display: flex; align-items: center; gap: 0.65rem; }
+    .term-titlebar-right { display: flex; align-items: center; gap: 0.3rem; }
+
+    .term-dots { display: flex; gap: 5px; }
+    .term-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .term-dot-red    { background: #ff5f57; }
+    .term-dot-yellow { background: #febc2e; }
+    .term-dot-green  { background: #28c840; }
+
+    .term-label { font-family: var(--mono); font-size: 0.7rem; color: rgba(57,232,122,0.6); letter-spacing: 0.08em; }
+
+    .term-tbtn {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      background: none;
+      border: 1px solid rgba(57,232,122,0.15);
+      border-radius: 3px;
+      color: rgba(57,232,122,0.55);
+      padding: 1px 7px;
+      cursor: pointer;
+      line-height: 1.6;
+    }
+    .term-tbtn:hover { color: #39e87a; border-color: rgba(57,232,122,0.4); }
+
+    .term-body { flex: 1; display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
+
+    .term-output {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0.45rem 0.85rem 0.25rem;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      line-height: 1.55;
+      color: #39e87a;
+      scroll-behavior: smooth;
+    }
+    .term-output::-webkit-scrollbar { width: 3px; }
+    .term-output::-webkit-scrollbar-track { background: transparent; }
+    .term-output::-webkit-scrollbar-thumb { background: rgba(57,232,122,0.2); border-radius: 2px; }
+
+    .term-input-row {
+      display: flex;
+      align-items: center;
+      padding: 0.3rem 0.85rem;
+      border-top: 1px solid rgba(57,232,122,0.07);
+      flex-shrink: 0;
+      background: #020a04;
+    }
+    .term-prompt { font-family: var(--mono); font-size: 0.78rem; color: var(--amber); white-space: nowrap; flex-shrink: 0; }
+    .term-input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: #39e87a;
+      caret-color: #39e87a;
+      padding: 0 0.3rem;
+    }
+
+    /* output line colour classes */
+    .tl-cmd    { color: var(--amber); opacity: 0.85; }
+    .tl-ok     { color: #39e87a; }
+    .tl-muted  { color: rgba(57,232,122,0.45); }
+    .tl-err    { color: #ff6b6b; }
+    .tl-amber  { color: var(--amber); }
+    .tl-white  { color: #e8dfc8; }
+    .tl-pre    { white-space: pre; font-family: var(--mono); }
+    .tl-pre.tl-amber { color: var(--amber); }
+    .tl-pre.tl-ok    { color: #39e87a; }
+
+    /* blinking cursor line at bottom of output */
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    .term-cursor-blink { display: inline-block; width: 7px; height: 1em; background: #39e87a; vertical-align: text-bottom; animation: blink 1s step-end infinite; margin-left: 1px; }
+
+    /* ── Mobile: hide bottom bar, show via hamburger ── */
     @media (max-width: 760px) {
       .layout { flex-direction: column; }
       .sidebar { display: none; }
       .mobile-bar { display: flex; }
       .main-content { padding: 1.5rem 1.1rem 4rem; }
-      .about-cols  { grid-template-columns: 1fr; }
+      .about-cols { grid-template-columns: 1fr; }
       .support-grid { grid-template-columns: 1fr; }
+      .term-bar { display: none; }
+      .term-bar.mobile-active {
+        display: flex !important;
+        position: fixed;
+        inset: 0;
+        height: 100dvh !important;
+        border-top: none;
+      }
     }
   </style>
 </head>
@@ -428,28 +322,21 @@
       <button data-target="lib">~/lib</button>
       <button data-target="usr">~/usr</button>
       <button data-target="etc">~/etc</button>
+      <button id="mobileTermOpen">~/term &mdash; open terminal</button>
     </nav>
     <div class="mobile-facts">
-      <div>
-        <div class="mobile-fact-label">// focus</div>
-        <div class="mobile-fact-value">infrastructure automation &amp; ops tooling</div>
-      </div>
-      <div>
-        <div class="mobile-fact-label">// stack</div>
-        <div class="mobile-fact-value">python &middot; powershell &middot; ansible &middot; ci</div>
-      </div>
+      <div><div class="mobile-fact-label">// focus</div><div class="mobile-fact-value">infrastructure automation &amp; ops tooling</div></div>
+      <div><div class="mobile-fact-label">// stack</div><div class="mobile-fact-value">python &middot; powershell &middot; ansible &middot; ci</div></div>
     </div>
   </div>
 
   <div class="layout">
-
     <!-- Sidebar -->
     <aside class="sidebar">
       <div class="brand-block">
         <div class="brand-title">BYRON_FERGUSON<br>.PORTFOLIO</div>
         <div class="brand-sub">// infrastructure automation</div>
       </div>
-
       <div class="sidebar-section">
         <p class="sidebar-label">// navigate</p>
         <nav class="path-nav">
@@ -459,35 +346,19 @@
           <button data-target="etc">~/etc</button>
         </nav>
       </div>
-
       <div class="sidebar-section">
         <p class="sidebar-label">// env</p>
-        <div class="sidebar-fact">
-          <span class="sidebar-fact-label">FOCUS</span>
-          <span class="sidebar-fact-value">infra automation &amp; ops tooling</span>
-        </div>
-        <div class="sidebar-fact">
-          <span class="sidebar-fact-label">TARGET</span>
-          <span class="sidebar-fact-value">systems &amp; platform engineering</span>
-        </div>
-        <div class="sidebar-fact">
-          <span class="sidebar-fact-label">STYLE</span>
-          <span class="sidebar-fact-value">solo-maintained, docs-first</span>
-        </div>
+        <div class="sidebar-fact"><span class="sidebar-fact-label">FOCUS</span><span class="sidebar-fact-value">infra automation &amp; ops tooling</span></div>
+        <div class="sidebar-fact"><span class="sidebar-fact-label">TARGET</span><span class="sidebar-fact-value">systems &amp; platform engineering</span></div>
+        <div class="sidebar-fact"><span class="sidebar-fact-label">STYLE</span><span class="sidebar-fact-value">solo-maintained, docs-first</span></div>
       </div>
-
       <div class="sidebar-section">
         <p class="sidebar-label">// stack</p>
         <div class="stack-tags">
-          <span class="s-tag">python</span>
-          <span class="s-tag">powershell</span>
-          <span class="s-tag">ansible</span>
-          <span class="s-tag">ci</span>
-          <span class="s-tag">ssh</span>
-          <span class="s-tag">winrm</span>
+          <span class="s-tag">python</span><span class="s-tag">powershell</span><span class="s-tag">ansible</span>
+          <span class="s-tag">ci</span><span class="s-tag">ssh</span><span class="s-tag">winrm</span>
         </div>
       </div>
-
       <div class="sidebar-footer">
         <a class="gh-btn" href="https://github.com/bferguson-dev" target="_blank" rel="noreferrer">$ open github</a>
       </div>
@@ -516,11 +387,7 @@
  ██║     ███████╗██║  ██║╚██████╔╝╚██████╔╝███████║╚██████╔╝██║ ╚████║
  ╚═╝     ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝ ╚═════╝ ╚═╝  ╚═══╝</pre>
           <div class="hero-role">role: infrastructure_automation_engineer</div>
-          <p class="hero-lede">
-            I build <strong>operator-facing tools</strong> for infrastructure remediation, compliance,
-            and repeatable workflows. The kind of work that usually lives in a shared doc nobody updates —
-            I turn it into something you can actually run, audit, and hand off.
-          </p>
+          <p class="hero-lede">I build <strong>operator-facing tools</strong> for infrastructure remediation, compliance, and repeatable workflows. The kind of work that usually lives in a shared doc nobody updates — I turn it into something you can actually run, audit, and hand off.</p>
           <div class="btn-row">
             <button class="btn btn-primary" data-target="usr">ls /usr</button>
             <a class="btn btn-ghost" href="https://github.com/bferguson-dev" target="_blank" rel="noreferrer">$ open github</a>
@@ -539,17 +406,8 @@
             <span class="section-comment">// shared libraries — what I'm built on</span>
           </div>
           <div class="about-cols">
-            <p>
-              My work centers on infrastructure tasks that are usually documented but still handled
-              manually: remediation steps, compliance checks, workstation setup, connectivity validation,
-              and repeatable lab operations. I'm most interested in roles where that work becomes
-              durable internal tooling instead of tribal knowledge.
-            </p>
-            <p>
-              Everything here is presented conservatively. Where a tool has strong unit coverage but
-              limited production validation, the page says so directly. That's intentional — honest
-              maturity statements are part of the engineering communication style, not a disclaimer.
-            </p>
+            <p>My work centers on infrastructure tasks that are usually documented but still handled manually: remediation steps, compliance checks, workstation setup, connectivity validation, and repeatable lab operations. I'm most interested in roles where that work becomes durable internal tooling instead of tribal knowledge.</p>
+            <p>Everything here is presented conservatively. Where a tool has strong unit coverage but limited production validation, the page says so directly. That's intentional — honest maturity statements are part of the engineering communication style, not a disclaimer.</p>
           </div>
         </section>
 
@@ -559,21 +417,13 @@
             <span class="section-path">~/usr</span>
             <span class="section-comment">// user-installed programs — the things I've shipped</span>
           </div>
-
           <article class="project-featured">
             <div class="tag-row">
-              <span class="tag">featured</span>
-              <span class="tag">python</span>
-              <span class="tag">infrastructure</span>
-              <span class="tag green">v0.2.0</span>
-              <span class="tag warn">prod_validated: partial</span>
+              <span class="tag">featured</span><span class="tag">python</span><span class="tag">infrastructure</span>
+              <span class="tag green">v0.2.0</span><span class="tag warn">prod_validated: partial</span>
             </div>
             <p class="proj-name">FailWarden Orchestrator</p>
-            <p class="proj-desc">
-              A constrained YAML runbook executor for infrastructure remediation over SSH.
-              Compile-time validation, audit logging, notifier support, dry-run mode, and shipped runbooks.
-              It doesn't try to be Ansible — it tries to be the thing you hand to an operator at 2am.
-            </p>
+            <p class="proj-desc">A constrained YAML runbook executor for infrastructure remediation over SSH. Compile-time validation, audit logging, notifier support, dry-run mode, and shipped runbooks. It doesn't try to be Ansible — it tries to be the thing you hand to an operator at 2am.</p>
             <ul class="proj-points">
               <li>current release: v0.2.0</li>
               <li>V1 and V1.5 implemented</li>
@@ -585,39 +435,26 @@
               <a class="text-link" href="https://github.com/bferguson-dev/FailWarden-Orchestrator" target="_blank" rel="noreferrer">github.com/&hellip;</a>
             </div>
           </article>
-
           <div class="support-grid">
             <article class="support-card">
               <p class="support-name">YMC</p>
               <p class="support-desc">Agentless Windows compliance scanner over WinRM. Framework-mapped checks, audit-ready output. No agent install required.</p>
-              <div class="support-links">
-                <a class="text-link" href="projects/ymc/">./project-page</a>
-                <a class="text-link" href="https://github.com/bferguson-dev/YMC" target="_blank" rel="noreferrer">github</a>
-              </div>
+              <div class="support-links"><a class="text-link" href="projects/ymc/">./project-page</a><a class="text-link" href="https://github.com/bferguson-dev/YMC" target="_blank" rel="noreferrer">github</a></div>
             </article>
             <article class="support-card">
               <p class="support-name">Loadout</p>
               <p class="support-desc">Portable PowerShell + WPF workstation setup tool. Because manually rebuilding your toolchain on a fresh box is a crime against your own time.</p>
-              <div class="support-links">
-                <a class="text-link" href="projects/loadout/">./project-page</a>
-                <a class="text-link" href="https://github.com/bferguson-dev/Loadout" target="_blank" rel="noreferrer">github</a>
-              </div>
+              <div class="support-links"><a class="text-link" href="projects/loadout/">./project-page</a><a class="text-link" href="https://github.com/bferguson-dev/Loadout" target="_blank" rel="noreferrer">github</a></div>
             </article>
             <article class="support-card">
               <p class="support-name">ReadyCheck</p>
-              <p class="support-desc">Connectivity validation CLI that compares observed network behavior against declared intent and emits review artifacts.</p>
-              <div class="support-links">
-                <a class="text-link" href="projects/readycheck/">./project-page</a>
-                <a class="text-link" href="https://github.com/bferguson-dev/ReadyCheck" target="_blank" rel="noreferrer">github</a>
-              </div>
+              <p class="support-desc">Connectivity validation CLI comparing observed network behavior against declared intent and emits review artifacts.</p>
+              <div class="support-links"><a class="text-link" href="projects/readycheck/">./project-page</a><a class="text-link" href="https://github.com/bferguson-dev/ReadyCheck" target="_blank" rel="noreferrer">github</a></div>
             </article>
             <article class="support-card">
               <p class="support-name">My Lab Setup</p>
               <p class="support-desc">Sanitized Proxmox + Ansible lab automation — provisioning phases, guest baselining, and clone workflows. Where I actually break things first.</p>
-              <div class="support-links">
-                <a class="text-link" href="projects/my-lab-setup/">./project-page</a>
-                <a class="text-link" href="https://github.com/bferguson-dev/My-Lab-Setup" target="_blank" rel="noreferrer">github</a>
-              </div>
+              <div class="support-links"><a class="text-link" href="projects/my-lab-setup/">./project-page</a><a class="text-link" href="https://github.com/bferguson-dev/My-Lab-Setup" target="_blank" rel="noreferrer">github</a></div>
             </article>
           </div>
         </section>
@@ -629,10 +466,7 @@
             <span class="section-comment">// system configuration — how to reach me</span>
           </div>
           <div class="contact-block">
-            <p>
-              GitHub is the primary public contact point for now. Resume, email, and LinkedIn
-              can be added here without restructuring anything — this section was designed for it.
-            </p>
+            <p>GitHub is the primary public contact point for now. Resume, email, and LinkedIn can be added here without restructuring anything — this section was designed for it.</p>
             <div class="btn-row" style="margin-bottom:0;">
               <a class="btn btn-primary" href="https://github.com/bferguson-dev" target="_blank" rel="noreferrer">$ open github</a>
             </div>
@@ -643,36 +477,673 @@
     </main>
   </div>
 
+  <!-- ═══════════════════════════════════
+       TERMINAL BAR (fixed bottom)
+  ═══════════════════════════════════ -->
+  <div class="term-bar" id="termBar">
+    <div class="term-titlebar" id="termTitlebar">
+      <div class="term-titlebar-left">
+        <div class="term-dots">
+          <div class="term-dot term-dot-red"></div>
+          <div class="term-dot term-dot-yellow"></div>
+          <div class="term-dot term-dot-green"></div>
+        </div>
+        <span class="term-label" id="termLabel">TERM 80x24</span>
+      </div>
+      <div class="term-titlebar-right">
+        <button class="term-tbtn" id="termCycleBtn" title="Resize">&#9650;</button>
+        <button class="term-tbtn" id="termCollapseBtn" title="Collapse">&#9660;</button>
+      </div>
+    </div>
+    <div class="term-body" id="termBody">
+      <div class="term-output" id="termOutput"></div>
+      <div class="term-input-row">
+        <span class="term-prompt" id="termPrompt"></span>
+        <input class="term-input" id="termInput" type="text"
+               autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+               aria-label="Terminal input">
+      </div>
+    </div>
+  </div>
+
   <script>
+  (function () {
+    'use strict';
+
+    // ── Usernames ──────────────────────────────────────────────
+    const USERNAMES = [
+      'cool_person', 'distinguished_engineer', 'person_of_culture',
+      'future_colleague', 'talent_scout', 'definitely_not_a_bot',
+      'hiring_manager_probably', 'curious_human', 'fellow_nerd',
+      'valued_visitor', 'potential_collaborator', 'tasteful_human',
+      'clearly_intelligent', 'excellent_taste', 'discerning_professional',
+      'infrastructure_enjoyer', 'devops_enthusiast', 'seasoned_evaluator',
+      'senior_talent_detector', 'thoughtful_recruiter', 'technical_visionary',
+      'power_user', 'caffeinated_engineer', 'keyboard_archaeologist',
+      'l33t_visitor'
+    ];
+    const USERNAME = USERNAMES[Math.floor(Math.random() * USERNAMES.length)];
+    const HOSTNAME = 'portfolio';
+
+    // ── Virtual filesystem ─────────────────────────────────────
+    const FS = {
+      '/': { type: 'dir', children: ['home', 'lib', 'usr', 'etc'] },
+      '/home': {
+        type: 'dir', children: ['intro.txt', 'about.txt'],
+        files: {
+          'intro.txt': 'Welcome to /home\n\nThis is the landing zone.\nTry: ls /usr  to see what I\'ve shipped.\nTry: neofetch for the full system readout.',
+          'about.txt': 'Byron Ferguson\nInfrastructure Automation Engineer\n\nI build operator-facing tools that make infrastructure work\nrepeatable, auditable, and safe to hand off.'
+        }
+      },
+      '/lib': {
+        type: 'dir', children: ['philosophy.txt', 'principles.txt'],
+        files: {
+          'philosophy.txt': '[SHARED LIBRARIES — WHAT I\'M BUILT ON]\n\nWork centers on infrastructure tasks that are usually\ndocumented but still handled manually: remediation steps,\ncompliance checks, workstation setup, connectivity validation.\n\nMost interested in roles where that work becomes durable\ninternal tooling instead of tribal knowledge.',
+          'principles.txt': 'Engineering Communication Principles\n====================================\n- Honest maturity statements over vague claims\n- Documentation that matches what actually ships\n- Scope control over feature creep\n- If it needs a disclaimer, the code needs more work'
+        }
+      },
+      '/usr': {
+        type: 'dir', children: ['failwarden', 'ymc', 'loadout', 'readycheck', 'my-lab-setup']
+      },
+      '/usr/failwarden': {
+        type: 'dir', children: ['README.md', 'status.txt'],
+        files: {
+          'README.md': 'FailWarden Orchestrator\n=======================\nConstrained YAML runbook executor for infra remediation over SSH.\n\nFeatures: compile-time validation, audit logging, notifier\nsupport, dry-run mode, shipped runbooks.\n\nRelease:    v0.2.0\nStatus:     V1 and V1.5 implemented\nValidation: strong unit + controlled local integration\nNote:       not yet validated against live prod infrastructure\n\nIt doesn\'t try to be Ansible.\nIt tries to be the thing you hand an operator at 2am.\n\nGitHub: github.com/bferguson-dev/FailWarden-Orchestrator',
+          'status.txt': 'v0.2.0 — STABLE\nprod_validated: partial\ntest_coverage: strong\nnext: V2 scope planning'
+        }
+      },
+      '/usr/ymc': {
+        type: 'dir', children: ['README.md'],
+        files: { 'README.md': 'YMC\n===\nAgentless Windows compliance scanner over WinRM.\nFramework-mapped checks. Audit-ready output.\nNo agent install required.\n\nGitHub: github.com/bferguson-dev/YMC' }
+      },
+      '/usr/loadout': {
+        type: 'dir', children: ['README.md'],
+        files: { 'README.md': 'Loadout\n=======\nPortable PowerShell + WPF workstation setup tool.\nFor infrastructure professionals who are tired of\nmanually rebuilding their toolchain on every fresh box.\n\nGitHub: github.com/bferguson-dev/Loadout' }
+      },
+      '/usr/readycheck': {
+        type: 'dir', children: ['README.md'],
+        files: { 'README.md': 'ReadyCheck\n==========\nConnectivity validation CLI. Compares observed network\nbehavior against declared allow/deny intent.\nEmits review artifacts. Designed for auditable change verification.\n\nGitHub: github.com/bferguson-dev/ReadyCheck' }
+      },
+      '/usr/my-lab-setup': {
+        type: 'dir', children: ['README.md'],
+        files: { 'README.md': 'My Lab Setup\n============\nSanitized Proxmox + Ansible lab automation.\nProvisioning phases, guest baselining, clone workflows.\n\nWhere I actually break things before shipping elsewhere.\n\nGitHub: github.com/bferguson-dev/My-Lab-Setup' }
+      },
+      '/etc': {
+        type: 'dir', children: ['contact.txt', 'hosts', 'motd'],
+        files: {
+          'contact.txt': '[CONTACT CONFIGURATION]\n\nGitHub:   github.com/bferguson-dev\nEmail:    [coming soon]\nLinkedIn: [coming soon]\nResume:   [coming soon — placeholder active]\n\nThis file intentionally terse.',
+          'hosts':  '127.0.0.1       localhost\n::1             localhost\n0.0.0.0         imposter-syndrome\n0.0.0.0         burnout',
+          'motd':   'Welcome to BYRON_FERGUSON.PORTFOLIO\nPortfolioOS 2.0.0 — be excellent to each other\nLast login: right now, from your curiosity'
+        }
+      }
+    };
+
+    // ── Fortune quotes ──────────────────────────────────────────
+    const FORTUNES = [
+      '"Talk is cheap. Show me the code." — Linus Torvalds',
+      '"The best tool is the one that actually gets used." — unknown ops engineer',
+      '"It works on my machine." — every developer, ever',
+      '"Documentation is a love letter to your future self." — Damian Conway',
+      '"There are two hard problems in CS: cache invalidation, naming things, and off-by-one errors."',
+      '"Real artists ship." — Steve Jobs',
+      '"rm -rf is not a deployment strategy."',
+      '"The cloud is just someone else\'s computer."',
+      '"Any sufficiently advanced automation is indistinguishable from a shell script no one remembers writing."',
+      '"sudo make me a sandwich." — xkcd #149',
+      '"Weeks of coding can save you hours of planning."',
+      '"A good runbook is the difference between an incident and a disaster."',
+      '"Tribal knowledge is technical debt in disguise."',
+      '"The most dangerous phrase is: we\'ve always done it this way."',
+      '"Audit logs are a love language."',
+    ];
+
+    // ── Terminal state ──────────────────────────────────────────
+    let cwd = '/';
+    let termHistory = [];
+    let histIdx = -1;
+    let collapsed = false;
+    let sizeIdx = 0;
+    const SIZES = ['15vh', '40vh', '70vh'];
+
+    // ── DOM refs ───────────────────────────────────────────────
+    const termBar        = document.getElementById('termBar');
+    const termOutput     = document.getElementById('termOutput');
+    const termInput      = document.getElementById('termInput');
+    const termPromptEl   = document.getElementById('termPrompt');
+    const termLabel      = document.getElementById('termLabel');
+    const termCycleBtn   = document.getElementById('termCycleBtn');
+    const termCollapseBtn= document.getElementById('termCollapseBtn');
+    const termTitlebar   = document.getElementById('termTitlebar');
+    const mobileMenu     = document.getElementById('mobileMenu');
+
+    // ── Prompt ────────────────────────────────────────────────
+    function getPrompt() { return USERNAME + '@' + HOSTNAME + ':' + cwd + '$ '; }
+    function refreshPrompt() { termPromptEl.textContent = getPrompt(); }
+
+    // ── Output helpers ─────────────────────────────────────────
+    function println(text, cls) {
+      const d = document.createElement('div');
+      if (cls) d.className = cls;
+      d.textContent = text;
+      termOutput.appendChild(d);
+      termOutput.scrollTop = termOutput.scrollHeight;
+    }
+    function printPre(text, cls) {
+      const p = document.createElement('pre');
+      p.className = 'tl-pre' + (cls ? ' ' + cls : '');
+      p.textContent = text;
+      termOutput.appendChild(p);
+      termOutput.scrollTop = termOutput.scrollHeight;
+    }
+    function blank() { println(''); }
+
+    // ── Path resolution ────────────────────────────────────────
+    function resolvePath(target) {
+      if (!target || target === '~') return '/';
+      if (target.startsWith('/')) return normPath(target);
+      if (target.startsWith('~/')) return normPath('/' + target.slice(2));
+      // relative
+      const base = cwd === '/' ? '' : cwd;
+      return normPath(base + '/' + target);
+    }
+    function normPath(p) {
+      const parts = p.split('/').filter(Boolean);
+      const stack = [];
+      for (const part of parts) {
+        if (part === '..') stack.pop();
+        else if (part !== '.') stack.push(part);
+      }
+      return '/' + stack.join('/');
+    }
+
+    // ── Commands ───────────────────────────────────────────────
+    function cmdHelp() {
+      blank();
+      println('AVAILABLE COMMANDS', 'tl-amber');
+      println('──────────────────────────────────────────────────', 'tl-muted');
+      const cmds = [
+        ['ls [path]',       'list directory contents'],
+        ['ls -la',          'list with hidden files (.ambition, .humility...)'],
+        ['cd [path]',       'change directory  (try: cd /usr)'],
+        ['pwd',             'print working directory'],
+        ['cat [file]',      'display file contents'],
+        ['clear',           'clear terminal output'],
+        ['whoami',          'who are you, really'],
+        ['echo [text]',     'echo text back'],
+        ['history',         'show command history'],
+        ['neofetch',        'system info + ascii logo'],
+        ['uname -a',        'kernel information'],
+        ['uptime',          'how long we\'ve been at this'],
+        ['ping [host/ip]',  'ping any host or IP address'],
+        ['man [command]',   'show manual page for a command'],
+        ['git log',         'project commit history'],
+        ['open [project]',  'open a project page (try: open failwarden)'],
+        ['fortune',         'words of questionable wisdom'],
+        ['vim',             'good luck'],
+        ['sudo [command]',  'you already know how this ends'],
+        ['exit / quit',     'collapse the terminal'],
+      ];
+      for (const [cmd, desc] of cmds) {
+        const d = document.createElement('div');
+        d.innerHTML = '<span class="tl-ok">' + cmd.padEnd(22) + '</span><span class="tl-muted"> — ' + desc + '</span>';
+        termOutput.appendChild(d);
+      }
+      blank();
+    }
+
+    function cmdLs(args) {
+      const showHidden = args.includes('-la') || args.includes('-a') || args.includes('-al');
+      const pathArg = args.find(a => !a.startsWith('-'));
+      const target = pathArg ? resolvePath(pathArg) : cwd;
+      const node = FS[target];
+      if (!node) { println('ls: ' + target + ': No such file or directory', 'tl-err'); return; }
+      if (node.type !== 'dir') { println(target.split('/').pop()); return; }
+
+      blank();
+      if (showHidden) {
+        println('total ' + (node.children.length + 6), 'tl-muted');
+        const hidden = ['.ambition', '.humility', '.coffee_count', '.bashrc', '.gitconfig', '.ssh'];
+        for (const h of hidden) println('drw-r--r--  ' + USERNAME + '  ' + h, 'tl-muted');
+      }
+      const items = node.children.map(c => {
+        const childPath = (target === '/' ? '' : target) + '/' + c;
+        const isDir = FS[childPath] && FS[childPath].type === 'dir';
+        return isDir ? c + '/' : c;
+      });
+      const d = document.createElement('div');
+      d.className = 'tl-ok';
+      d.textContent = items.join('  ');
+      termOutput.appendChild(d);
+      termOutput.scrollTop = termOutput.scrollHeight;
+      blank();
+    }
+
+    function cmdCd(arg) {
+      const target = resolvePath(arg || '/');
+      if (!FS[target]) { println('cd: ' + (arg || '/') + ': No such file or directory', 'tl-err'); return; }
+      if (FS[target].type !== 'dir') { println('cd: ' + arg + ': Not a directory', 'tl-err'); return; }
+      cwd = target;
+      refreshPrompt();
+    }
+
+    function cmdPwd() { println(cwd, 'tl-ok'); }
+
+    function cmdCat(args) {
+      if (!args.length) { println('cat: missing operand. Usage: cat [file]', 'tl-err'); return; }
+      const target = resolvePath(args[0]);
+      const node = FS[target];
+
+      // Try target as a file within current dir
+      const parentPath = target.substring(0, target.lastIndexOf('/')) || '/';
+      const filename   = target.split('/').pop();
+      const parent     = FS[parentPath];
+
+      if (node && node.type === 'dir') {
+        println('cat: ' + args[0] + ': Is a directory. Try: ls ' + args[0], 'tl-err'); return;
+      }
+      if (parent && parent.files && parent.files[filename]) {
+        blank(); printPre(parent.files[filename]); blank(); return;
+      }
+      // try cwd files
+      const cwdNode = FS[cwd];
+      if (cwdNode && cwdNode.files && cwdNode.files[args[0]]) {
+        blank(); printPre(cwdNode.files[args[0]]); blank(); return;
+      }
+      if (args[0] === 'resume.txt') {
+        blank();
+        println('resume.txt', 'tl-amber');
+        println('──────────────────────────────', 'tl-muted');
+        println('[RESUME CONTENT — COMING SOON]', 'tl-muted');
+        println('Check back or visit /etc/contact.txt for current contact options.', 'tl-muted');
+        blank(); return;
+      }
+      println('cat: ' + args[0] + ': No such file or directory', 'tl-err');
+    }
+
+    function cmdClear() { termOutput.innerHTML = ''; }
+
+    function cmdWhoami() {
+      blank();
+      println(USERNAME, 'tl-ok');
+      println('// a discerning individual with excellent taste in portfolios', 'tl-muted');
+      blank();
+    }
+
+    function cmdEcho(args) { println(args.join(' '), 'tl-ok'); }
+
+    function cmdShowHistory() {
+      if (!termHistory.length) { println('(no history yet)', 'tl-muted'); return; }
+      termHistory.forEach((cmd, i) => println('  ' + String(i + 1).padStart(3) + '  ' + cmd, 'tl-muted'));
+    }
+
+    function cmdNeofetch() {
+      const logo = [
+        ' ██████╗ ███████╗',
+        ' ██╔══██╗██╔════╝',
+        ' ██████╔╝█████╗  ',
+        ' ██╔══██╗██╔══╝  ',
+        ' ██████╔╝██║     ',
+        ' ╚═════╝ ╚═╝     ',
+        '                 ',
+      ];
+      const info = [
+        USERNAME + '@' + HOSTNAME,
+        '─'.repeat((USERNAME + '@' + HOSTNAME).length),
+        'OS:       PortfolioOS 2.0.0',
+        'Host:     bferguson-dev.github.io',
+        'Kernel:   JavaScript ES2026',
+        'Uptime:   4 years, still shipping',
+        'Shell:    portfolio-bash 1.0',
+        'Terminal: TERM 80x24',
+        'CPU:      Caffeine-powered @ \u221e GHz',
+        'Memory:   adequately-caffeinated / not-yet-burned-out',
+        'Packages: 5 projects, \u221e ideas',
+        'Theme:    Warm Dark CRT (amber + phosphor green)',
+      ];
+      blank();
+      const lines = Math.max(logo.length, info.length);
+      for (let i = 0; i < lines; i++) {
+        const l = (logo[i] || '                 ');
+        const r = (info[i] || '');
+        const d = document.createElement('div');
+        d.className = 'tl-pre';
+        d.innerHTML = '<span class="tl-amber">' + l + '</span>  <span class="tl-ok">' + r + '</span>';
+        termOutput.appendChild(d);
+      }
+      termOutput.scrollTop = termOutput.scrollHeight;
+      blank();
+    }
+
+    function cmdUname(args) {
+      if (args.includes('-a') || args.length === 0) {
+        println('PortfolioOS 2.0.0 #1 SMP portfolio-kernel x86_64 GNU/Coffee', 'tl-ok');
+      } else {
+        println('PortfolioOS', 'tl-ok');
+      }
+    }
+
+    function cmdUptime() {
+      const d = new Date();
+      println('up 4 years,  2 users (you and a recruiter),  load average: 0.42, 0.39, 0.35', 'tl-ok');
+    }
+
+    function cmdMan(cmd) {
+      const pages = {
+        ls:      'ls — list directory contents\n\nUsage: ls [options] [path]\n  -la   include hidden files\n\nLists the contents of a directory. On this system,\ndirectories map to portfolio sections.',
+        cd:      'cd — change directory\n\nUsage: cd [path]\n\nNavigates the virtual portfolio filesystem.\nTry: cd /usr  to browse projects.',
+        cat:     'cat — concatenate and display files\n\nUsage: cat [file]\n\nDisplays the contents of a file.\nTry: cat README.md inside a project directory.',
+        pwd:     'pwd — print working directory\n\nPrints the absolute path of the current directory.',
+        ping:    'ping — send ICMP ECHO_REQUEST to a host\n\nUsage: ping [host or IP]\n\nSends simulated packets. Results are entirely fictional\nbut statistically plausible.',
+        neofetch:'neofetch — display system information\n\nPrints system info alongside the portfolio ASCII logo.\nInformation is accurate. CPU specs are aspirational.',
+        sudo:    'sudo — execute a command as another user\n\nYou are not in the sudoers file.\nThis incident will be reported.\nSee also: /etc/hosts for known blocklisted hostnames.',
+        vim:     'vim — Vi IMproved, a text editor\n\nThis is a portfolio, not a text editor.\nIf you got here by reflex, we respect that.\nTo quit vim in real life: Esc, then :q!',
+        fortune: 'fortune — print a random quote\n\nSometimes wise. Sometimes not. Always brief.',
+        git:     'git — the stupid content tracker\n\nUsage: git log\n\nShows portfolio project history.',
+      };
+      if (!cmd) { println('Usage: man [command]', 'tl-err'); return; }
+      if (pages[cmd]) { blank(); printPre(pages[cmd]); blank(); }
+      else { println('No manual entry for ' + cmd, 'tl-err'); }
+    }
+
+    function cmdPing(host) {
+      if (!host) { println('Usage: ping [host or IP]', 'tl-err'); return; }
+      blank();
+      println('PING ' + host + ': 56 data bytes', 'tl-ok');
+      const fakeIp = host.match(/^\d+\.\d+\.\d+\.\d+$/) ? host
+        : [Math.floor(Math.random()*200+20), Math.floor(Math.random()*200+20),
+           Math.floor(Math.random()*200+20), Math.floor(Math.random()*50+1)].join('.');
+      for (let i = 0; i < 4; i++) {
+        const ms = (Math.random() * 25 + 8).toFixed(1);
+        println('64 bytes from ' + fakeIp + ': icmp_seq=' + i + ' ttl=57 time=' + ms + ' ms', 'tl-ok');
+      }
+      println('^C', 'tl-muted');
+      println('--- ' + host + ' ping statistics ---', 'tl-muted');
+      println('4 packets transmitted, 4 received, 0% packet loss', 'tl-ok');
+      println('// packets delivered. hire me and our latency improves.', 'tl-muted');
+      blank();
+    }
+
+    function cmdGitLog() {
+      blank();
+      printPre(
+        'commit 8d239bf (HEAD -> main, origin/main)\n' +
+        'Author: Byron Ferguson <infra@portfolio.dev>\n' +
+        'Date:   Sun Apr 6 2026\n\n' +
+        '    feat: add terminal mode — because why not\n\n' +
+        'commit 3af53a3\n' +
+        'Author: Byron Ferguson <infra@portfolio.dev>\n' +
+        'Date:   Sun Apr 6 2026\n\n' +
+        '    style: CRT amber/green palette, section-switch nav\n\n' +
+        'commit 961729b\n' +
+        'Author: Byron Ferguson <infra@portfolio.dev>\n' +
+        'Date:   Sun Apr 6 2026\n\n' +
+        '    redesign: operator-console aesthetic + filesystem nav\n\n' +
+        'commit 1b05af7\n' +
+        'Author: Byron Ferguson <infra@portfolio.dev>\n' +
+        'Date:   Mon Mar 17 2026\n\n' +
+        '    init: portfolio scaffold\n\n' +
+        '    honest maturity statements, zero buzzwords, maximum\n' +
+        '    documentation-to-vague-claim ratio', 'tl-muted');
+      blank();
+    }
+
+    function cmdOpen(arg) {
+      const map = {
+        failwarden: 'failwarden-orchestrator',
+        'failwarden-orchestrator': 'failwarden-orchestrator',
+        ymc: 'ymc',
+        loadout: 'loadout',
+        readycheck: 'readycheck',
+        'my-lab-setup': 'my-lab-setup',
+        'lab': 'my-lab-setup',
+      };
+      if (!arg) { println('Usage: open [project]  (failwarden, ymc, loadout, readycheck, my-lab-setup)', 'tl-err'); return; }
+      const slug = map[arg.toLowerCase()];
+      if (!slug) { println('open: unknown project "' + arg + '"', 'tl-err'); return; }
+      println('Opening projects/' + slug + '/ ...', 'tl-ok');
+      setTimeout(() => { window.location.href = 'projects/' + slug + '/'; }, 600);
+    }
+
+    function cmdFortune() {
+      blank();
+      println(FORTUNES[Math.floor(Math.random() * FORTUNES.length)], 'tl-ok');
+      blank();
+    }
+
+    function cmdVim() {
+      blank();
+      println('Entering vim...', 'tl-amber');
+      println('INSERT mode active. Type whatever you want.', 'tl-muted');
+      println('(To exit, type :q! — it will not work, but you\'ll feel better for trying.)', 'tl-muted');
+      blank();
+    }
+
+    function cmdSudo(args) {
+      if (!args.length) { println('usage: sudo [command]', 'tl-err'); return; }
+      const sub = args.join(' ').toLowerCase();
+      blank();
+      if (sub === 'hire-me' || sub === 'hire me') {
+        println('[sudo] password for ' + USERNAME + ':', 'tl-muted');
+        println('Executing: /usr/sbin/hire-me ...', 'tl-ok');
+        println('Generating offer letter... ████████████████ 100%', 'tl-ok');
+        println('Offer letter queued for delivery to /etc/hr/inbox', 'tl-ok');
+        println('Status: pending_recruiter_approval', 'tl-amber');
+        println('ETA: [REDACTED] — check your calendar', 'tl-muted');
+      } else if (sub.includes('rm -rf') || sub.includes('rm-rf')) {
+        println('[sudo] password for ' + USERNAME + ':', 'tl-muted');
+        println('Nice try. Incident logged to /dev/null.', 'tl-err');
+        println('(The portfolio survives. As does your dignity, barely.)', 'tl-muted');
+      } else if (sub === 'make me a sandwich' || sub === 'make-me-a-sandwich') {
+        println('Okay.', 'tl-ok');
+      } else {
+        println('[sudo] password for ' + USERNAME + ':', 'tl-muted');
+        println(USERNAME + ' is not in the sudoers file. This incident will be reported.', 'tl-err');
+      }
+      blank();
+    }
+
+    function cmdRm(args) {
+      if (args.includes('-rf') || args.includes('-rf/') || args.join('').includes('-rf')) {
+        blank();
+        println('rm: refusing to remove \'/\': protection active', 'tl-err');
+        println('Incident logged. IP flagged. Just kidding. But don\'t try that on prod.', 'tl-muted');
+        blank();
+      } else {
+        println('rm: cannot remove \'' + (args[0] || '') + '\': this filesystem is read-only', 'tl-err');
+      }
+    }
+
+    function cmdMake(args) {
+      if (!args.length) {
+        println('make: *** No targets specified and no makefile found. Stop.', 'tl-err');
+        println('// the story of every Monday morning', 'tl-muted');
+      } else if (args[0] === 'coffee') {
+        println('make: brewing... Error: no kettle interface found.', 'tl-err');
+      } else {
+        println('make: *** No rule to make target \'' + args[0] + '\'. Stop.', 'tl-err');
+      }
+    }
+
+    function cmdHack() {
+      blank();
+      println('INITIALIZING HACK SEQUENCE...', 'tl-amber');
+      println('Bypassing firewall       ████████░░░░░░░░ 50%', 'tl-ok');
+      println('Accessing mainframe...', 'tl-ok');
+      setTimeout(() => {
+        println('ERROR: target is a portfolio website', 'tl-err');
+        println('ERROR: there is nothing to hack here', 'tl-err');
+        println('ERROR: unless you want to read about FailWarden', 'tl-muted');
+        println('Segmentation fault (core dumped)', 'tl-err');
+        blank();
+      }, 800);
+    }
+
+    // ── Command dispatcher ─────────────────────────────────────
+    function runCmd(raw) {
+      const input = raw.trim();
+      if (!input) return;
+
+      println(getPrompt() + input, 'tl-cmd');
+      termHistory.push(input);
+      histIdx = termHistory.length;
+
+      const parts = input.split(/\s+/);
+      const cmd   = parts[0].toLowerCase();
+      const args  = parts.slice(1);
+
+      switch (cmd) {
+        case 'help':    cmdHelp(); break;
+        case 'ls':      cmdLs(args); break;
+        case 'cd':      cmdCd(args[0]); break;
+        case 'pwd':     cmdPwd(); break;
+        case 'cat':     cmdCat(args); break;
+        case 'clear':   cmdClear(); break;
+        case 'whoami':  cmdWhoami(); break;
+        case 'echo':    cmdEcho(args); break;
+        case 'history': cmdShowHistory(); break;
+        case 'neofetch':cmdNeofetch(); break;
+        case 'uname':   cmdUname(args); break;
+        case 'uptime':  cmdUptime(); break;
+        case 'man':     cmdMan(args[0]); break;
+        case 'ping':    cmdPing(args[0]); break;
+        case 'git':     if (args[0] === 'log') cmdGitLog(); else println('git: try \'git log\'', 'tl-muted'); break;
+        case 'open':    cmdOpen(args[0]); break;
+        case 'fortune': cmdFortune(); break;
+        case 'vim':
+        case 'nano':
+        case 'emacs':   cmdVim(); break;
+        case 'sudo':    cmdSudo(args); break;
+        case 'rm':      cmdRm(args); break;
+        case 'make':    cmdMake(args); break;
+        case 'hack':
+        case 'exploit': cmdHack(); break;
+        case ':q!':
+        case ':wq':
+        case ':q':      println('This isn\'t vim. But respect for the muscle memory.', 'tl-muted'); break;
+        case 'coffee':  println('Error: brew install caffeine failed. Dependency: sleep not found.', 'tl-err'); break;
+        case 'exit':
+        case 'quit':    collapse(true); break;
+        case 'apt':
+        case 'brew':
+        case 'dnf':
+        case 'yum':     println(cmd + ': package manager not available. This is a portfolio, not a server.', 'tl-err'); break;
+        default:
+          println(cmd + ': command not found. Type \'help\' for available commands.', 'tl-err');
+      }
+    }
+
+    // ── Input handling ─────────────────────────────────────────
+    termInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        const val = termInput.value;
+        termInput.value = '';
+        runCmd(val);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (histIdx > 0) { histIdx--; termInput.value = termHistory[histIdx]; }
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (histIdx < termHistory.length - 1) { histIdx++; termInput.value = termHistory[histIdx]; }
+        else { histIdx = termHistory.length; termInput.value = ''; }
+      } else if (e.key === 'l' && e.ctrlKey) {
+        e.preventDefault(); cmdClear();
+      }
+    });
+
+    // Click on title bar to expand when collapsed
+    termTitlebar.addEventListener('click', function (e) {
+      if (e.target === termCollapseBtn || e.target === termCycleBtn) return;
+      if (collapsed) collapse(false);
+    });
+
+    // ── Size / collapse controls ───────────────────────────────
+    function setSize(vh) {
+      termBar.style.height = vh;
+      document.documentElement.style.setProperty('--term-bar-h', vh);
+      updateLabel();
+    }
+
+    function collapse(yes) {
+      collapsed = yes;
+      termBar.classList.toggle('collapsed', yes);
+      termCollapseBtn.textContent = yes ? '▲' : '▼';
+      if (!yes) {
+        setSize(SIZES[sizeIdx]);
+        termInput.focus();
+      } else {
+        document.documentElement.style.setProperty('--term-bar-h', '34px');
+      }
+      updateLabel();
+    }
+
+    termCycleBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (collapsed) { collapse(false); return; }
+      sizeIdx = (sizeIdx + 1) % SIZES.length;
+      setSize(SIZES[sizeIdx]);
+    });
+
+    termCollapseBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      collapse(!collapsed);
+    });
+
+    function updateLabel() {
+      termLabel.textContent = collapsed ? 'TERM — click to expand' : 'TERM 80x24';
+    }
+
+    // ── Mobile terminal ────────────────────────────────────────
+    const mobileTermOpen = document.getElementById('mobileTermOpen');
+    if (mobileTermOpen) {
+      mobileTermOpen.addEventListener('click', function () {
+        mobileMenu.classList.remove('open');
+        termBar.classList.add('mobile-active');
+        collapse(false);
+        setTimeout(() => termInput.focus(), 100);
+      });
+    }
+    // Mobile close (red dot or collapse btn closes mobile-active)
+    termCollapseBtn.addEventListener('click', function () {
+      if (termBar.classList.contains('mobile-active') && collapsed) {
+        termBar.classList.remove('mobile-active');
+      }
+    });
+
+    // ── Boot sequence ──────────────────────────────────────────
+    function boot() {
+      refreshPrompt();
+      println('PortfolioOS 2.0.0 — ' + new Date().toDateString(), 'tl-muted');
+      println('Type \'help\' for available commands.', 'tl-muted');
+      blank();
+      refreshPrompt();
+      termInput.focus();
+    }
+
+    // ── Site navigation ────────────────────────────────────────
     const pages   = document.querySelectorAll('.page');
     const navBtns = document.querySelectorAll('[data-target]');
     const menu    = document.getElementById('mobileMenu');
 
     function navigate(target) {
-      // hide all pages
       pages.forEach(p => p.classList.remove('active'));
-      // deactivate all nav buttons
       navBtns.forEach(b => b.classList.remove('active'));
-      // show target page
       const page = document.getElementById('page-' + target);
       if (page) page.classList.add('active');
-      // mark matching nav buttons active
-      document.querySelectorAll('[data-target="' + target + '"]')
-        .forEach(b => b.classList.add('active'));
-      // close mobile menu if open
+      document.querySelectorAll('[data-target="' + target + '"]').forEach(b => b.classList.add('active'));
       menu.classList.remove('open');
-      // scroll content area back to top
       window.scrollTo(0, 0);
     }
 
-    // wire up all [data-target] buttons
     navBtns.forEach(btn => {
       btn.addEventListener('click', () => navigate(btn.dataset.target));
     });
 
-    // mobile open/close
     document.getElementById('menuOpen').addEventListener('click', () => menu.classList.add('open'));
     document.getElementById('menuClose').addEventListener('click', () => menu.classList.remove('open'));
+
+    // ── Init ───────────────────────────────────────────────────
+    boot();
+  })();
   </script>
 
 </body>
