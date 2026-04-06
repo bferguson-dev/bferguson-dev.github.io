@@ -193,6 +193,9 @@
     .contact-item-value { font-family: var(--mono); font-size: 0.82rem; color: var(--text-bright); font-weight: 600; }
     .contact-item-value a { color: var(--amber); }
     .contact-item-value a:hover { color: var(--amber-bright); text-decoration: underline; }
+    .reveal-btn { background: none; border: 1px dashed var(--amber-border); color: var(--muted); font-family: var(--mono); font-size: 0.8rem; padding: 0.12rem 0.5rem; border-radius: 3px; cursor: pointer; letter-spacing: 0.02em; transition: color 0.15s, border-color 0.15s; }
+    .reveal-btn:hover { color: var(--amber); border-color: var(--amber); }
+    .reveal-btn:focus { outline: 1px solid var(--amber); outline-offset: 2px; }
 
     /* ── Mobile bar ── */
     .mobile-bar { display: none; position: sticky; top: 0; z-index: 100; background: var(--sidebar-bg); border-bottom: 1px solid var(--sidebar-border); padding: 0.85rem 1.1rem; justify-content: space-between; align-items: center; }
@@ -661,11 +664,11 @@
           <div class="contact-grid">
             <div class="contact-item">
               <div class="contact-item-label">Email</div>
-              <div class="contact-item-value"><a href="mailto:bferguson-dev@gmail.com">bferguson-dev@gmail.com</a></div>
+              <div class="contact-item-value" id="ci-e"><button class="reveal-btn" data-key="e">[ click to reveal ]</button></div>
             </div>
             <div class="contact-item">
               <div class="contact-item-label">Phone</div>
-              <div class="contact-item-value"><a href="tel:6153593820">615-359-3820</a></div>
+              <div class="contact-item-value" id="ci-p"><button class="reveal-btn" data-key="p">[ click to reveal ]</button></div>
             </div>
             <div class="contact-item">
               <div class="contact-item-label">LinkedIn</div>
@@ -781,7 +784,7 @@
       '/etc': {
         type: 'dir', children: ['contact.txt', 'hosts', 'motd'],
         files: {
-          'contact.txt': '[CONTACT CONFIGURATION]\n\nEmail:    bferguson-dev@gmail.com\nPhone:    615-359-3820\nLinkedIn: linkedin.com/in/byronferguson\nGitHub:   github.com/bferguson-dev\nResume:   bferguson-dev.github.io (view online)\n\nThis file intentionally terse.',
+          'contact.txt': '[CONTACT CONFIGURATION]\n\nEmail:    [ navigate to ~/etc and click to reveal ]\nPhone:    [ navigate to ~/etc and click to reveal ]\nLinkedIn: linkedin.com/in/byronferguson\nGitHub:   github.com/bferguson-dev\nResume:   bferguson-dev.github.io (view online)\n\nContact details are click-protected. Navigate to ~/etc.',
           'hosts':  '127.0.0.1       localhost\n::1             localhost\n0.0.0.0         imposter-syndrome\n0.0.0.0         burnout',
           'motd':   'Welcome to BYRON_FERGUSON.PORTFOLIO\nPortfolioOS 2.0.0 — be excellent to each other\nLast login: right now, from your curiosity'
         }
@@ -963,7 +966,7 @@
         blank();
         println('Byron L. Ferguson, II', 'tl-amber');
         println('AI-Augmented Infrastructure Engineer', 'tl-ok');
-        println('bferguson-dev@gmail.com | 615-359-3820 | linkedin.com/in/byronferguson', 'tl-muted');
+        println('linkedin.com/in/byronferguson | github.com/bferguson-dev', 'tl-muted');
         println('──────────────────────────────────────────────────────────────────', 'tl-muted');
         blank();
         println('"I use tools to create tools to solve everyday problems', 'tl-amber');
@@ -1336,6 +1339,24 @@
       refreshPrompt();
       termInput.focus();
     }
+
+    // ── Contact reveal (reversed strings defeat naive scrapers) ──
+    const _rv = s => s.split('').reverse().join('');
+    const _cd = {
+      e: { v: _rv('moc.liamg@ved-nosugrefb'), h: v => 'mailto:' + v },
+      p: { v: _rv('0283-953-516'),            h: v => 'tel:' + v.replace(/-/g, '') },
+    };
+    document.querySelectorAll('.reveal-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        const k = this.dataset.key;
+        if (!_cd[k]) return;
+        const val = _cd[k].v;
+        const a = document.createElement('a');
+        a.href = _cd[k].h(val);
+        a.textContent = val;
+        this.parentElement.replaceChild(a, this);
+      });
+    });
 
     // ── Site navigation ────────────────────────────────────────
     const pages   = document.querySelectorAll('.page');
