@@ -507,7 +507,7 @@
               <span class="exp-company">Independent Software Development &amp; R&amp;D</span>
               <span class="exp-meta">Dec 2024 – Present</span>
               <ul class="exp-bullets">
-                <li>Designed, built, and shipped a portfolio of open-source infrastructure, security, and compliance tooling</li>
+                <li>Designed and built a portfolio of open-source infrastructure, security, and compliance tooling</li>
                 <li>Applied agentic AI and advanced prompt engineering using Claude, OpenAI, Gemini, and Ollama as engineering force multipliers</li>
                 <li>Built AI governance and auditability framework for accountable, traceable AI-assisted development</li>
                 <li>Implemented CI/CD pipelines via GitHub Actions; applied DevOps-first discipline across all projects</li>
@@ -696,7 +696,7 @@
         <section class="page" id="page-usr">
           <div class="section-hdr">
             <span class="section-path">~/usr</span>
-            <span class="section-comment">// user-installed programs — the things I've shipped</span>
+            <span class="section-comment">// user-installed programs — the things I've built</span>
           </div>
           <p>Everything here is presented conservatively. Where a tool has strong unit coverage but limited production validation, the page says so directly. Honest maturity statements are part of my communication style, not a disclaimer.</p>
           <p class="resume-section-label">// infrastructure_tooling</p>
@@ -706,7 +706,7 @@
               <span class="tag green">v0.2.0</span><span class="tag warn">prod_validated: partial</span>
             </div>
             <p class="proj-name">FailWarden Orchestrator</p>
-            <p class="proj-desc">A constrained YAML runbook executor for infrastructure remediation over SSH. Compile-time validation, audit logging, notifier support, dry-run mode, and shipped runbooks. It doesn't try to be Ansible — it tries to be the thing you hand to an operator at 2am.</p>
+            <p class="proj-desc">A constrained YAML runbook executor for infrastructure remediation over SSH. Compile-time validation, audit logging, notifier support, dry-run mode, and included runbooks. It doesn't try to be Ansible — it tries to be the thing you hand to an operator at 2am.</p>
             <ul class="proj-points">
               <li>current release: v0.2.0</li>
               <li>V1 and V1.5 implemented</li>
@@ -866,7 +866,7 @@
           '.bashrc': '# ~/.bashrc\n\nexport EDITOR=vim\nexport MONSTER_LEVEL=critically_low\nexport ANSIBLE_STDOUT_CALLBACK=yaml\nexport HISTCONTROL=ignoredups:erasedups\n\nalias ll=\'ls -la\'\nalias please=\'sudo\'\nalias dryrun=\'ansible-playbook --check --diff\'\nalias yolo=\'git push --force\'  # DO NOT\n\n# added after an incident:\nalias nope=\'rm -i\'\n\n[ -f ~/.profile ] && source ~/.profile',
           '.gitconfig': '[user]\n    name = Byron Ferguson\n    email = bferguson-dev@gmail.com\n    signingkey = [redacted]\n\n[core]\n    editor = vim\n    autocrlf = input\n\n[commit]\n    gpgsign = true\n\n[alias]\n    lg = log --oneline --graph --decorate\n    yolo = push --force  # still here. still not recommended.\n    oops = commit --amend --no-edit\n\n[pull]\n    rebase = true',
           '.ssh': '[directory — not readable]\n\nIf you found this, you already know what goes here.\nIf you don\'t know what goes here, you\'re not ready.\n\nSee: man ssh',
-          '.ambition': 'build things that matter.\nship things that work.\ndocument everything.\ngo home on time.',
+          '.ambition': 'build things that matter.\nbuild things that work.\ndocument everything.\ngo home on time.',
           '.humility': 'you don\'t know everything.\nnobody does.\nthe ones who act like they do are the ones you\nlearn the least from.\n\nask questions. read the logs. admit when you\'re wrong.\nthen fix it.',
           '.monster_count': '3\n\n# today\n# (this is not a problem)',
         }
@@ -874,9 +874,9 @@
       '/home': {
         type: 'dir', children: ['intro.txt', 'about.txt'],
         files: {
-          'intro.txt': 'Welcome to BYRON_FERGUSON.PORTFOLIO\n\nStart here:\n  ~/root  — the landing page\n  ~/lib   — resume and skills\n  ~/usr   — things I\'ve shipped\n  ~/etc   — contact info\n  ~/home  — whoami\n\nUseful commands:\n  neofetch          system info\n  cat resume.txt    resume summary\n  wget resume.pdf   download full resume\n  ls /usr           browse projects\n  fortune           words of wisdom',
+          'intro.txt': 'Welcome to BYRON_FERGUSON.PORTFOLIO\n\nStart here:\n  ~/root  — the landing page\n  ~/lib   — resume and skills\n  ~/usr   — things I\'ve built\n  ~/etc   — contact info\n  ~/home  — whoami\n\nUseful commands:\n  neofetch          system info\n  cat resume.txt    resume summary\n  wget resume.pdf   download full resume\n  ls /usr           browse projects\n  fortune           words of wisdom',
           'about.txt': 'Byron Ferguson\nAI-Augmented Infrastructure Engineer\n\nGrew up in rural eastern Ohio — three stoplights in the\nwhole county type of place. Joined the Air Force, worked\non AC-130 gunships, MC-130 Talon IIs, and MH-53 Pave Lows\nacross multiple deployments out of Hurlburt Field, FL.\nSettled in Middle Tennessee. Husband and father.\n\n16+ years in infrastructure. Currently building AI-driven\ntooling for infrastructure problems.\n\n"I use tools to create tools to solve everyday problems\n so that we can all go home on time."',
-          '.diary': '[ENCRYPTED — just kidding]\n\nDay 1:   set up the lab. everything is broken.\nDay 12:  fixed the lab. broke something else.\nDay 31:  ansible playbook ran clean on the first try.\n          nobody will ever believe me.\nDay 47:  still shipping.\nDay 203: jeep is broken again. unrelated to the lab.',
+          '.diary': '[ENCRYPTED — just kidding]\n\nDay 1:   set up the lab. everything is broken.\nDay 12:  fixed the lab. broke something else.\nDay 31:  ansible playbook ran clean on the first try.\n          nobody will ever believe me.\nDay 47:  still building.\nDay 203: jeep is broken again. unrelated to the lab.',
           '.drum_practice_log': 'practice_log — last 7 entries\n──────────────────────────────\nMon:  skipped (lab was on fire, metaphorically)\nTue:  20 min — paradiddles\nWed:  skipped (lab was on fire, literally this time)\nThu:  45 min — actually pretty good\nFri:  skipped (ansible)\nSat:  1 hr — no one was home, went hard\nSun:  skipped (jeep)',
           '.jeep_repair_notes': 'JEEP REPAIR LOG\n───────────────\nIssue:   it\'s making that sound again\nStatus:  parts ordered\nETA:     "a few days" (3 weeks ago)\nNotes:   its always the serpentine belt\n         actually this time its not the serpentine belt\n         it was the serpentine belt',
           '.ohio_weather_complaints': '# ohio_weather.conf\n\nJAN="no"\nFEB="no"\nMAR="snow in the morning, 60 degrees by noon, somehow both"\nAPR="mud"\nMAY="okay fine"\nJUN-AUG="actually nice"\nSEP="okay fine"\nOCT="beautiful for 2 weeks then immediately winter"\nNOV="no"\nDEC="no"',
@@ -887,7 +887,7 @@
         type: 'dir', children: ['philosophy.txt', 'principles.txt', 'methodology.txt'],
         files: {
           'philosophy.txt': '[SHARED LIBRARIES — WHAT I\'M BUILT ON]\n\nAccumulated dependencies. 16+ years of infrastructure\nexperience: VMware at 10k+ VM scale, Dell EMC storage,\ncompliance (NIST 800-53, HIPAA, PCI-DSS, SOC 2), and\nsystems automation via Ansible and PowerShell.\n\nNow applying AI and agentic workflows to infrastructure\nproblems — with full accountability and audit trails.\n\nFull resume: navigate to ~/lib or wget resume.pdf',
-          'principles.txt': 'Engineering Communication Principles\n====================================\n- Honest maturity statements over vague claims\n- Documentation that matches what actually ships\n- Scope control over feature creep\n- If it needs a disclaimer, the code needs more work\n- Tribal knowledge is technical debt in disguise',
+          'principles.txt': 'Engineering Communication Principles\n====================================\n- Honest maturity statements over vague claims\n- Documentation that matches what actually gets built\n- Scope control over feature creep\n- If it needs a disclaimer, the code needs more work\n- Tribal knowledge is technical debt in disguise',
           'methodology.txt': 'Engineering Methodology\n=======================\ndefine → scope → document → build → harden\n  → review → test → iterate → audit → document → push\n\nSecurity is not a step. It is a constant.\nDocumentation is not an afterthought. It is the work.',
           '.lessons_learned': 'LESSONS LEARNED — compiled over 16 years\n─────────────────────────────────────────\n- always run --check first. always. yes, even that one.\n- "it works in dev" is a threat, not a promise.\n- the runbook you don\'t write is the incident you can\'t explain.\n- imposter syndrome is loudest right before something ships.\n- if it\'s not in git, it didn\'t happen.\n- documentation is not done when you write it.\n  it\'s done when someone else understands it.',
           '.overengineered_drafts': 'OVERENGINEERED DRAFTS — graveyard\n───────────────────────────────────\nv0.1 - failwarden with plugin architecture and 14 config files\n       → scrapped. too clever.\nv0.2 - ymc with ML-based false positive reduction\n       → scrapped. overkill.\nv0.3 - readycheck with a web dashboard\n       → scrapped. it\'s a CLI. stay a CLI.\nv0.4 - this portfolio with a React build pipeline\n       → scrapped immediately.\n\nLesson: the boring thing that ships beats the clever thing that doesn\'t.',
@@ -897,7 +897,7 @@
       '/usr': {
         type: 'dir', children: ['failwarden', 'ymc', 'loadout', 'readycheck', 'my-lab-setup', 'project-prompts'],
         files: {
-          '.wip': 'WORK IN PROGRESS — always\n──────────────────────────\nnext up (probably):\n  [ ] failwarden v2 scope\n  [ ] ymc linux support\n  [ ] that one tool i thought of at 11pm\n  [x] ship the thing\n  [x] document the thing\n  [x] question the thing\n  [x] ship it anyway',
+          '.wip': 'WORK IN PROGRESS — always\n──────────────────────────\nnext up (probably):\n  [ ] failwarden v2 scope\n  [ ] ymc linux support\n  [ ] that one tool i thought of at 11pm\n  [x] build the thing\n  [x] document the thing\n  [x] question the thing\n  [x] push it anyway',
           '.abandoned_ideas': 'ABANDONED IDEAS\n────────────────\nnone.\n\n(there are no abandoned ideas.\n there are only deferred ones.\n the queue is very long.)',
           '.half_finished_readme': '# [PROJECT NAME]\n\n## Overview\n\nThis tool does the thing that the other tool does but better\nbecause [TODO: fill in why]\n\n## Installation\n\n```bash\n[TODO]\n```\n\n## Usage\n\n[TODO: write this before you forget how it works]\n\n## Status\n\nworks on my machine\n\n<!-- last edited: 3 weeks ago -->\n<!-- TODO: finish this -->',
         }
@@ -923,7 +923,7 @@
       },
       '/usr/my-lab-setup': {
         type: 'dir', children: ['README.md'],
-        files: { 'README.md': 'My Lab Setup\n============\nSanitized Proxmox + Ansible lab automation.\nProvisioning phases, guest baselining, clone workflows.\n\nWhere I actually break things before shipping elsewhere.\n\nGitHub: github.com/bferguson-dev/My-Lab-Setup' }
+        files: { 'README.md': 'My Lab Setup\n============\nSanitized Proxmox + Ansible lab automation.\nProvisioning phases, guest baselining, clone workflows.\n\nWhere I actually break things before pushing elsewhere.\n\nGitHub: github.com/bferguson-dev/My-Lab-Setup' }
       },
       '/usr/project-prompts': {
         type: 'dir', children: ['README.md'],
@@ -1233,7 +1233,7 @@
         'OS:       PortfolioOS 2.0.0',
         'Host:     bferguson-dev.github.io',
         'Kernel:   JavaScript ES2026',
-        'Uptime:   4 years, still shipping',
+        'Uptime:   4 years, still at it',
         'Shell:    portfolio-bash 1.0',
         'Terminal: TERM 80x24',
         'CPU:      Caffeine-powered @ \u221e GHz',
@@ -1540,8 +1540,8 @@
         blank();
         const d = new Date().toLocaleDateString();
         println(d + ' ' + HOSTNAME + ' portfolio.js[1]: compiling experience...', 'tl-muted');
-        println(d + ' ' + HOSTNAME + ' portfolio.js[1]: shipping anyway', 'tl-muted');
-        println(d + ' ' + HOSTNAME + ' portfolio.js[1]: still shipping', 'tl-muted');
+        println(d + ' ' + HOSTNAME + ' portfolio.js[1]: still building', 'tl-muted');
+        println(d + ' ' + HOSTNAME + ' portfolio.js[1]: still at it', 'tl-muted');
       } else if (sub === 'start') {
         println('// ' + service + ' is already running. has been for years.', 'tl-muted');
       } else if (sub === 'restart') {
