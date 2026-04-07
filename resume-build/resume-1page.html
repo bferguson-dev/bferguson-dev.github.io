@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Merriweather:wght@400;700&display=swap');
+
+  @page {
+    size: letter;
+    margin: 0.55in 0.65in 0.55in 0.65in;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 10pt;
+    color: #1a1a1a;
+    line-height: 1.4;
+    background: #fff;
+  }
+
+  /* ── Header ── */
+  .header {
+    border-bottom: 2.5pt solid #1a2942;
+    padding-bottom: 8pt;
+    margin-bottom: 9pt;
+  }
+
+  .name {
+    font-family: 'Merriweather', Georgia, serif;
+    font-size: 23pt;
+    font-weight: 700;
+    color: #1a2942;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 3pt;
+  }
+
+  .tagline {
+    font-size: 9.5pt;
+    color: #4a5568;
+    font-style: italic;
+    margin-bottom: 5pt;
+    font-weight: 300;
+  }
+
+  .contact-row {
+    display: flex;
+    gap: 14pt;
+    font-size: 9pt;
+    color: #2d3748;
+    flex-wrap: wrap;
+  }
+
+  .contact-row span::before {
+    content: '';
+    display: inline-block;
+    width: 4pt;
+    height: 4pt;
+    background: #2b6cb0;
+    border-radius: 50%;
+    margin-right: 4pt;
+    vertical-align: middle;
+    margin-top: -1pt;
+  }
+
+  /* ── Section ── */
+  .section {
+    margin-bottom: 8pt;
+  }
+
+  .section-title {
+    font-family: 'Merriweather', Georgia, serif;
+    font-size: 10.5pt;
+    font-weight: 700;
+    color: #1a2942;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1pt solid #bee3f8;
+    padding-bottom: 2pt;
+    margin-bottom: 5pt;
+  }
+
+  /* ── Summary ── */
+  .summary {
+    font-size: 10pt;
+    color: #2d3748;
+    line-height: 1.5;
+  }
+
+  /* ── Experience ── */
+  .exp-entry {
+    margin-bottom: 6pt;
+    page-break-inside: avoid;
+  }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .exp-company {
+    font-weight: 700;
+    font-size: 10pt;
+    color: #1a2942;
+  }
+
+  .exp-dates {
+    font-size: 9pt;
+    color: #718096;
+    white-space: nowrap;
+  }
+
+  .exp-title {
+    font-size: 9.5pt;
+    color: #2b6cb0;
+    font-style: italic;
+    margin-bottom: 2pt;
+  }
+
+  .exp-bullets {
+    padding-left: 11pt;
+    list-style: none;
+  }
+
+  .exp-bullets li {
+    position: relative;
+    margin-bottom: 1.5pt;
+    font-size: 9.5pt;
+    color: #2d3748;
+    line-height: 1.4;
+  }
+
+  .exp-bullets li::before {
+    content: '▸';
+    position: absolute;
+    left: -9pt;
+    color: #2b6cb0;
+    font-size: 7.5pt;
+    top: 1.5pt;
+  }
+
+  /* ── Skills ── */
+  .skills-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .skills-table tr { vertical-align: top; }
+
+  .skill-cat {
+    font-weight: 700;
+    font-size: 9pt;
+    color: #1a2942;
+    white-space: nowrap;
+    padding-right: 8pt;
+    padding-bottom: 3pt;
+    width: 22%;
+  }
+
+  .skill-list {
+    font-size: 9pt;
+    color: #2d3748;
+    padding-bottom: 3pt;
+    line-height: 1.45;
+  }
+
+  /* ── Two-column layout ── */
+  .two-col {
+    display: flex;
+    gap: 20pt;
+  }
+
+  .two-col .col-left  { flex: 1; }
+  .two-col .col-right { flex: 1; }
+
+  /* ── Certifications ── */
+  .cert-entry {
+    margin-bottom: 2.5pt;
+    font-size: 9.5pt;
+  }
+
+  .cert-name { font-weight: 700; color: #1a2942; }
+  .cert-status { color: #718096; font-style: italic; }
+
+  /* ── Education ── */
+  .edu-entry {
+    margin-bottom: 5pt;
+    page-break-inside: avoid;
+  }
+
+  .edu-degree {
+    font-weight: 700;
+    font-size: 10pt;
+    color: #1a2942;
+  }
+
+  .edu-school {
+    font-size: 9.5pt;
+    color: #2b6cb0;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="name">Byron Ferguson</div>
+    <div class="tagline">"I use tools to create tools to solve everyday problems so that we can all go home on time."</div>
+    <div class="contact-row">
+      <span>bferguson-dev@gmail.com</span>
+      <span>615-359-3820</span>
+      <span>linkedin.com/in/byronferguson</span>
+      <span>bferguson-dev.github.io</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Summary</div>
+    <p class="summary">AI-augmented infrastructure engineer with 16+ years of experience designing, operating, and automating enterprise-scale systems. Applies artificial intelligence, agentic workflows, and modern DevOps practices to build tooling that solves real infrastructure problems. Proven operator at VMware scale with deep expertise in Dell EMC storage, compliance frameworks (NIST 800-53, HIPAA, PCI-DSS, SOC 2), and systems automation via Ansible and PowerShell.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Experience</div>
+
+    <div class="exp-entry">
+      <div class="exp-header">
+        <span class="exp-company">Independent Software Development &amp; R&amp;D</span>
+        <span class="exp-dates">Dec 2024 – Present</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Designed and shipped open-source infrastructure, security, and compliance tooling using Python and GitHub Actions</li>
+        <li>Applied agentic AI (Claude, OpenAI, Gemini, Ollama) as engineering force multipliers with full auditability framework</li>
+      </ul>
+    </div>
+
+    <div class="exp-entry">
+      <div class="exp-header">
+        <span class="exp-company">Experian Health — Systems Engineer</span>
+        <span class="exp-dates">Dec 2016 – Nov 2024</span>
+      </div>
+      <div class="exp-title">Remote / Nashville, TN</div>
+      <ul class="exp-bullets">
+        <li>Scaled VMware vSphere/ESXi to 10,000+ VMs across 500+ ESXi hosts and 400+ physical servers</li>
+        <li>Automated patching, compliance auditing, and config management via PowerShell and Ansible Automation Platform</li>
+        <li>Enforced HIPAA, PCI-DSS, NIST 800-53, and SOC 2 compliance; designed and tested DR runbooks</li>
+      </ul>
+    </div>
+
+    <div class="exp-entry">
+      <div class="exp-header">
+        <span class="exp-company">City of Franklin — Network Analyst / ISO</span>
+        <span class="exp-dates">Aug 2014 – Oct 2016</span>
+      </div>
+      <div class="exp-title">Franklin, TN</div>
+      <ul class="exp-bullets">
+        <li>Deployed and hardened Office 365, MBAM, and Veeam; rewrote Group Policy infrastructure from scratch</li>
+        <li>Administered DNS, ExaGrid storage, and managed legal eDiscovery exports</li>
+      </ul>
+    </div>
+
+    <div class="exp-entry">
+      <div class="exp-header">
+        <span class="exp-company">City of Franklin — Network Technician</span>
+        <span class="exp-dates">Oct 2012 – Aug 2014</span>
+      </div>
+      <div class="exp-title">Franklin, TN</div>
+      <ul class="exp-bullets">
+        <li>Maintained AD, DNS, DHCP, and file services; supported Cisco routing, switching, and VPN infrastructure</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="section">
+    <div class="section-title">Technical Skills</div>
+    <table class="skills-table">
+      <tr>
+        <td class="skill-cat">AI &amp; Automation</td>
+        <td class="skill-list">LLMs, Prompt Engineering, Agentic AI, Ansible AAP, PowerShell, Python, Bash, GitHub Actions, CI/CD, Terraform</td>
+      </tr>
+      <tr>
+        <td class="skill-cat">Infrastructure</td>
+        <td class="skill-list">VMware vSphere/ESXi, Nutanix HCI, Windows Server, RHEL/Linux, Proxmox</td>
+      </tr>
+      <tr>
+        <td class="skill-cat">Storage &amp; Backup</td>
+        <td class="skill-list">Dell EMC Isilon, PowerFlex, Data Domain, ECS, ExaGrid, Disaster Recovery</td>
+      </tr>
+      <tr>
+        <td class="skill-cat">Networking</td>
+        <td class="skill-list">Cisco Nexus, Arista BCF, SDN, NetMotion, AnyConnect</td>
+      </tr>
+      <tr>
+        <td class="skill-cat">Security &amp; Compliance</td>
+        <td class="skill-list">NIST 800-53, HIPAA, PCI-DSS, SOC 2, CMMC, ISO 27001, CIS Benchmarks, DISA STIG</td>
+      </tr>
+      <tr>
+        <td class="skill-cat">Cloud &amp; Identity</td>
+        <td class="skill-list">Microsoft Azure (AZ-104 in progress), Office 365, Active Directory, DNS, DHCP, Group Policy</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="two-col">
+    <div class="col-left">
+      <div class="section">
+        <div class="section-title">Certifications</div>
+        <div class="cert-entry"><span class="cert-name">Microsoft Azure Administrator (AZ-104)</span> <span class="cert-status">— in progress</span></div>
+        <div class="cert-entry"><span class="cert-name">Red Hat Certified Specialist in Ansible Automation</span> <span class="cert-status">— training completed, 2018</span></div>
+        <div class="cert-entry"><span class="cert-name">CEH &amp; CHFI — EC-Council</span> <span class="cert-status">— formerly certified, 2018</span></div>
+      </div>
+    </div>
+    <div class="col-right">
+      <div class="section">
+        <div class="section-title">Education</div>
+        <div class="edu-entry">
+          <div class="edu-degree">M.S. Information Security and Assurance</div>
+          <div class="edu-school">Western Governors University &middot; 2018</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

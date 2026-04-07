@@ -101,6 +101,7 @@
     .s-tag[data-tip] { cursor: help; }
     .s-tag[data-tip]::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: #06090b; border: 1px solid var(--amber-border); color: var(--text); font-family: var(--sans); font-size: 0.73rem; font-style: normal; font-weight: 400; line-height: 1.5; white-space: normal; text-align: left; padding: 0.4rem 0.65rem; border-radius: 4px; pointer-events: none; opacity: 0; transition: opacity 0.15s ease; z-index: 300; width: 240px; box-shadow: 0 4px 18px rgba(0,0,0,0.6); }
     .s-tag[data-tip]:hover::after { opacity: 1; }
+    .sidebar-section .s-tag[data-tip]::after { left: 0; transform: none; }
     .sidebar-footer { margin-top: auto; }
     .gh-btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 0.55rem; background: var(--amber); color: #0e0c08; font-family: var(--mono); font-size: 0.78rem; font-weight: 700; border-radius: 5px; letter-spacing: 0.04em; }
     .gh-btn:hover { background: var(--amber-bright); }
@@ -363,10 +364,11 @@
       <button class="mobile-close" id="menuClose">[ close ]</button>
     </div>
     <nav class="mobile-nav">
-      <button data-target="home">~/home</button>
+      <button data-target="root">~/root</button>
       <button data-target="lib">~/lib</button>
       <button data-target="usr">~/usr</button>
       <button data-target="etc">~/etc</button>
+      <button data-target="home">~/home</button>
       <button id="mobileTermOpen">~/term &mdash; open terminal</button>
     </nav>
     <div class="mobile-facts">
@@ -385,23 +387,34 @@
       <div class="sidebar-section">
         <p class="sidebar-label">// navigate</p>
         <nav class="path-nav">
-          <button data-target="home" class="active">~/home</button>
+          <button data-target="root" class="active">~/root</button>
           <button data-target="lib">~/lib</button>
           <button data-target="usr">~/usr</button>
           <button data-target="etc">~/etc</button>
+          <button data-target="home">~/home</button>
         </nav>
       </div>
       <div class="sidebar-section">
         <p class="sidebar-label">// env</p>
         <div class="sidebar-fact"><span class="sidebar-fact-label">FOCUS</span><span class="sidebar-fact-value">ai-augmented infra tooling</span></div>
         <div class="sidebar-fact"><span class="sidebar-fact-label">TARGET</span><span class="sidebar-fact-value">ai infrastructure engineering</span></div>
-        <div class="sidebar-fact"><span class="sidebar-fact-label">STYLE</span><span class="sidebar-fact-value">solo-maintained, docs-first</span></div>
+        <div class="sidebar-fact"><span class="sidebar-fact-label">STYLE</span><span class="sidebar-fact-value">define → scope → document → build → harden → review → test → iterate → audit → document → push</span></div>
       </div>
       <div class="sidebar-section">
         <p class="sidebar-label">// stack</p>
         <div class="stack-tags">
-          <span class="s-tag">python</span><span class="s-tag">powershell</span><span class="s-tag">ansible</span>
-          <span class="s-tag">ci</span><span class="s-tag">ssh</span><span class="s-tag">winrm</span>
+          <span class="s-tag" data-tip="Core language for FailWarden, ReadyCheck, and SquirrelBrain">python</span>
+          <span class="s-tag" data-tip="Primary automation language at Experian Health — patching, compliance auditing, config management">powershell</span>
+          <span class="s-tag" data-tip="Red Hat Ansible Automation Platform for enterprise config management; Proxmox homelab automation">ansible</span>
+          <span class="s-tag" data-tip="GitHub Actions CI/CD pipelines across all personal projects">ci/cd</span>
+          <span class="s-tag" data-tip="Remote infrastructure management; protocol layer for FailWarden Orchestrator">ssh</span>
+          <span class="s-tag" data-tip="Agentless Windows remote management; foundation of YMC compliance scanner">winrm</span>
+          <span class="s-tag" data-tip="Administered 10,000+ VMs across 500+ ESXi hosts and 400+ physical servers at Experian Health">vmware</span>
+          <span class="s-tag" data-tip="Server hardening, administration, and automation across enterprise and homelab environments">linux</span>
+          <span class="s-tag" data-tip="Container workloads in homelab; experimentation and project environments">docker</span>
+          <span class="s-tag" data-tip="Homelab hypervisor — Ansible-automated provisioning, guest baselining, and clone workflows">proxmox</span>
+          <span class="s-tag" data-tip="Isilon NAS, PowerFlex SDS, Data Domain, and ECS object storage at Experian Health">dell emc</span>
+          <span class="s-tag" data-tip="Arista Big Cloud Fabric for datacenter network monitoring and management">arista bcf</span>
         </div>
       </div>
       <div class="sidebar-footer">
@@ -413,11 +426,11 @@
     <main class="main-content">
       <div class="content-inner">
 
-        <!-- ~/home -->
-        <section class="page active" id="page-home">
+        <!-- ~/root -->
+        <section class="page active" id="page-root">
           <div class="section-hdr">
-            <span class="section-path">~/home</span>
-            <span class="section-comment">// where I live</span>
+            <span class="section-path">~/root</span>
+            <span class="section-comment">// start here</span>
           </div>
           <pre class="ascii-art"> ██████╗ ██╗   ██╗██████╗  ██████╗ ███╗   ██╗
  ██╔══██╗╚██╗ ██╔╝██╔══██╗██╔═══██╗████╗  ██║
@@ -436,8 +449,8 @@
           <p class="hero-lede">I use <strong>AI and automation</strong> to build operator-facing tooling for infrastructure problems — remediation, compliance, repeatable workflows. The kind of work that usually lives in a shared doc nobody updates — I turn it into something you can actually run, audit, and hand off.</p>
           <div class="btn-row">
             <button class="btn btn-primary" data-target="usr">ls /usr</button>
-            <button class="btn btn-ghost" data-target="lib">cat resume.txt</button>
-            <a class="btn btn-ghost" href="https://github.com/bferguson-dev" target="_blank" rel="noreferrer">$ lynx github</a>
+            <button class="btn btn-primary" data-target="lib">cat resume.txt</button>
+            <a class="btn btn-primary" href="https://github.com/bferguson-dev" target="_blank" rel="noreferrer">$ lynx github</a>
           </div>
           <div class="status-row">
             <span class="chip"><span class="dot dot-ok"></span>open_to_work: true</span>
@@ -446,24 +459,47 @@
           </div>
         </section>
 
+        <!-- ~/home -->
+        <section class="page" id="page-home">
+          <div class="section-hdr">
+            <span class="section-path">~/home</span>
+            <span class="section-comment">// who I am</span>
+          </div>
+          <span class="resume-section-label">// background</span>
+          <p class="hero-lede">I grew up in rural eastern Ohio — three stoplights in the whole county type of place — joined the Air Force, and was stationed at Hurlburt Field in Florida. I worked on AC-130 gunships, MC-130 Talon IIs, and MH-53 Pave Low helicopters across multiple deployments. When my service was up, I settled in Middle Tennessee, where I live now with my wife and daughter.</p>
+          <span class="resume-section-label">// outside the terminal</span>
+          <p class="hero-lede">When I'm not in a terminal, you'll find me crawling down trails in my Jeep — or most likely working on it because it's broken again — behind a drum kit I've been playing since fifth grade, or deep in a retro gaming rabbit hole. Part of that is nostalgia, part of it is finally being able to own all the things I couldn't growing up. I collect old hardware for the same reason: there's history in it.</p>
+          <div class="stack-tags" style="margin-bottom:1.25rem;">
+            <span class="s-tag">retro gaming</span>
+            <span class="s-tag">old hardware</span>
+            <span class="s-tag">jeep trails</span>
+            <span class="s-tag">drums</span>
+            <span class="s-tag">tabletop rpg</span>
+            <span class="s-tag">sci-fi</span>
+            <span class="s-tag">live comedy</span>
+            <span class="s-tag">concerts</span>
+            <span class="s-tag">cooking</span>
+          </div>
+          <p class="hero-lede">When the WiFi goes down on purpose, I'm into tabletop games and RPGs, sci-fi, live comedy, concerts, and music festivals. I cook. I'm usually learning something new just because it's interesting.</p>
+          <p class="hero-mantra">"I believe good tools should make the people using them feel capable. That's true whether it's a runbook, a drum machine, or a well-seasoned cast iron pan."</p>
+        </section>
+
         <!-- ~/lib -->
         <section class="page" id="page-lib">
           <div class="section-hdr">
             <span class="section-path">~/lib</span>
             <span class="section-comment">// shared libraries — what I'm built on</span>
           </div>
-          <div class="about-cols">
-            <p>I use AI and automation to build operator-facing tooling for infrastructure problems — remediation, compliance, connectivity validation, repeatable ops workflows. The kind of work that usually lives in a shared doc nobody updates — I turn it into something you can run, audit, and hand off.</p>
-            <p>Everything here is presented conservatively. Where a tool has strong unit coverage but limited production validation, the page says so directly. Honest maturity statements are part of the engineering communication style, not a disclaimer.</p>
-          </div>
+          <p>Accumulated dependencies. This is the full reference — experience, skills, certifications, education. Read it like a man page. Download if you need something to hand off.</p>
 
           <div class="resume-meta-bar">
             <span class="resume-section-label" style="margin:0;">// resume</span>
-            <a class="btn btn-ghost" href="/resume.pdf" target="_blank">[ download .pdf ]</a>
+            <a class="btn btn-primary" href="/resume-1page.pdf" download>$ wget resume-1page.pdf</a>
+            <a class="btn btn-primary" href="/resume.pdf" download>$ wget resume-2page.pdf</a>
           </div>
 
           <blockquote class="resume-mantra">"I use tools to create tools to solve everyday problems so that we can all go home on time."</blockquote>
-          <p class="resume-summary-text">AI-augmented infrastructure engineer with 16+ years of experience designing, operating, and automating enterprise-scale systems. Applies artificial intelligence, agentic workflows, and modern DevOps practices to build tooling that solves real infrastructure problems. Proven operator at VMware scale with deep expertise in Dell EMC storage, compliance frameworks (NIST 800-53, HIPAA, PCI-DSS), and systems automation via Ansible and PowerShell.</p>
+          <p class="resume-summary-text">AI-augmented infrastructure engineer with 16+ years of experience designing, operating, and automating enterprise-scale systems. Applies artificial intelligence, agentic workflows, and modern DevOps practices to build tooling that solves real infrastructure problems. Proven operator at VMware scale with deep expertise in Dell EMC storage, compliance frameworks (NIST 800-53, HIPAA, PCI-DSS, SOC 2), and systems automation via Ansible and PowerShell.</p>
 
           <span class="resume-section-label">// professional_experience</span>
           <div class="exp-timeline">
@@ -622,10 +658,11 @@
           <span class="resume-section-label">// certifications</span>
           <div class="cert-list">
             <div class="cert-item"><span class="cert-name">Microsoft Azure Administrator Associate (AZ-104)</span><span class="cert-status"> — in progress</span></div>
-            <div class="cert-item"><span class="cert-name">Red Hat Certified Specialist in Ansible Automation</span><span class="cert-status"> — training completed</span></div>
+            <div class="cert-item"><span class="cert-name">Red Hat Certified Specialist in Ansible Automation</span><span class="cert-status"> — training completed, 2018</span></div>
             <div class="cert-item"><span class="cert-name">CompTIA Advanced Security Practitioner (CASP+)</span><span class="cert-status"> — training completed, 2015</span></div>
-            <div class="cert-item"><span class="cert-name">Certified Ethical Hacker (CEH) — EC-Council</span><span class="cert-status"> — formerly certified</span></div>
-            <div class="cert-item"><span class="cert-name">Certified Forensic Computer Examiner</span><span class="cert-status"> — formerly certified</span></div>
+            <div class="cert-item"><span class="cert-name">PowerShell for Systems Administration — New Horizons</span><span class="cert-status"> — training completed, 2015</span></div>
+            <div class="cert-item"><span class="cert-name">Certified Ethical Hacker (CEH) — EC-Council</span><span class="cert-status"> — formerly certified, 2018; 40hr New Horizons training completed, 2015</span></div>
+            <div class="cert-item"><span class="cert-name">Computer Hacking Forensic Investigator (CHFI) — EC-Council</span><span class="cert-status"> — formerly certified, 2018</span></div>
           </div>
 
           <span class="resume-section-label">// education</span>
@@ -662,9 +699,11 @@
             <span class="section-path">~/usr</span>
             <span class="section-comment">// user-installed programs — the things I've shipped</span>
           </div>
+          <p>Everything here is presented conservatively. Where a tool has strong unit coverage but limited production validation, the page says so directly. Honest maturity statements are part of my communication style, not a disclaimer.</p>
+          <p class="resume-section-label">// infrastructure_tooling</p>
           <article class="project-featured">
             <div class="tag-row">
-              <span class="tag">featured</span><span class="tag">python</span><span class="tag">infrastructure</span>
+              <span class="tag warn">featured</span><span class="tag green">python</span><span class="tag green">infrastructure</span>
               <span class="tag green">v0.2.0</span><span class="tag warn">prod_validated: partial</span>
             </div>
             <p class="proj-name">FailWarden Orchestrator</p>
@@ -682,21 +721,25 @@
           </article>
           <div class="support-grid">
             <article class="support-card">
+              <div class="tag-row"><span class="tag green">python</span><span class="tag green">powershell</span><span class="tag green">winrm</span><span class="tag warn">compliance</span></div>
               <p class="support-name">YMC</p>
               <p class="support-desc">Agentless Windows compliance scanner over WinRM. Framework-mapped checks, audit-ready output. No agent install required.</p>
               <div class="support-links"><a class="text-link" href="projects/ymc/">./project-page</a><a class="text-link" href="https://github.com/bferguson-dev/YMC" target="_blank" rel="noreferrer">github</a></div>
             </article>
             <article class="support-card">
+              <div class="tag-row"><span class="tag green">powershell</span><span class="tag green">wpf</span><span class="tag green">windows</span></div>
               <p class="support-name">Loadout</p>
               <p class="support-desc">Portable PowerShell + WPF workstation setup tool. Because manually rebuilding your toolchain on a fresh box is a crime against your own time.</p>
               <div class="support-links"><a class="text-link" href="projects/loadout/">./project-page</a><a class="text-link" href="https://github.com/bferguson-dev/Loadout" target="_blank" rel="noreferrer">github</a></div>
             </article>
             <article class="support-card">
+              <div class="tag-row"><span class="tag green">python</span><span class="tag green">networking</span><span class="tag green">cli</span></div>
               <p class="support-name">ReadyCheck</p>
               <p class="support-desc">Connectivity validation CLI comparing observed network behavior against declared intent and emits review artifacts.</p>
               <div class="support-links"><a class="text-link" href="projects/readycheck/">./project-page</a><a class="text-link" href="https://github.com/bferguson-dev/ReadyCheck" target="_blank" rel="noreferrer">github</a></div>
             </article>
             <article class="support-card">
+              <div class="tag-row"><span class="tag green">proxmox</span><span class="tag green">ansible</span><span class="tag green">automation</span><span class="tag warn">lab</span></div>
               <p class="support-name">My Lab Setup</p>
               <p class="support-desc">Sanitized Proxmox + Ansible lab automation — provisioning phases, guest baselining, and clone workflows. Where I actually break things first.</p>
               <div class="support-links"><a class="text-link" href="projects/my-lab-setup/">./project-page</a><a class="text-link" href="https://github.com/bferguson-dev/My-Lab-Setup" target="_blank" rel="noreferrer">github</a></div>
@@ -706,9 +749,9 @@
           <p class="resume-section-label">// ai_engineering_discipline</p>
           <article class="project-featured" style="border-color: var(--green-border);">
             <div class="tag-row">
-              <span class="tag green">methodology</span>
-              <span class="tag green">accountability</span>
-              <span class="tag green">auditable</span>
+              <span class="tag warn">methodology</span>
+              <span class="tag warn">accountability</span>
+              <span class="tag warn">auditable</span>
               <span class="tag warn">ai governance</span>
             </div>
             <p class="proj-name">project-prompts</p>
@@ -753,7 +796,8 @@
           <div class="btn-row">
             <a class="btn btn-primary" href="https://www.linkedin.com/in/byronferguson/" target="_blank" rel="noreferrer">$ lynx linkedin</a>
             <a class="btn btn-primary" href="https://github.com/bferguson-dev" target="_blank" rel="noreferrer">$ lynx github</a>
-            <a class="btn btn-primary" href="/resume.pdf" target="_blank">$ wget resume.pdf</a>
+            <a class="btn btn-primary" href="/resume-1page.pdf" download>$ wget resume-1page.pdf</a>
+            <a class="btn btn-primary" href="/resume.pdf" download>$ wget resume-2page.pdf</a>
           </div>
         </section>
 
