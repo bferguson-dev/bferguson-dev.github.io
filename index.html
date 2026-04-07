@@ -1044,27 +1044,39 @@
       println('AVAILABLE COMMANDS', 'tl-amber');
       println('──────────────────────────────────────────────────', 'tl-muted');
       const cmds = [
-        ['ls [path]',       'list directory contents'],
-        ['ls -la',          'list with hidden files (.ambition, .humility...)'],
-        ['cd [path]',       'change directory  (try: cd /usr)'],
-        ['pwd',             'print working directory'],
-        ['cat [file]',      'display file contents'],
-        ['clear',           'clear terminal output'],
-        ['whoami',          'who are you, really'],
-        ['echo [text]',     'echo text back'],
-        ['history',         'show command history'],
-        ['neofetch',        'system info + ascii logo'],
-        ['uname -a',        'kernel information'],
-        ['uptime',          'how long we\'ve been at this'],
-        ['ping [host/ip]',  'ping any host or IP address'],
-        ['man [command]',   'show manual page for a command'],
-        ['git log',         'project commit history'],
-        ['open [project]',  'open a project page (try: open failwarden)'],
-        ['wget [file]',      'download a file  (try: wget resume.pdf)'],
-        ['fortune',         'words of questionable wisdom'],
-        ['vim',             'good luck'],
-        ['sudo [command]',  'you already know how this ends'],
-        ['exit / quit',     'collapse the terminal'],
+        ['ls [path]',          'list directory contents'],
+        ['ls -la',             'list with hidden files (.ambition, .humility...)'],
+        ['cd [path]',          'change directory  (try: cd /usr)'],
+        ['pwd',                'print working directory'],
+        ['cat [file]',         'display file contents'],
+        ['clear',              'clear terminal output'],
+        ['whoami',             'who are you, really'],
+        ['echo [text]',        'echo text back'],
+        ['history',            'show command history'],
+        ['neofetch',           'system info + ascii logo'],
+        ['uname -a',           'kernel information'],
+        ['uptime',             'how long we\'ve been at this'],
+        ['top / htop',         'process viewer (results: portfolio-flavored)'],
+        ['ps aux',             'process snapshot'],
+        ['df -h',              'disk usage (philosophically accurate)'],
+        ['env',                'print environment variables'],
+        ['alias',              'active shell aliases'],
+        ['ping [host/ip]',     'ping any host or IP address'],
+        ['ssh [host]',         'remote login (spoiler: it won\'t)'],
+        ['curl [url]',         'transfer data (try: curl bferguson-dev.github.io)'],
+        ['date',               'print current date and time'],
+        ['hostname',           'print system hostname'],
+        ['ansible [host] ...',  'run ad-hoc command (control node not included)'],
+        ['python3',            'python interpreter (kind of)'],
+        ['systemctl status',   'check service status'],
+        ['man [command]',      'show manual page for a command'],
+        ['git log',            'project commit history'],
+        ['open [project]',     'open a project page (try: open failwarden)'],
+        ['wget [file]',        'download a file  (try: wget resume.pdf)'],
+        ['fortune',            'words of questionable wisdom'],
+        ['vim',                'good luck'],
+        ['sudo [command]',     'you already know how this ends'],
+        ['exit / quit',        'collapse the terminal'],
       ];
       for (const [cmd, desc] of cmds) {
         const d = document.createElement('div');
@@ -1226,20 +1238,295 @@
 
     function cmdMan(cmd) {
       const pages = {
-        ls:      'ls — list directory contents\n\nUsage: ls [options] [path]\n  -la   include hidden files\n\nLists the contents of a directory. On this system,\ndirectories map to portfolio sections.',
-        cd:      'cd — change directory\n\nUsage: cd [path]\n\nNavigates the virtual portfolio filesystem.\nTry: cd /usr  to browse projects.',
-        cat:     'cat — concatenate and display files\n\nUsage: cat [file]\n\nDisplays the contents of a file.\nTry: cat README.md inside a project directory.',
-        pwd:     'pwd — print working directory\n\nPrints the absolute path of the current directory.',
-        ping:    'ping — send ICMP ECHO_REQUEST to a host\n\nUsage: ping [host or IP]\n\nSends simulated packets. Results are entirely fictional\nbut statistically plausible.',
-        neofetch:'neofetch — display system information\n\nPrints system info alongside the portfolio ASCII logo.\nInformation is accurate. CPU specs are aspirational.',
-        sudo:    'sudo — execute a command as another user\n\nYou are not in the sudoers file.\nThis incident will be reported.\nSee also: /etc/hosts for known blocklisted hostnames.',
-        vim:     'vim — Vi IMproved, a text editor\n\nThis is a portfolio, not a text editor.\nIf you got here by reflex, we respect that.\nTo quit vim in real life: Esc, then :q!',
-        fortune: 'fortune — print a random quote\n\nSometimes wise. Sometimes not. Always brief.',
-        git:     'git — the stupid content tracker\n\nUsage: git log\n\nShows portfolio project history.',
+        ls:         'ls — list directory contents\n\nUsage: ls [options] [path]\n  -la   include hidden files\n\nLists the contents of a directory. On this system,\ndirectories map to portfolio sections.',
+        cd:         'cd — change directory\n\nUsage: cd [path]\n\nNavigates the virtual portfolio filesystem.\nTry: cd /usr  to browse projects.',
+        cat:        'cat — concatenate and display files\n\nUsage: cat [file]\n\nDisplays the contents of a file.\nTry: cat README.md inside a project directory.\nTry: cat /home/about.txt for the human behind the terminal.',
+        pwd:        'pwd — print working directory\n\nPrints the absolute path of the current directory.\nUseful when you\'ve cd\'d somewhere and lost track.\nWe\'ve all been there.',
+        clear:      'clear — clear the terminal screen\n\nClears the terminal output buffer.\nThe past is gone. Your mistakes, forgotten.\nThis is why we prefer terminals over open offices.',
+        whoami:     'whoami — print effective username\n\nPrints the username of the current session.\nOn this system, usernames are randomly assigned\nfrom a curated pool of operator archetypes.\n\nIf you don\'t like yours, clear and try again.',
+        echo:       'echo — display a line of text\n\nUsage: echo [text]\n\nRepeats back exactly what you type.\nUnlike most tools in enterprise IT,\nthis one does exactly what it promises.',
+        history:    'history — display command history\n\nShows a numbered list of commands entered this session.\nGood for copy-paste. Better for realizing\nyou\'ve typed \'ls\' twelve times.',
+        uname:      'uname — print system information\n\nUsage: uname [-a]\n  -a   print all information\n\nReports kernel and OS version.\nPortfolioOS is not a real operating system.\nThe kernel is real. It\'s JavaScript.',
+        uptime:     'uptime — tell how long the system has been running\n\nPrints uptime, number of active users, and load averages.\nLoad averages reflect genuine cognitive load.\nUptime may be slightly exaggerated for effect.',
+        ping:       'ping — send ICMP ECHO_REQUEST to a host\n\nUsage: ping [host or IP]\n\nSends simulated packets. Results are statistically\nplausible but entirely fictional.\nTry: ping 8.8.8.8  or  ping imposter-syndrome',
+        wget:       'wget — non-interactive network downloader\n\nUsage: wget [filename]\n\nDownloads files over HTTPS.\nCurrently supports: resume.pdf\n\nExample:\n  wget resume.pdf\n  wget byron_ferguson_resume.pdf\n\nSee also: ~/lib for the online version.',
+        neofetch:   'neofetch — display system information\n\nPrints system info alongside the portfolio ASCII logo.\nInformation is accurate. CPU specs are aspirational.\nCaffeine dependency is not a bug.',
+        fortune:    'fortune — print a random quote\n\nPrints a random quote from the wisdom buffer.\nSources include: engineers, philosophers, metal musicians,\ncar guys, and at least one AI researcher.\n\nSometimes wise. Sometimes not. Always brief.',
+        sudo:       'sudo — execute a command as another user\n\nYou are not in the sudoers file.\nThis incident will be reported.\n\nException: sudo hire-me (highly recommended)\nSee also: /etc/hosts for known blocklisted hostnames.',
+        vim:        'vim — Vi IMproved, a text editor\n\nThis is a portfolio, not a text editor.\nIf you got here by reflex, we respect that.\n\nTo exit vim in real life:\n  1. Press Esc\n  2. Type :q!\n  3. Question your life choices\n  4. Repeat until free',
+        git:        'git — the stupid content tracker\n\nUsage: git log\n\nShows portfolio commit history.\nAll other subcommands unsupported.\n\ngit blame    — see git log\ngit push -f  — absolutely not\ngit stash    — emotions not accepted',
+        rm:         'rm — remove files\n\nUsage: rm [file]\n       rm -rf [path]  (not recommended here or anywhere)\n\nThis filesystem is read-only. All rm attempts are\nlogged, judged, and filed under /dev/null.\nrm -rf is a permanent career event.',
+        make:       'make — build execution utility\n\nUsage: make [target]\n       make coffee  (hardware not found)\n\nExecutes build targets defined in a Makefile.\nNo Makefile was found. As usual.\nThis is not a comment on your organization.',
+        open:       'open — navigate to a project\n\nUsage: open [project]\n\nAvailable projects:\n  failwarden       runbook executor\n  ymc              compliance scanner\n  loadout          workstation setup\n  readycheck       connectivity validator\n  my-lab-setup     lab automation\n  project-prompts  AI governance framework',
+        hack:       'hack — initiate hacking sequence\n\nUsage: hack\n       exploit\n\nOutput is entirely cinematic and accomplishes nothing\nof substance. The portfolio survives unharmed.\nSee also: Mr. Robot (2015), every heist movie.',
+        ssh:        'ssh — OpenSSH remote login client\n\nUsage: ssh [user@]host\n\nEstablishes encrypted shell sessions to remote hosts.\nOn this system, all connections are refused.\nThis is a portfolio, not a jump box.\n\nFor actual contact: navigate to ~/etc',
+        top:        'top — display running processes\n\nDisplays a real-time view of system processes.\nProcess names and resource usage are portfolio-adjacent\nand entirely fictional. Accuracy: vibes-based.',
+        ps:         'ps — report process status\n\nUsage: ps\n       ps aux   (full process table)\n\nSnapshots the current process table.\nOn this system, processes reflect genuine concerns.',
+        df:         'df — report disk space usage\n\nUsage: df [-h]\n  -h   human-readable sizes\n\nReports filesystem usage. All storage values are\nphilosophically accurate.',
+        env:        'env — print environment\n\nPrints all environment variables for the current session.\nSome variables reflect deeply held engineering values.\nCOFFEE_LEVEL should always be monitored.',
+        alias:      'alias — list command aliases\n\nDisplays active shell aliases for this session.\nMany exist for safety. Some for speed.\nAt least one exists because of a production incident.',
+        curl:       'curl — transfer data from or to a server\n\nUsage: curl [url]\n\nSupports HTTP, HTTPS, and vibes.\ncurl bferguson-dev.github.io — you\'re already here\nSee also: wget for actual file downloads.',
+        date:       'date — print the system date and time\n\nPrints the current date and time in your local timezone.\nSetting the date requires elevated privileges\nand a concerning disregard for causality.',
+        hostname:   'hostname — show system hostname\n\nPrints the hostname for this system.\nThe hostname is not the username.\nThe username is randomly assigned. The hostname is not.',
+        ansible:    'ansible — run ad-hoc commands\n\nUsage: ansible [host-pattern] -m [module] -a [args]\n\nThis terminal is not an Ansible control node.\nFor real Ansible work: navigate to ~/usr or ~/lib.\n\nFun fact: this portfolio was built by someone who has\nautomated 10,000+ VMs with Ansible. Just saying.',
+        python3:    'python3 — Python language interpreter\n\nUsage: python3\n       python3 -c [code]\n\nInteractive Python interpreter. This is not a real\nPython environment. The projects at /usr are though.\n\nPython 3.12. The walrus operator is allowed.',
+        systemctl:  'systemctl — control the system and service manager\n\nUsage: systemctl [command] [service]\n\nCommands: status, start, stop, restart\n\nManages systemd units. On this system, the portfolio\nservice has been running continuously since deployment\nand cannot be stopped.',
+        exit:       'exit — close the terminal\n\nUsage: exit\n       quit\n\nCollapses the terminal panel.\nYour session is not saved. Your dignity is intact.\nThe portfolio continues to exist without you.',
       };
       if (!cmd) { println('Usage: man [command]', 'tl-err'); return; }
       if (pages[cmd]) { blank(); printPre(pages[cmd]); blank(); }
-      else { println('No manual entry for ' + cmd, 'tl-err'); }
+      else { println('No manual entry for ' + cmd + '\n// try: man man', 'tl-err'); }
+    }
+
+    function cmdTop() {
+      blank();
+      const t = new Date().toLocaleTimeString();
+      println('top - ' + t + '  up 4 years,  2 users,  load average: 0.42, 0.39, 0.35', 'tl-muted');
+      println('Tasks:  12 total,   1 running,  10 sleeping,   0 stopped,   1 zombie', 'tl-muted');
+      println('%Cpu(s):  2.1 us,  0.8 sy,  0.0 ni, 96.4 id,  0.7 wa,  0.0 hi,  0.0 si', 'tl-muted');
+      println('MiB Mem:  16384.0 total,   8201.4 free,   5120.2 used,   3062.4 buff/cache', 'tl-muted');
+      blank();
+      println('  PID USER            PR  NI    VIRT    RES  %CPU  %MEM  COMMAND', 'tl-amber');
+      const procs = [
+        ['    1', USERNAME,   '20',  '0', ' 128M', ' 64M', ' 0.0', '0.4', 'portfolio.js'],
+        ['    2', USERNAME,   '20',  '0', '  64M', ' 32M', ' 0.0', '0.2', 'vim (suspended, send help)'],
+        ['    3', USERNAME,   '20',  '0', ' 256M', '128M', ' 0.3', '0.8', 'ansible-runner'],
+        ['    4', USERNAME,   '20',  '0', ' 512M', '256M', ' 1.2', '1.6', 'failwarden-orchestrator'],
+        ['    5', USERNAME,   '20',  '0', '  32M', ' 16M', ' 0.0', '0.1', 'coffee.sh (waiting: no kettle)'],
+        ['  666', 'root',     '20',  '0', '1024M', '512M', ' 0.0', '3.1', 'imposter_syndrome (zombie)'],
+        ['    7', USERNAME,   '20',  '0', ' 128M', ' 64M', ' 0.1', '0.4', 'docs-updater'],
+        ['    8', USERNAME,   '20',  '0', '  96M', ' 48M', ' 0.0', '0.3', 'fortune --daemon'],
+        ['    9', 'recruiter','19',  '0', '  64M', ' 32M', ' 0.0', '0.2', 'linkedin-crawler (external)'],
+        ['   10', USERNAME,   '20',  '0', ' 768M', '384M', ' 0.0', '2.3', 'jeep-diagnostic (idle: broken again)'],
+      ];
+      for (const [pid, user, pr, ni, virt, res, cpu, mem, command] of procs) {
+        const line = pid + '  ' + user.padEnd(14) + pr.padEnd(4) + ni.padEnd(5) + virt.padEnd(8) + res.padEnd(7) + cpu.padEnd(6) + mem.padEnd(6) + command;
+        println(line, 'tl-ok');
+      }
+      blank();
+      println('// press q to quit — this is not real top, q does nothing', 'tl-muted');
+      blank();
+    }
+
+    function cmdPs(args) {
+      const full = args.some(a => a.includes('a') || a === 'aux' || a === '-ax');
+      blank();
+      if (full) {
+        println('USER            PID  %CPU  %MEM    VSZ    RSS  STAT  COMMAND', 'tl-amber');
+        const procs = [
+          [USERNAME,   '  1', '0.0', '0.4', '131072', '65536',  'Ss', 'portfolio.js'],
+          [USERNAME,   '  2', '0.0', '0.2', ' 65536', '32768',  'T ', 'vim (trapped, probably forever)'],
+          [USERNAME,   '  3', '0.3', '0.8', '262144', '131072', 'S ', 'ansible-runner'],
+          [USERNAME,   '  4', '0.0', '0.1', ' 32768', '16384',  'S ', 'coffee.sh <defunct>'],
+          ['root',     '666', '0.0', '3.1', '1048576','524288', 'Z ', 'imposter_syndrome <zombie>'],
+          [USERNAME,   '  9', '0.0', '0.2', ' 65536', '32768',  'S+', '-portfolio-bash'],
+        ];
+        for (const [user, pid, cpu, mem, vsz, rss, stat, command] of procs) {
+          println(user.padEnd(16) + pid.padEnd(5) + cpu.padEnd(6) + mem.padEnd(6) + vsz.padEnd(8) + rss.padEnd(7) + stat.padEnd(6) + command, 'tl-ok');
+        }
+      } else {
+        println('  PID TTY          TIME CMD', 'tl-amber');
+        println('    1 pts/0    00:00:04 portfolio.js', 'tl-ok');
+        println('    9 pts/0    00:00:00 portfolio-bash', 'tl-ok');
+        println('// try: ps aux', 'tl-muted');
+      }
+      blank();
+    }
+
+    function cmdDf(args) {
+      const h = args.includes('-h') || args.includes('--human-readable');
+      blank();
+      println('Filesystem         ' + (h ? ' Size  Used  Avail  Use%' : '   1K-blocks      Used  Available  Use%') + '  Mounted on', 'tl-amber');
+      if (h) {
+        println('/dev/experience      16Y   16Y      0   100%  /', 'tl-ok');
+        println('/dev/projects          ∞     8      ∞     0%  /usr', 'tl-ok');
+        println('/dev/ideas             ∞     ∞      ∞   ???%  /tmp', 'tl-amber');
+        println('tmpfs                 1T     0     1T     0%  /dev/shm (caffeine buffer)', 'tl-ok');
+        println('/dev/imposter_syn     1G     0     1G     0%  /dev/null', 'tl-muted');
+      } else {
+        println('/dev/experience   16777216  16777216         0  100%  /', 'tl-ok');
+        println('/dev/projects            ∞         8         ∞    0%  /usr', 'tl-ok');
+        println('/dev/ideas               ∞         ∞         ∞  ???%  /tmp', 'tl-amber');
+        println('tmpfs              1048576         0   1048576    0%  /dev/shm', 'tl-ok');
+        println('// try: df -h', 'tl-muted');
+      }
+      blank();
+    }
+
+    function cmdEnv() {
+      blank();
+      println('SHELL=/bin/portfolio-bash', 'tl-ok');
+      println('USER=' + USERNAME, 'tl-ok');
+      println('HOME=/home', 'tl-ok');
+      println('HOSTNAME=' + HOSTNAME, 'tl-ok');
+      println('TERM=xterm-256color', 'tl-ok');
+      println('EDITOR=vim  # (currently suspended, cannot exit)', 'tl-muted');
+      println('ANSIBLE_STDOUT_CALLBACK=yaml', 'tl-ok');
+      println('ANSIBLE_HOST_KEY_CHECKING=False  # trust but verify the playbook', 'tl-ok');
+      println('COFFEE_LEVEL=critically_low', 'tl-amber');
+      println('IMPOSTER_SYNDROME=unset', 'tl-ok');
+      println('YEARS_EXPERIENCE=16', 'tl-ok');
+      println('VM_COUNT=10000+', 'tl-ok');
+      println('PREFERRED_DISTRO=RHEL', 'tl-ok');
+      println('JEEP_STATUS=needs_repair  # permanent fixture at this point', 'tl-amber');
+      println('DRUMS_SINCE=5th_grade', 'tl-ok');
+      println('DEPLOY_ENV=production  # there is no staging', 'tl-amber');
+      println('DEBUG=false  # always false in prod, always true in reality', 'tl-muted');
+      println('PATH=/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/caffeine/bin', 'tl-ok');
+      blank();
+    }
+
+    function cmdAlias() {
+      blank();
+      println('alias ll=\'ls -la\'', 'tl-ok');
+      println('alias la=\'ls -a\'', 'tl-ok');
+      println('alias please=\'sudo\'', 'tl-ok');
+      println('alias ffs=\'sudo systemctl restart portfolio.service\'', 'tl-ok');
+      println('alias idk=\'man\'', 'tl-ok');
+      println('alias gtfo=\'exit\'', 'tl-ok');
+      println('alias yolo=\'git push --force\'  # do not. seriously.', 'tl-err');
+      println('alias dryrun=\'ansible-playbook --check --diff\'', 'tl-ok');
+      println('alias nope=\'rm -i\'  # added after an incident', 'tl-ok');
+      println('alias vi=\'vim\'  # the betrayal', 'tl-muted');
+      println('alias python=\'python3\'', 'tl-ok');
+      println('alias cls=\'clear\'  # old Windows habits die hard', 'tl-muted');
+      println('alias weather=\'ping 8.8.8.8\'  # not useful. reassuring.', 'tl-muted');
+      println('alias fix=\'cat /usr/failwarden/README.md\'  # runbook first', 'tl-ok');
+      blank();
+    }
+
+    function cmdSsh(args) {
+      const target = (args[0] || 'remote-host').replace(/^.*@/, '');
+      blank();
+      println('ssh: connecting to ' + target + ' port 22...', 'tl-muted');
+      setTimeout(() => {
+        if (target === HOSTNAME || target === 'localhost' || target === '127.0.0.1') {
+          println('Warning: Connecting to yourself. Ego check recommended.', 'tl-amber');
+          println('ssh: connect to host ' + target + ' port 22: Connection refused', 'tl-err');
+          println('// even localhost doesn\'t want a recursive connection right now', 'tl-muted');
+        } else {
+          println('ssh: connect to host ' + target + ' port 22: Connection refused', 'tl-err');
+          println('// this is a portfolio, not a jump box', 'tl-muted');
+          println('// for actual contact: navigate to ~/etc', 'tl-muted');
+        }
+        blank();
+      }, 700);
+    }
+
+    function cmdCurl(args) {
+      if (!args.length) { println('curl: try: curl [url]', 'tl-err'); return; }
+      const url = args.find(a => !a.startsWith('-')) || '';
+      blank();
+      if (!url) { println('curl: no URL specified', 'tl-err'); blank(); return; }
+      if (url.includes('bferguson') || url.includes('localhost') || url.includes('127.0.0.1')) {
+        println('  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current', 'tl-muted');
+        println('                                 Dload  Upload   Total   Spent    Left  Speed', 'tl-muted');
+        println('100  4821  100  4821    0     0  24105      0 --:--:-- --:--:-- --:--:-- 24105', 'tl-ok');
+        blank();
+        println('// you\'re already here. this is beautifully recursive.', 'tl-muted');
+        println('// try: wget resume.pdf if you want something to take with you', 'tl-muted');
+      } else if (url.includes('resume') || url.includes('.pdf')) {
+        println('// wget handles downloads better: wget resume.pdf', 'tl-muted');
+      } else {
+        println('curl: (6) Could not resolve host: ' + url, 'tl-err');
+        println('// this terminal has no outbound internet access', 'tl-muted');
+        println('// it is, after all, a portfolio — not a network appliance', 'tl-muted');
+      }
+      blank();
+    }
+
+    function cmdDate() {
+      blank();
+      println(new Date().toString(), 'tl-ok');
+      blank();
+    }
+
+    function cmdHostname() {
+      println(HOSTNAME, 'tl-ok');
+    }
+
+    function cmdAnsible(args) {
+      if (!args.length || args[0] === '--help') {
+        blank();
+        println('Usage: ansible [host-pattern] -m [module] -a [args]', 'tl-muted');
+        println('       ansible all -m ping', 'tl-muted');
+        blank();
+        println('// this terminal is not a control node', 'tl-muted');
+        println('// for real Ansible work: cd /usr  or  navigate to ~/usr', 'tl-muted');
+        blank();
+        return;
+      }
+      const host = args[0];
+      blank();
+      println(host + ' | UNREACHABLE! => {', 'tl-err');
+      println('    "changed": false,', 'tl-muted');
+      println('    "msg": "Failed to connect to the host via ssh: this is a portfolio.",', 'tl-muted');
+      println('    "unreachable": true', 'tl-muted');
+      println('}', 'tl-err');
+      blank();
+      println('// check /usr for real Ansible projects', 'tl-muted');
+      println('// or navigate to ~/lib — 10,000+ VMs automated. it was real.', 'tl-muted');
+      blank();
+    }
+
+    function cmdPython(args) {
+      blank();
+      if (args.includes('-c') && args.length > 2) {
+        const code = args.slice(args.indexOf('-c') + 1).join(' ');
+        if (code.includes('import this')) {
+          println('Beautiful is better than ugly.', 'tl-ok');
+          println('Explicit is better than implicit.', 'tl-ok');
+          println('Simple is better than complex.', 'tl-ok');
+          println('Complex is better than complicated.', 'tl-ok');
+          println('Readability counts.', 'tl-ok');
+          println('// ...and 14 more. run it for real: python3 -c "import this"', 'tl-muted');
+        } else {
+          println('// this is not a real Python interpreter', 'tl-muted');
+          println('// but the sentiment is appreciated', 'tl-muted');
+        }
+      } else {
+        println('Python 3.12.0 (portfolio-build, Apr 2026, 00:00:00)', 'tl-ok');
+        println('[GCC 13.2.0] on linux', 'tl-muted');
+        println('Type "help", "copyright", "credits" or "license" for more information.', 'tl-muted');
+        println('>>> ', 'tl-amber');
+        println('// not a real interpreter — the projects at /usr are though', 'tl-muted');
+        println('// Ctrl+D to exit a real Python session (you\'re welcome)', 'tl-muted');
+      }
+      blank();
+    }
+
+    function cmdSystemctl(args) {
+      const sub     = (args[0] || '').toLowerCase();
+      const service = args[1] || 'portfolio.service';
+      blank();
+      if (sub === 'status') {
+        println('● ' + service, 'tl-ok');
+        println('     Loaded: loaded (/etc/systemd/system/' + service + '; enabled; vendor preset: enabled)', 'tl-muted');
+        println('     Active: \u001b[32mactive (running)\u001b[0m since forever; 4 years 0 months ago', 'tl-ok');
+        println('    Process: 1 ExecStart=/usr/bin/portfolio.js (code=running)', 'tl-muted');
+        println('   Main PID: 1 (portfolio.js)', 'tl-muted');
+        blank();
+        const d = new Date().toLocaleDateString();
+        println(d + ' ' + HOSTNAME + ' portfolio.js[1]: compiling experience...', 'tl-muted');
+        println(d + ' ' + HOSTNAME + ' portfolio.js[1]: shipping anyway', 'tl-muted');
+        println(d + ' ' + HOSTNAME + ' portfolio.js[1]: still shipping', 'tl-muted');
+      } else if (sub === 'start') {
+        println('// ' + service + ' is already running. has been for years.', 'tl-muted');
+      } else if (sub === 'restart') {
+        println('Restarting ' + service + '...', 'tl-muted');
+        setTimeout(() => { println('// done. same as before, but with fresh uptime.', 'tl-muted'); blank(); }, 500);
+        return;
+      } else if (sub === 'stop') {
+        println('Failed to stop ' + service + ': operation not permitted.', 'tl-err');
+        println('// this portfolio cannot be stopped.', 'tl-muted');
+        println('// (the operator is also hard to stop, for reference)', 'tl-muted');
+      } else if (!sub) {
+        println('Usage: systemctl [status|start|stop|restart] [service]', 'tl-muted');
+        println('// try: systemctl status portfolio.service', 'tl-muted');
+      } else {
+        println('systemctl: unknown operation \'' + sub + '\'', 'tl-err');
+      }
+      blank();
     }
 
     function cmdPing(host) {
@@ -1433,7 +1720,6 @@
         case 'neofetch':cmdNeofetch(); break;
         case 'uname':   cmdUname(args); break;
         case 'uptime':  cmdUptime(); break;
-        case 'man':     cmdMan(args[0]); break;
         case 'ping':    cmdPing(args[0]); break;
         case 'git':     if (args[0] === 'log') cmdGitLog(); else println('git: try \'git log\'', 'tl-muted'); break;
         case 'open':    cmdOpen(args[0]); break;
@@ -1446,17 +1732,33 @@
         case 'rm':      cmdRm(args); break;
         case 'make':    cmdMake(args); break;
         case 'hack':
-        case 'exploit': cmdHack(); break;
+        case 'exploit':   cmdHack(); break;
+        case 'top':
+        case 'htop':      cmdTop(); break;
+        case 'ps':        cmdPs(args); break;
+        case 'df':        cmdDf(args); break;
+        case 'env':
+        case 'printenv':  cmdEnv(); break;
+        case 'alias':     cmdAlias(); break;
+        case 'ssh':       cmdSsh(args); break;
+        case 'curl':      cmdCurl(args); break;
+        case 'date':      cmdDate(); break;
+        case 'hostname':  cmdHostname(); break;
+        case 'ansible':   cmdAnsible(args); break;
+        case 'python':
+        case 'python3':   cmdPython(args); break;
+        case 'systemctl': cmdSystemctl(args); break;
         case ':q!':
         case ':wq':
-        case ':q':      println('This isn\'t vim. But respect for the muscle memory.', 'tl-muted'); break;
-        case 'coffee':  println('Error: brew install caffeine failed. Dependency: sleep not found.', 'tl-err'); break;
+        case ':q':        println('This isn\'t vim. But respect for the muscle memory.', 'tl-muted'); break;
+        case 'coffee':    println('Error: brew install caffeine failed. Dependency: sleep not found.', 'tl-err'); break;
         case 'exit':
-        case 'quit':    collapse(true); break;
+        case 'quit':      collapse(true); break;
         case 'apt':
         case 'brew':
         case 'dnf':
-        case 'yum':     println(cmd + ': package manager not available. This is a portfolio, not a server.', 'tl-err'); break;
+        case 'yum':       println(cmd + ': package manager not available. This is a portfolio, not a server.', 'tl-err'); break;
+        case 'man':       cmdMan(args[0]); break;
         default:
           println(cmd + ': command not found. Type \'help\' for available commands.', 'tl-err');
       }
