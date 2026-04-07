@@ -860,7 +860,17 @@
 
     // ── Virtual filesystem ─────────────────────────────────────
     const FS = {
-      '/': { type: 'dir', children: ['home', 'lib', 'usr', 'etc'] },
+      '/': {
+        type: 'dir', children: ['home', 'lib', 'usr', 'etc'],
+        files: {
+          '.bashrc': '# ~/.bashrc\n\nexport EDITOR=vim\nexport MONSTER_LEVEL=critically_low\nexport ANSIBLE_STDOUT_CALLBACK=yaml\nexport HISTCONTROL=ignoredups:erasedups\n\nalias ll=\'ls -la\'\nalias please=\'sudo\'\nalias dryrun=\'ansible-playbook --check --diff\'\nalias yolo=\'git push --force\'  # DO NOT\n\n# added after an incident:\nalias nope=\'rm -i\'\n\n[ -f ~/.profile ] && source ~/.profile',
+          '.gitconfig': '[user]\n    name = Byron Ferguson\n    email = bferguson-dev@gmail.com\n    signingkey = [redacted]\n\n[core]\n    editor = vim\n    autocrlf = input\n\n[commit]\n    gpgsign = true\n\n[alias]\n    lg = log --oneline --graph --decorate\n    yolo = push --force  # still here. still not recommended.\n    oops = commit --amend --no-edit\n\n[pull]\n    rebase = true',
+          '.ssh': '[directory — not readable]\n\nIf you found this, you already know what goes here.\nIf you don\'t know what goes here, you\'re not ready.\n\nSee: man ssh',
+          '.ambition': 'build things that matter.\nship things that work.\ndocument everything.\ngo home on time.',
+          '.humility': 'you don\'t know everything.\nnobody does.\nthe ones who act like they do are the ones you\nlearn the least from.\n\nask questions. read the logs. admit when you\'re wrong.\nthen fix it.',
+          '.monster_count': '3\n\n# today\n# (this is not a problem)',
+        }
+      },
       '/home': {
         type: 'dir', children: ['intro.txt', 'about.txt'],
         files: {
@@ -1117,7 +1127,7 @@
           '/usr': ['.wip', '.abandoned_ideas', '.half_finished_readme'],
           '/etc': ['.secrets', '.do_not_open'],
         };
-        const hidden = hiddenMap[target] || ['.bashrc', '.gitconfig', '.ssh/', '.ambition', '.humility', '.monster_count'];
+        const hidden = hiddenMap[target] || [];
         println('total ' + (node.children.length + hidden.length), 'tl-muted');
         for (const h of hidden) println('drw-r--r--  ' + USERNAME + '  ' + h, 'tl-muted');
       }
