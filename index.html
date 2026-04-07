@@ -846,7 +846,14 @@
       'infrastructure_enjoyer', 'devops_enthusiast', 'seasoned_evaluator',
       'senior_talent_detector', 'thoughtful_recruiter', 'technical_visionary',
       'power_user', 'caffeinated_engineer', 'keyboard_archaeologist',
-      'l33t_visitor'
+      'l33t_visitor', 'ansible_whisperer', 'yaml_architect',
+      'vm_wrangler', 'patch_tuesday_survivor', 'runbook_author',
+      'compliance_crusher', 'three_am_responder', 'pagerduty_veteran',
+      'chaos_monkey_tamer', 'incident_commander', 'postmortem_poet',
+      'proxmox_hermit', 'retro_hardware_collector', 'jeep_trail_navigator',
+      'drum_kit_survivor', 'tab_completionist', 'grep_whisperer',
+      'config_drift_hunter', 'audit_log_enjoyer', 'on_call_survivor',
+      'documentation_believer', 'scope_enforcer', 'shell_historian',
     ];
     const USERNAME = USERNAMES[Math.floor(Math.random() * USERNAMES.length)];
     const HOSTNAME = 'portfolio';
@@ -857,19 +864,20 @@
       '/home': {
         type: 'dir', children: ['intro.txt', 'about.txt'],
         files: {
-          'intro.txt': 'Welcome to /home\n\nThis is the landing zone.\nTry: ls /usr  to see what I\'ve shipped.\nTry: neofetch for the full system readout.',
-          'about.txt': 'Byron Ferguson\nInfrastructure Automation Engineer\n\nI build operator-facing tools that make infrastructure work\nrepeatable, auditable, and safe to hand off.'
+          'intro.txt': 'Welcome to BYRON_FERGUSON.PORTFOLIO\n\nStart here:\n  ~/root  — the landing page\n  ~/lib   — resume and skills\n  ~/usr   — things I\'ve shipped\n  ~/etc   — contact info\n  ~/home  — who I am\n\nUseful commands:\n  neofetch          system info\n  cat resume.txt    resume summary\n  wget resume.pdf   download full resume\n  ls /usr           browse projects\n  fortune           words of wisdom',
+          'about.txt': 'Byron Ferguson\nAI-Augmented Infrastructure Engineer\n\nGrew up in rural eastern Ohio — three stoplights in the\nwhole county type of place. Joined the Air Force, worked\non AC-130 gunships, MC-130 Talon IIs, and MH-53 Pave Lows\nacross multiple deployments out of Hurlburt Field, FL.\nSettled in Middle Tennessee. Husband and father.\n\n16+ years in infrastructure. Currently building AI-driven\ntooling for infrastructure problems.\n\n"I use tools to create tools to solve everyday problems\n so that we can all go home on time."'
         }
       },
       '/lib': {
-        type: 'dir', children: ['philosophy.txt', 'principles.txt'],
+        type: 'dir', children: ['philosophy.txt', 'principles.txt', 'methodology.txt'],
         files: {
-          'philosophy.txt': '[SHARED LIBRARIES — WHAT I\'M BUILT ON]\n\nWork centers on infrastructure tasks that are usually\ndocumented but still handled manually: remediation steps,\ncompliance checks, workstation setup, connectivity validation.\n\nMost interested in roles where that work becomes durable\ninternal tooling instead of tribal knowledge.',
-          'principles.txt': 'Engineering Communication Principles\n====================================\n- Honest maturity statements over vague claims\n- Documentation that matches what actually ships\n- Scope control over feature creep\n- If it needs a disclaimer, the code needs more work'
+          'philosophy.txt': '[SHARED LIBRARIES — WHAT I\'M BUILT ON]\n\nAccumulated dependencies. 16+ years of infrastructure\nexperience: VMware at 10k+ VM scale, Dell EMC storage,\ncompliance (NIST 800-53, HIPAA, PCI-DSS, SOC 2), and\nsystems automation via Ansible and PowerShell.\n\nNow applying AI and agentic workflows to infrastructure\nproblems — with full accountability and audit trails.\n\nFull resume: navigate to ~/lib or wget resume.pdf',
+          'principles.txt': 'Engineering Communication Principles\n====================================\n- Honest maturity statements over vague claims\n- Documentation that matches what actually ships\n- Scope control over feature creep\n- If it needs a disclaimer, the code needs more work\n- Tribal knowledge is technical debt in disguise',
+          'methodology.txt': 'Engineering Methodology\n=======================\ndefine → scope → document → build → harden\n  → review → test → iterate → audit → document → push\n\nSecurity is not a step. It is a constant.\nDocumentation is not an afterthought. It is the work.'
         }
       },
       '/usr': {
-        type: 'dir', children: ['failwarden', 'ymc', 'loadout', 'readycheck', 'my-lab-setup']
+        type: 'dir', children: ['failwarden', 'ymc', 'loadout', 'readycheck', 'my-lab-setup', 'project-prompts']
       },
       '/usr/failwarden': {
         type: 'dir', children: ['README.md', 'status.txt'],
@@ -894,10 +902,14 @@
         type: 'dir', children: ['README.md'],
         files: { 'README.md': 'My Lab Setup\n============\nSanitized Proxmox + Ansible lab automation.\nProvisioning phases, guest baselining, clone workflows.\n\nWhere I actually break things before shipping elsewhere.\n\nGitHub: github.com/bferguson-dev/My-Lab-Setup' }
       },
+      '/usr/project-prompts': {
+        type: 'dir', children: ['README.md'],
+        files: { 'README.md': 'project-prompts\n===============\nStructured library of project-scoped prompt engineering\nguidelines for accountable, auditable AI-assisted development.\n\nAI is a force multiplier — but only if you can trust what\nit produced and reproduce how it got there.\n\nFeatures:\n- Project-scoped guidelines that constrain AI behavior\n- Standardized direction, review, and constraint rules\n- Paired with session logging for full audit trail\n- Treats AI tooling like any external dependency:\n  version it, document it, own it.\n\nGitHub: github.com/bferguson-dev/project-prompts' }
+      },
       '/etc': {
         type: 'dir', children: ['contact.txt', 'hosts', 'motd'],
         files: {
-          'contact.txt': '[CONTACT CONFIGURATION]\n\nEmail:    [ navigate to ~/etc and click to reveal ]\nPhone:    [ navigate to ~/etc and click to reveal ]\nLinkedIn: linkedin.com/in/byronferguson\nGitHub:   github.com/bferguson-dev\nResume:   bferguson-dev.github.io (view online)\n\nContact details are click-protected. Navigate to ~/etc.',
+          'contact.txt': '[CONTACT CONFIGURATION]\n\nEmail:    [ navigate to ~/etc and click to reveal ]\nPhone:    [ navigate to ~/etc and click to reveal ]\nLinkedIn: linkedin.com/in/byronferguson\nPortfolio: bferguson-dev.github.io\nResume:   wget resume.pdf  (or navigate to ~/lib)\n\nContact details are click-protected. Navigate to ~/etc.',
           'hosts':  '127.0.0.1       localhost\n::1             localhost\n0.0.0.0         imposter-syndrome\n0.0.0.0         burnout',
           'motd':   'Welcome to BYRON_FERGUSON.PORTFOLIO\nPortfolioOS 2.0.0 — be excellent to each other\nLast login: right now, from your curiosity'
         }
@@ -921,6 +933,50 @@
       '"Tribal knowledge is technical debt in disguise."',
       '"The most dangerous phrase is: we\'ve always done it this way."',
       '"Audit logs are a love language."',
+      '"Programs must be written for people to read, and only incidentally for machines to execute." — Harold Abelson & Gerald J. Sussman',
+      '"Simplicity is prerequisite for reliability." — Edsger W. Dijkstra',
+      '"Any fool can write code that a computer can understand. Good programmers write code that humans can understand." — Martin Fowler',
+      '"Make it work, make it right, make it fast." — Kent Beck',
+      '"Measuring programming progress by lines of code is like measuring aircraft building progress by weight." — Bill Gates',
+      '"A computer lets you make more mistakes faster than any invention in human history — with the possible exceptions of handguns and tequila." — Mitch Radcliffe',
+      '"Good code is its own best documentation." — Steve McConnell',
+      '"Walking on water and developing software from a spec are easy if both are frozen." — Edward V. Berard',
+      '"Controlling complexity is the essence of computer programming." — Brian Kernighan',
+      '"The art of debugging is figuring out what you really told your program to do rather than what you thought you told it to do." — Andrew Singer',
+      '"Before software can be reusable it first has to be usable." — Ralph Johnson',
+      '"The function of good software is to make the complex appear to be simple." — Grady Booch',
+      '"First, solve the problem. Then, write the code." — John Johnson',
+      '"The best performance improvement is the transition from the nonworking state to the working state." — John Ousterhout',
+      '"If you think good architecture is expensive, try bad architecture." — Brian Foote & Joseph Yoder',
+      '"No one is born knowing how to fix it. They just refuse to stop until it works." — garage wisdom',
+      '"The car doesn\'t care about your feelings. It cares about whether you did the job right." — shop floor wisdom',
+      '"It\'s easier to ask forgiveness than to get permission." — Grace Hopper',
+      '"I\'m not arrogant. Arrogant people are never in doubt." — James Hetfield, Metallica',
+      '"The loudest sound in the world is silence after a question nobody wants to answer." — unknown ops veteran',
+      '"Heavy music taught me that precision and power are not opposites." — anonymous',
+      '"Without music, life would be a mistake." — Friedrich Nietzsche',
+      '"The problem with the world is that the intelligent people are full of doubts, while the stupid ones are full of confidence." — Bertrand Russell',
+      '"An investment in knowledge pays the best interest." — Benjamin Franklin',
+      '"The measure of intelligence is the ability to change." — Albert Einstein',
+      '"In theory, there is no difference between theory and practice. In practice, there is." — Yogi Berra',
+      '"It always seems impossible until it\'s done." — Nelson Mandela',
+      '"It feels important to have a nuanced, rich conception of what it is to be good." — Amanda Askell',
+      '"Human values are very difficult to specify, especially with the kind of precision required of a machine learning system." — Amanda Askell',
+      '"My heart will always be budget builds. I\'m just a blue collar, hard-working guy. I work seven days a week." — Derek Bieri, Vice Grip Garage',
+      '"I just decided I\'m going to be me. If that means a little rough around the edges, so be it. But I\'ll never fake who I am." — Derek Bieri, Vice Grip Garage',
+      '"If your dream costs you your family, it\'s too expensive." — Derek Bieri, Vice Grip Garage',
+      '"If it doesn\'t have character, or if we can\'t force it to have character, it\'s out." — David Freiburger, Roadkill',
+      '"These kids have to get a start somewhere, and pulling a 440 out of a motorhome somehow leads to a life where they\'re eventually building a 632." — David Freiburger',
+      '"I like troubleshooting and making an engine run after it\'s been sitting forever." — David Freiburger, Roadkill',
+      '"Born to lose. Live to win." — Lemmy Kilmister, Motörhead',
+      '"I don\'t do regrets. Regrets are pointless. It\'s too late for regrets. You\'ve already done it, haven\'t you?" — Lemmy Kilmister',
+      '"Integrity is everything to me. I will not die ashamed." — Lemmy Kilmister',
+      '"Reading\'s the only thing that allows you to use your imagination." — Lemmy Kilmister',
+      '"I choose to live, not just exist." — James Hetfield, Metallica',
+      '"You don\'t have to take over the world; just be an artist and express your area." — Maynard James Keenan, Tool',
+      '"The more you let the music speak for yourself, the more powerful the music will be." — Maynard James Keenan, Tool',
+      '"Hating people isn\'t a productive way of living. There\'s enough hate in the world as it is." — Ozzy Osbourne',
+      '"I don\'t know what\'s going to happen tomorrow and I can\'t relive yesterday, but I live in the moment if I can." — Ozzy Osbourne',
     ];
 
     // ── Terminal state ──────────────────────────────────────────
@@ -1004,6 +1060,7 @@
         ['man [command]',   'show manual page for a command'],
         ['git log',         'project commit history'],
         ['open [project]',  'open a project page (try: open failwarden)'],
+        ['wget [file]',      'download a file  (try: wget resume.pdf)'],
         ['fortune',         'words of questionable wisdom'],
         ['vim',             'good luck'],
         ['sudo [command]',  'you already know how this ends'],
@@ -1085,10 +1142,10 @@
         println('"I use tools to create tools to solve everyday problems', 'tl-amber');
         println(' so that we can all go home on time."', 'tl-amber');
         blank();
-        println('16+ years enterprise IT | VMware (10k+ VMs) | Dell EMC | NIST/HIPAA/PCI-DSS', 'tl-ok');
-        println('Now building AI-driven tooling for infrastructure problems.', 'tl-ok');
+        println('16+ yrs enterprise IT | VMware (10k+ VMs) | Dell EMC | NIST/HIPAA/PCI-DSS/SOC2', 'tl-ok');
+        println('Building AI-driven tooling for infrastructure problems.', 'tl-ok');
         blank();
-        println('Full resume: navigate to ~/lib or visit bferguson-dev.github.io', 'tl-muted');
+        println('Full resume: navigate to ~/lib  |  wget resume.pdf to download', 'tl-muted');
         blank(); return;
       }
       println('cat: ' + args[0] + ': No such file or directory', 'tl-err');
@@ -1231,11 +1288,43 @@
         'my-lab-setup': 'my-lab-setup',
         'lab': 'my-lab-setup',
       };
-      if (!arg) { println('Usage: open [project]  (failwarden, ymc, loadout, readycheck, my-lab-setup)', 'tl-err'); return; }
+      if (!arg) { println('Usage: open [project]  (failwarden, ymc, loadout, readycheck, my-lab-setup, project-prompts)', 'tl-err'); return; }
       const slug = map[arg.toLowerCase()];
       if (!slug) { println('open: unknown project "' + arg + '"', 'tl-err'); return; }
       println('Opening projects/' + slug + '/ ...', 'tl-ok');
       setTimeout(() => { window.location.href = 'projects/' + slug + '/'; }, 600);
+    }
+
+    function cmdWget(args) {
+      if (!args.length) { println('Usage: wget [filename]  e.g. wget resume.pdf', 'tl-err'); return; }
+      const target = args[0].toLowerCase().replace(/^\//, '');
+      const resumeNames = ['resume.pdf', 'byron_ferguson_resume.pdf', 'resume'];
+      if (resumeNames.includes(target)) {
+        const now = new Date().toISOString().replace('T', ' ').slice(0, 19);
+        blank();
+        println('--' + now + '--  https://bferguson-dev.github.io/byron_ferguson_resume.pdf', 'tl-muted');
+        println('Resolving bferguson-dev.github.io... resolved.', 'tl-muted');
+        println('Connecting to bferguson-dev.github.io:443... connected.', 'tl-muted');
+        println('HTTP request sent, awaiting response... 200 OK', 'tl-ok');
+        println('Length: 37842 (37K) [application/pdf]', 'tl-muted');
+        println('Saving to: \'byron_ferguson_resume.pdf\'', 'tl-muted');
+        blank();
+        println('byron_ferguson_resume.pdf   100%[===================>]  37K  --.-KB/s    in 0.1s', 'tl-ok');
+        blank();
+        println('2026 -- Download complete.', 'tl-ok');
+        blank();
+        const a = document.createElement('a');
+        a.href = '/byron_ferguson_resume.pdf';
+        a.download = 'byron_ferguson_resume.pdf';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        return;
+      }
+      blank();
+      println('wget: ' + args[0] + ': 404 Not Found', 'tl-err');
+      println('// try: wget resume.pdf', 'tl-muted');
+      blank();
     }
 
     function cmdFortune() {
@@ -1343,6 +1432,7 @@
         case 'git':     if (args[0] === 'log') cmdGitLog(); else println('git: try \'git log\'', 'tl-muted'); break;
         case 'open':    cmdOpen(args[0]); break;
         case 'fortune': cmdFortune(); break;
+        case 'wget':    cmdWget(args); break;
         case 'vim':
         case 'nano':
         case 'emacs':   cmdVim(); break;
