@@ -1146,8 +1146,8 @@
     }
 
     function cmdCd(arg) {
-      const target = resolvePath(arg || '/');
-      if (!FS[target]) { println('cd: ' + (arg || '/') + ': No such file or directory', 'tl-err'); return; }
+      const target = (!arg || arg === '~') ? '/home' : resolvePath(arg);
+      if (!FS[target]) { println('cd: ' + (arg || '~') + ': No such file or directory', 'tl-err'); return; }
       if (FS[target].type !== 'dir') { println('cd: ' + arg + ': Not a directory', 'tl-err'); return; }
       cwd = target;
       refreshPrompt();
