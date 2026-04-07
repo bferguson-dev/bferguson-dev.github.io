@@ -1796,9 +1796,142 @@
       }
     }
 
+    // ── Tab completion ─────────────────────────────────────────
+    const ALL_COMMANDS = [
+      'alias','ansible','cat','cd','clear','curl','date','df','echo','emacs',
+      'env','exit','exploit','fortune','git','hack','help','history','hostname',
+      'htop','ls','make','man','monster','nano','neofetch','open','ping','ps',
+      'pwd','python3','quit','rm','ssh','sudo','systemctl','top','uname','uptime',
+      'vim','wget','whoami',
+    ];
+
+    function commonPrefix(strs) {
+      if (!strs.length) return '';
+      let pre = strs[0];
+      for (let i = 1; i < strs.length; i++) {
+        while (!strs[i].startsWith(pre)) { pre = pre.slice(0, -1); if (!pre) return ''; }
+      }
+      return pre;
+    }
+
+    function pathCandidates(partial, dirsOnly) {
+      const lastSlash = partial.lastIndexOf('/');
+      const dirPart  = lastSlash >= 0 ? partial.substring(0, lastSlash) || '/' : null;
+      const filePart = lastSlash >= 0 ? partial.substring(lastSlash + 1) : partial;
+      const searchDir = dirPart ? resolvePath(dirPart) : cwd;
+      const node = FS[searchDir];
+      if (!node || node.type !== 'dir') return [];
+
+      const results = [];
+      for (const child of (node.children || [])) {
+        if (!child.startsWith(filePart)) continue;
+        const childPath = (searchDir === '/' ? '' : searchDir) + '/' + child;
+        const isDir = FS[childPath] && FS[childPath].type === 'dir';
+        if (dirsOnly && !isDir) continue;
+        results.push(isDir ? child + '/' : child);
+      }
+      if (!dirsOnly && node.files) {
+        for (const f of Object.keys(node.files)) {
+          if (f.startsWith(filePart)) results.push(f);
+        }
+      }
+      return { results, dirPart, filePart };
+    }
+
+    function applyPathCompletion(parts, partial, dirsOnly) {
+      const { results, dirPart, filePart } = pathCandidates(partial, dirsOnly);
+      if (!results || !results.length) return;
+      const pre = commonPrefix(results);
+      const completed = (dirPart ? (dirPart === '/' ? '/' : dirPart + '/') : '') + (pre || filePart);
+      if (results.length === 1) {
+        parts[parts.length - 1] = completed;
+        termInput.value = parts.join(' ');
+      } else {
+        if (pre.length > filePart.length) {
+          parts[parts.length - 1] = completed;
+          termInput.value = parts.join(' ');
+        }
+        println(getPrompt() + termInput.value, 'tl-cmd');
+        const d = document.createElement('div');
+        d.className = 'tl-muted';
+        d.textContent = results.join('  ');
+        termOutput.appendChild(d);
+        termOutput.scrollTop = termOutput.scrollHeight;
+      }
+    }
+
+    function tabComplete() {
+      const val  = termInput.value;
+      const parts = val.split(/\s+/);
+      const cmd   = parts[0].toLowerCase();
+
+      // completing the command itself
+      if (parts.length === 1 && !val.endsWith(' ')) {
+        const partial  = cmd;
+        const matches  = ALL_COMMANDS.filter(c => c.startsWith(partial));
+        if (!matches.length) return;
+        const pre = commonPrefix(matches);
+        if (matches.length === 1) {
+          termInput.value = matches[0] + ' ';
+        } else {
+          if (pre.length > partial.length) termInput.value = pre;
+          println(getPrompt() + termInput.value, 'tl-cmd');
+          const d = document.createElement('div');
+          d.className = 'tl-muted';
+          d.textContent = matches.join('  ');
+          termOutput.appendChild(d);
+          termOutput.scrollTop = termOutput.scrollHeight;
+        }
+        return;
+      }
+
+      // completing an argument
+      const partial = parts[parts.length - 1];
+
+      // man: complete against command names
+      if (cmd === 'man') {
+        const matches = ALL_COMMANDS.filter(c => c.startsWith(partial));
+        if (!matches.length) return;
+        const pre = commonPrefix(matches);
+        if (matches.length === 1) { parts[parts.length - 1] = matches[0]; termInput.value = parts.join(' '); }
+        else {
+          if (pre.length > partial.length) { parts[parts.length - 1] = pre; termInput.value = parts.join(' '); }
+          println(getPrompt() + termInput.value, 'tl-cmd');
+          const d = document.createElement('div'); d.className = 'tl-muted'; d.textContent = matches.join('  ');
+          termOutput.appendChild(d); termOutput.scrollTop = termOutput.scrollHeight;
+        }
+        return;
+      }
+
+      // open: complete against project names
+      if (cmd === 'open') {
+        const projects = ['failwarden','ymc','loadout','readycheck','my-lab-setup','project-prompts'];
+        const matches = projects.filter(p => p.startsWith(partial));
+        if (!matches.length) return;
+        const pre = commonPrefix(matches);
+        if (matches.length === 1) { parts[parts.length - 1] = matches[0]; termInput.value = parts.join(' '); }
+        else {
+          if (pre.length > partial.length) { parts[parts.length - 1] = pre; termInput.value = parts.join(' '); }
+          println(getPrompt() + termInput.value, 'tl-cmd');
+          const d = document.createElement('div'); d.className = 'tl-muted'; d.textContent = matches.join('  ');
+          termOutput.appendChild(d); termOutput.scrollTop = termOutput.scrollHeight;
+        }
+        return;
+      }
+
+      // cd: directories only
+      if (cmd === 'cd') { applyPathCompletion(parts, partial, true); return; }
+
+      // everything else: files + dirs
+      applyPathCompletion(parts, partial, false);
+    }
+
     // ── Input handling ─────────────────────────────────────────
     termInput.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter') {
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        tabComplete();
+      } else if (e.key === 'Enter') {
         const val = termInput.value;
         termInput.value = '';
         runCmd(val);
