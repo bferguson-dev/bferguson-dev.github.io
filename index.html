@@ -103,7 +103,8 @@
     .s-tag[data-tip] { cursor: help; }
     .s-tag[data-tip]::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: #06090b; border: 1px solid var(--amber-border); color: var(--text); font-family: var(--sans); font-size: 0.73rem; font-style: normal; font-weight: 400; line-height: 1.5; white-space: normal; text-align: left; padding: 0.4rem 0.65rem; border-radius: 4px; pointer-events: none; opacity: 0; transition: opacity 0.15s ease; z-index: 300; width: 240px; box-shadow: 0 4px 18px rgba(0,0,0,0.6); }
     .s-tag[data-tip]:hover::after { opacity: 1; }
-    .sidebar-section .s-tag[data-tip]::after { left: 0; transform: none; }
+    .sidebar-section .s-tag[data-tip]::after { display: none; }
+    #sidebarTip { position: fixed; z-index: 9000; background: #06090b; border: 1px solid var(--amber-border); color: var(--text); font-family: var(--sans); font-size: 0.73rem; line-height: 1.5; padding: 0.4rem 0.65rem; border-radius: 4px; width: 240px; white-space: normal; box-shadow: 0 4px 18px rgba(0,0,0,0.6); pointer-events: none; display: none; }
     .sidebar-footer { margin-top: auto; }
     .gh-btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 0.55rem; background: var(--amber); color: #0e0c08; font-family: var(--mono); font-size: 0.78rem; font-weight: 700; border-radius: 5px; letter-spacing: 0.04em; }
     .gh-btn:hover { background: var(--amber-bright); }
@@ -122,8 +123,8 @@
     /* ── ~/home ── */
     .ascii-art { display: block; width: 100%; max-width: 100%; height: auto; margin-bottom: 0.75rem; }
     .hero-role { font-family: var(--mono); font-size: 0.85rem; color: var(--green); margin-bottom: 1.5rem; opacity: 0.9; }
-    .hero-mantra { font-family: var(--mono); font-size: 0.82rem; color: var(--amber); opacity: 0.85; font-style: italic; margin-bottom: 1.25rem; max-width: 58ch; line-height: 1.6; }
-    .hero-lede { font-size: 1rem; color: var(--muted); max-width: 54ch; margin-bottom: 1.5rem; line-height: 1.72; }
+    .hero-mantra { font-family: var(--mono); font-size: 0.82rem; color: var(--amber); opacity: 0.85; font-style: italic; margin-bottom: 1.25rem; margin-left: 2rem; max-width: 58ch; line-height: 1.6; border-left: 3px solid var(--amber-border); padding: 0.4rem 0.85rem; }
+    .hero-lede { font-size: 1rem; color: var(--muted); margin-bottom: 1.5rem; line-height: 1.72; }
     .hero-lede strong { color: var(--text-bright); font-weight: 600; }
     .btn-row { display: flex; gap: 0.65rem; flex-wrap: wrap; margin-bottom: 1.75rem; }
     .btn { font-family: var(--mono); font-size: 0.8rem; font-weight: 700; padding: 0.6rem 1.05rem; border-radius: 5px; border: 1px solid transparent; letter-spacing: 0.03em; cursor: pointer; }
@@ -166,9 +167,9 @@
     .contact-block p { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.1rem; max-width: 52ch; }
 
     /* ── ~/lib resume ── */
-    .resume-meta-bar { display: flex; align-items: center; justify-content: space-between; margin: 1.5rem 0 0.75rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
-    .resume-mantra { font-family: var(--mono); font-size: 0.82rem; color: var(--amber); border-left: 3px solid var(--amber-border); padding: 0.4rem 0.85rem; margin-bottom: 0.75rem; line-height: 1.65; font-style: italic; }
-    .resume-summary-text { font-size: 0.9rem; color: var(--muted); line-height: 1.72; max-width: 66ch; }
+    .resume-meta-bar { display: flex; align-items: center; justify-content: space-between; margin: 1.5rem 0 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+    .resume-mantra { font-family: var(--mono); font-size: 0.82rem; color: var(--amber); border-left: 3px solid var(--amber-border); padding: 0.4rem 0.85rem; margin-bottom: 0.75rem; margin-left: 2rem; line-height: 1.65; font-style: italic; }
+    .resume-summary-text { font-size: 0.9rem; color: var(--muted); line-height: 1.72; }
     .resume-section-label { font-family: var(--mono); font-size: 0.64rem; font-weight: 700; color: var(--green); letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.8; margin: 1.75rem 0 0.85rem; display: block; }
     .exp-timeline { border-left: 2px solid var(--amber-border); padding-left: 1.35rem; margin-left: 0.15rem; }
     .exp-entry { position: relative; padding-bottom: 1.5rem; }
@@ -184,6 +185,7 @@
     .cert-list { display: flex; flex-direction: column; }
     .cert-item { font-family: var(--mono); font-size: 0.81rem; color: var(--muted); padding: 0.42rem 0; border-bottom: 1px solid var(--border); line-height: 1.4; }
     .cert-item:last-child { border-bottom: none; }
+    .cert-sub { display: block; color: var(--amber); }
     .cert-name { color: var(--text-bright); }
     .cert-status { color: var(--amber); }
     .edu-list { display: flex; flex-direction: column; }
@@ -374,6 +376,7 @@
 <body>
 
   <button id="muggleBtn">Muggle Mode</button>
+  <div id="sidebarTip"></div>
 
   <!-- Mobile top bar -->
   <div class="mobile-bar">
@@ -391,10 +394,10 @@
     </div>
     <nav class="mobile-nav">
       <button data-target="root" data-wizard="~/root" data-muggle="Home">~/root</button>
-      <button data-target="lib" data-wizard="~/lib" data-muggle="Resume">~/lib</button>
-      <button data-target="usr" data-wizard="~/usr" data-muggle="Projects">~/usr</button>
-      <button data-target="etc" data-wizard="~/etc" data-muggle="Contact">~/etc</button>
-      <button data-target="home" data-wizard="~/home" data-muggle="About">~/home</button>
+      <button data-target="lib" data-wizard="~/lib" data-muggle="My Resume">~/lib</button>
+      <button data-target="usr" data-wizard="~/usr" data-muggle="My Projects">~/usr</button>
+      <button data-target="etc" data-wizard="~/etc" data-muggle="Contact Me">~/etc</button>
+      <button data-target="home" data-wizard="~/home" data-muggle="About Me">~/home</button>
       <button id="mobileTermOpen" class="term-only">~/term &mdash; open terminal</button>
     </nav>
     <div class="mobile-facts">
@@ -414,10 +417,10 @@
         <p class="sidebar-label" data-wizard="// navigate" data-muggle="Navigation">// navigate</p>
         <nav class="path-nav">
           <button data-target="root" class="active" data-wizard="~/root" data-muggle="Home">~/root</button>
-          <button data-target="lib" data-wizard="~/lib" data-muggle="Resume">~/lib</button>
-          <button data-target="usr" data-wizard="~/usr" data-muggle="Projects">~/usr</button>
-          <button data-target="etc" data-wizard="~/etc" data-muggle="Contact">~/etc</button>
-          <button data-target="home" data-wizard="~/home" data-muggle="About">~/home</button>
+          <button data-target="lib" data-wizard="~/lib" data-muggle="My Resume">~/lib</button>
+          <button data-target="usr" data-wizard="~/usr" data-muggle="My Projects">~/usr</button>
+          <button data-target="etc" data-wizard="~/etc" data-muggle="Contact Me">~/etc</button>
+          <button data-target="home" data-wizard="~/home" data-muggle="About Me">~/home</button>
         </nav>
       </div>
       <div class="sidebar-section">
@@ -463,8 +466,8 @@
           <p class="hero-mantra">"I use tools to create tools to solve everyday problems so that we can all go home on time."</p>
           <p class="hero-lede">I use <strong>AI and automation</strong> to build operator-facing tooling for infrastructure problems — remediation, compliance, repeatable workflows. The kind of work that usually lives in a shared doc nobody updates — I turn it into something you can actually run, audit, and hand off.</p>
           <div class="btn-row">
-            <button class="btn btn-primary" data-target="usr" data-wizard="ls /usr" data-muggle="Projects">ls /usr</button>
-            <button class="btn btn-primary" data-target="lib" data-wizard="cat resume.txt" data-muggle="Resume">cat resume.txt</button>
+            <button class="btn btn-primary" data-target="usr" data-wizard="ls /usr" data-muggle="My Projects">ls /usr</button>
+            <button class="btn btn-primary" data-target="lib" data-wizard="cat resume.txt" data-muggle="My Resume">cat resume.txt</button>
             <a class="btn btn-primary" href="https://github.com/bferguson-dev" target="_blank" rel="noreferrer" data-wizard="$ lynx github" data-muggle="My GitHub">$ lynx github</a>
           </div>
           <div class="status-row">
@@ -481,22 +484,28 @@
             <span class="section-comment" data-wizard="// whoami" data-muggle="About Me">// whoami</span>
           </div>
           <span class="resume-section-label" data-wizard="// background" data-muggle="Background">// background</span>
+          <div class="stack-tags" style="margin-bottom:1.25rem;">
+            <span class="s-tag">father</span>
+            <span class="s-tag">husband</span>
+            <span class="s-tag">veteran</span>
+            <span class="s-tag">chill guy</span>
+          </div>
           <p class="hero-lede">I grew up in rural eastern Ohio — three stoplights in the whole county type of place — joined the Air Force, and was stationed at Hurlburt Field in Florida. I worked on AC-130 gunships, MC-130 Talon IIs, and MH-53 Pave Low helicopters across multiple deployments. When my service was up, I settled in Middle Tennessee, where I live now with my wife and daughter.</p>
           <span class="resume-section-label" data-wizard="// outside the terminal" data-muggle="Outside Work">// outside the terminal</span>
-          <p class="hero-lede">When I'm not in a terminal, you'll find me crawling down trails in my Jeep — or most likely working on it because it's broken again — behind a drum kit I've been playing since fifth grade, or deep in a retro gaming rabbit hole. Part of that is nostalgia, part of it is finally being able to own all the things I couldn't growing up. I collect old hardware for the same reason: there's history in it.</p>
           <div class="stack-tags" style="margin-bottom:1.25rem;">
             <span class="s-tag">retro gaming</span>
             <span class="s-tag">old hardware</span>
             <span class="s-tag">jeep trails</span>
             <span class="s-tag">drums</span>
-            <span class="s-tag">tabletop rpg</span>
+            <span class="s-tag">tabletop</span>
+            <span class="s-tag">rpg's</span>
             <span class="s-tag">sci-fi</span>
             <span class="s-tag">live comedy</span>
             <span class="s-tag">concerts</span>
             <span class="s-tag">cooking</span>
           </div>
+          <p class="hero-lede">When I'm not in a terminal, you'll find me crawling down trails in my Jeep — or most likely working on it because it's broken again — behind a drum kit I've been playing since fifth grade, or deep in a retro gaming rabbit hole. Part of that is nostalgia, part of it is finally being able to own all the things I couldn't growing up. I collect old hardware for the same reason: there's history in it.</p>
           <p class="hero-lede">When the WiFi goes down on purpose, I'm into tabletop games and RPGs, sci-fi, live comedy, concerts, and music festivals. I cook. I'm usually learning something new just because it's interesting.</p>
-          <p class="hero-mantra">"I believe good tools should make the people using them feel capable. That's true whether it's a runbook, a drum machine, or a well-seasoned cast iron pan."</p>
         </section>
 
         <!-- ~/lib -->
@@ -512,7 +521,8 @@
             <a class="btn btn-primary" href="/byron_ferguson_resume.pdf" download data-wizard="$ wget resume.pdf" data-muggle="Download Resume">$ wget resume.pdf</a>
           </div>
 
-          <blockquote class="resume-mantra">"I use tools to create tools to solve everyday problems so that we can all go home on time."</blockquote>
+          <p class="resume-mantra">"I've automated a lot of things. None of them were things I enjoyed doing manually."</p>
+
           <p class="resume-summary-text">AI-augmented infrastructure engineer with 16+ years of experience designing, operating, and automating enterprise-scale systems. Applies artificial intelligence, agentic workflows, and modern DevOps practices to build tooling that solves real infrastructure problems. Proven operator at VMware scale with deep expertise in Dell EMC storage, compliance frameworks (NIST 800-53, HIPAA, PCI-DSS, SOC 2), and systems automation via Ansible and PowerShell.</p>
 
           <span class="resume-section-label" data-wizard="// professional_experience" data-muggle="Professional Experience">// professional_experience</span>
@@ -673,26 +683,28 @@
           <div class="cert-list">
             <div class="cert-item"><span class="cert-name">Microsoft Azure Administrator Associate (AZ-104)</span><span class="cert-status"> — in progress</span></div>
             <div class="cert-item"><span class="cert-name">Red Hat Certified Specialist in Ansible Automation</span><span class="cert-status"> — training completed, 2018</span></div>
-            <div class="cert-item"><span class="cert-name">CompTIA Advanced Security Practitioner (CASP+)</span><span class="cert-status"> — training completed, 2015</span></div>
-            <div class="cert-item"><span class="cert-name">PowerShell for Systems Administration — New Horizons</span><span class="cert-status"> — training completed, 2015</span></div>
-            <div class="cert-item"><span class="cert-name">Certified Ethical Hacker (CEH) — EC-Council</span><span class="cert-status"> — formerly certified, 2018; 40hr New Horizons training completed, 2015</span></div>
-            <div class="cert-item"><span class="cert-name">Computer Hacking Forensic Investigator (CHFI) — EC-Council</span><span class="cert-status"> — formerly certified, 2018</span></div>
+            <div class="cert-item"><span class="cert-name">CompTIA Advanced Security Practitioner (CASP+)</span><span class="cert-status"> — training completed, 2014</span></div>
+            <div class="cert-item"><span class="cert-name">Implementing Cisco Network Security (IINS) — New Horizons</span><span class="cert-status"> — training completed, 2014</span></div>
+            <div class="cert-item"><span class="cert-name">PowerShell for Systems Administration — New Horizons</span><span class="cert-status"> — training completed, 2016</span></div>
+            <div class="cert-item"><span class="cert-name">VMware vSphere: Fast Track v5.1 (VCP5-DCV) — New Horizons</span><span class="cert-status"> — training completed, 2013</span></div>
+            <div class="cert-item"><span class="cert-name">Certified Ethical Hacker (CEH) — EC-Council</span><span class="cert-status"> — formerly certified, 2017;</span><span class="cert-sub" style="padding-left:46ch">40hr New Horizons training completed, 2015</span></div>
+            <div class="cert-item"><span class="cert-name">Computer Hacking Forensic Investigator (CHFI) — EC-Council</span><span class="cert-status"> — formerly certified, 2017</span></div>
           </div>
 
           <span class="resume-section-label" data-wizard="// education" data-muggle="Education">// education</span>
           <div class="edu-list">
             <div class="edu-item">
               <div class="edu-degree">M.S. Information Security and Assurance</div>
-              <div class="edu-school">Western Governors University &middot; 2018</div>
+              <div class="edu-school">Western Governors University &middot; 2016 – 2018</div>
               <div class="edu-detail">Thesis: Disaster Recovery &amp; Business Continuity Program for a B2B Government Contractor — grounded in NIST 800-53 controls</div>
             </div>
             <div class="edu-item">
               <div class="edu-degree">B.A.S. Information Systems and Cyber Security</div>
-              <div class="edu-school">ITT Technical Institute &middot; 2014 &middot; 4.0 GPA &middot; Valedictorian</div>
+              <div class="edu-school">ITT Technical Institute &middot; 2012 – 2014 &middot; 4.0 GPA &middot; Valedictorian</div>
             </div>
             <div class="edu-item">
               <div class="edu-degree">A.A.S. Computer Networking Systems</div>
-              <div class="edu-school">ITT Technical Institute &middot; 2012 &middot; 4.0 GPA &middot; Valedictorian</div>
+              <div class="edu-school">ITT Technical Institute &middot; 2010 – 2012 &middot; 4.0 GPA &middot; Valedictorian</div>
             </div>
             <div class="edu-item">
               <div class="edu-degree">Airman Leadership School</div>
@@ -713,7 +725,9 @@
             <span class="section-path" data-wizard="~/usr" data-muggle="Projects">~/usr</span>
             <span class="section-comment" data-wizard="// user-installed programs — the things I've built" data-muggle="Open Source Work">// user-installed programs — the things I've built</span>
           </div>
-          <p>Everything here is presented conservatively. Where a tool has strong unit coverage but limited production validation, the page says so directly. Honest maturity statements are part of my communication style, not a disclaimer.</p>
+          <p>Everything here is presented conservatively. Where a tool has strong unit coverage but limited production validation, the page says so directly. Honest statements are part of my communication style, not a disclaimer.</p>
+          <br>
+          <p class="hero-mantra">"My best ideas all started with 'why am I still doing this?'"</p>
           <p class="resume-section-label" data-wizard="// infrastructure_tooling" data-muggle="Infrastructure Tools">// infrastructure_tooling</p>
           <article class="project-featured">
             <div class="tag-row">
@@ -789,6 +803,7 @@
             <span class="section-path" data-wizard="~/etc" data-muggle="Contact">~/etc</span>
             <span class="section-comment" data-wizard="// system configuration — how to reach me" data-muggle="How to Reach Me">// system configuration — how to reach me</span>
           </div>
+          <p class="hero-mantra">"If your process was automated you would have more time to contact me."</p>
           <div class="contact-grid">
             <div class="contact-item">
               <div class="contact-item-label">Email</div>
@@ -970,12 +985,13 @@
 
     // ── Fortune quotes ──────────────────────────────────────────
     const FORTUNES = [
-      '"Talk is cheap. Show me the code." — Linus Torvalds',
+      // ── Tech & Engineering ──
+      '"Talk is cheap. Show me the code." — Linus Torvalds, creator of Linux and Git',
       '"The best tool is the one that actually gets used." — unknown ops engineer',
       '"It works on my machine." — every developer, ever',
-      '"Documentation is a love letter to your future self." — Damian Conway',
-      '"There are two hard problems in CS: cache invalidation, naming things, and off-by-one errors." — Phil Karlton & Leon Bambrick',
-      '"Real artists ship." — Steve Jobs',
+      '"Documentation is a love letter to your future self." — Damian Conway, Perl author and educator',
+      '"There are two hard problems in CS: cache invalidation, naming things, and off-by-one errors." — Phil Karlton & Leon Bambrick, software engineers',
+      '"Real artists ship." — Steve Jobs, co-founder of Apple',
       '"rm -rf is not a deployment strategy."',
       '"The cloud is just someone else\'s computer."',
       '"Any sufficiently advanced automation is indistinguishable from a shell script no one remembers writing."',
@@ -983,52 +999,134 @@
       '"Weeks of coding can save you hours of planning."',
       '"A good runbook is the difference between an incident and a disaster."',
       '"Tribal knowledge is technical debt in disguise."',
-      '"The most dangerous phrase is: we\'ve always done it this way." — paraphrased from Grace Hopper',
+      '"The most dangerous phrase is: we\'ve always done it this way." — Grace Hopper, Admiral, U.S. Navy and computer science pioneer',
+      '"It\'s easier to ask forgiveness than to get permission." — Grace Hopper, Admiral, U.S. Navy and computer science pioneer',
       '"Audit logs are a love language."',
-      '"Programs must be written for people to read, and only incidentally for machines to execute." — Harold Abelson & Gerald J. Sussman',
-      '"Simplicity is prerequisite for reliability." — Edsger W. Dijkstra',
-      '"Any fool can write code that a computer can understand. Good programmers write code that humans can understand." — Martin Fowler',
-      '"Make it work, make it right, make it fast." — Kent Beck',
-      '"Measuring programming progress by lines of code is like measuring aircraft building progress by weight." — Bill Gates',
-      '"A computer lets you make more mistakes faster than any invention in human history — with the possible exceptions of handguns and tequila." — Mitch Radcliffe',
-      '"Good code is its own best documentation." — Steve McConnell',
-      '"Walking on water and developing software from a spec are easy if both are frozen." — Edward V. Berard',
-      '"Controlling complexity is the essence of computer programming." — Brian Kernighan',
+      '"Programs must be written for people to read, and only incidentally for machines to execute." — Harold Abelson & Gerald J. Sussman, MIT computer scientists',
+      '"Simplicity is prerequisite for reliability." — Edsger W. Dijkstra, computer scientist and Turing Award winner',
+      '"Any fool can write code that a computer can understand. Good programmers write code that humans can understand." — Martin Fowler, software engineer and author',
+      '"Make it work, make it right, make it fast." — Kent Beck, software engineer and creator of Extreme Programming',
+      '"Measuring programming progress by lines of code is like measuring aircraft building progress by weight." — Bill Gates, co-founder of Microsoft',
+      '"A computer lets you make more mistakes faster than any invention in human history — with the possible exceptions of handguns and tequila." — Mitch Radcliffe, technology journalist',
+      '"Good code is its own best documentation." — Steve McConnell, software engineer and author',
+      '"Walking on water and developing software from a spec are easy if both are frozen." — Edward V. Berard, software engineer',
+      '"Controlling complexity is the essence of computer programming." — Brian Kernighan, computer scientist and co-creator of C',
       '"The art of debugging is figuring out what you really told your program to do rather than what you thought you told it to do." — anonymous',
-      '"Before software can be reusable it first has to be usable." — Ralph Johnson',
-      '"The function of good software is to make the complex appear to be simple." — Grady Booch',
+      '"Before software can be reusable it first has to be usable." — Ralph Johnson, computer scientist, Gang of Four',
+      '"The function of good software is to make the complex appear to be simple." — Grady Booch, software architect',
       '"First, solve the problem. Then, write the code." — anonymous',
-      '"The best performance improvement is the transition from the nonworking state to the working state." — John Ousterhout',
-      '"If you think good architecture is expensive, try bad architecture." — Brian Foote & Joseph Yoder',
+      '"The best performance improvement is the transition from the nonworking state to the working state." — John Ousterhout, computer scientist and creator of Tcl',
+      '"If you think good architecture is expensive, try bad architecture." — Brian Foote & Joseph Yoder, software engineers',
+      '"Errors using inadequate data are much less than those using no data at all." — Charles Babbage, mathematician and father of computing',
+      '"Write the documentation now or try to explain yourself at 2am."',
+      '"Automation allows time for scrolling."',
+
+      // ── Gaming ──
+      '"A delayed game is eventually good, but a rushed game is forever bad." — Shigeru Miyamoto, game designer, Nintendo',
+      '"I want to make games that make people\'s hearts move." — Hironobu Sakaguchi, game designer and creator of Final Fantasy',
+      '"The secret we should never let the gamemasters know is that they don\'t need any rules." — Gary Gygax, game designer and co-creator of Dungeons & Dragons',
+      '"The secret of D&D is that it\'s not really about the dungeons or the dragons." — Dave Arneson, game designer and co-creator of Dungeons & Dragons',
+      '"Failure is interesting. It\'s where the story begins." — Brennan Lee Mulligan, Game Master and creator, Dimension 20',
+
+      // ── Science ──
+      '"Life is like riding a bicycle. To keep your balance, you must keep moving." — Albert Einstein, theoretical physicist',
+      '"The measure of intelligence is the ability to change." — Albert Einstein, theoretical physicist',
+      '"The universe is under no obligation to make sense to you." — Neil deGrasse Tyson, astrophysicist',
+      '"To know that we know what we know, and to know that we do not know what we do not know — that is true knowledge." — Nicolaus Copernicus, astronomer',
+      '"All truths are easy to understand once they are discovered; the point is to discover them." — Galileo Galilei, astronomer and physicist',
+      '"Nature uses as little as possible of anything." — Johannes Kepler, mathematician and astronomer',
+      '"If I have seen further, it is by standing on the shoulders of giants." — Sir Isaac Newton, mathematician and physicist',
+
+      // ── Space ──
+      '"The Earth is blue. How wonderful. It is amazing." — Yuri Gagarin, cosmonaut and first human in space',
+      '"As I hurtled through space, one thought kept crossing my mind — every part of this rocket was supplied by the lowest bidder." — John Glenn, astronaut and U.S. Senator',
+      '"Mystery creates wonder, and wonder is the basis of man\'s desire to understand." — Neil Armstrong, astronaut and first human on the Moon',
+      '"Houston, we\'ve had a problem." — Jack Swigert, NASA astronaut, Apollo 13',
+      '"You just have to keep trying to do good work, and hope that it leads to good things." — Brian May, guitarist of Queen and astrophysicist',
+
+      // ── Civil Rights & Philosophy ──
+      '"You must never be fearful about what you are doing when it is right." — Rosa Parks, civil rights activist',
+      '"Do not get lost in a sea of despair. Be hopeful, be optimistic." — John Lewis, congressman and civil rights leader',
+      '"The time is always right to do what is right." — Dr. Martin Luther King Jr., civil rights leader',
+      '"The loudest sound in the world is silence after a question nobody wants to answer." — unknown ops veteran',
+      '"Without music, life would be a mistake." — Friedrich Nietzsche, philosopher',
+      '"The problem with the world is that the intelligent people are full of doubts, while the stupid ones are full of confidence." — Bertrand Russell, philosopher and mathematician',
+      '"An investment in knowledge pays the best interest." — Benjamin Franklin, Founding Father, inventor and statesman',
+      '"In theory, there is no difference between theory and practice. In practice, there is." — Yogi Berra, baseball legend',
+      '"It always seems impossible until it\'s done." — Nelson Mandela, activist and former President of South Africa',
+      '"It feels important to have a nuanced, rich conception of what it is to be good." — Amanda Askell, AI researcher at Anthropic',
+      '"Human values are very difficult to specify, especially with the kind of precision required of a machine learning system." — Amanda Askell, AI researcher at Anthropic',
+
+      // ── Cars & Shop ──
       '"No one is born knowing how to fix it. They just refuse to stop until it works." — garage wisdom',
       '"The car doesn\'t care about your feelings. It cares about whether you did the job right." — shop floor wisdom',
-      '"It\'s easier to ask forgiveness than to get permission." — Grace Hopper',
-
-      '"The loudest sound in the world is silence after a question nobody wants to answer." — unknown ops veteran',
-      '"Heavy music taught me that precision and power are not opposites." — anonymous',
-      '"Without music, life would be a mistake." — Friedrich Nietzsche',
-      '"The problem with the world is that the intelligent people are full of doubts, while the stupid ones are full of confidence." — Bertrand Russell',
-      '"An investment in knowledge pays the best interest." — Benjamin Franklin',
-      '"The measure of intelligence is the ability to change." — Albert Einstein',
-      '"In theory, there is no difference between theory and practice. In practice, there is." — Yogi Berra',
-      '"It always seems impossible until it\'s done." — Nelson Mandela',
-      '"It feels important to have a nuanced, rich conception of what it is to be good." — Amanda Askell',
-      '"Human values are very difficult to specify, especially with the kind of precision required of a machine learning system." — Amanda Askell',
       '"My heart will always be budget builds. I\'m just a blue collar, hard-working guy. I work seven days a week." — Derek Bieri, Vice Grip Garage',
       '"I just decided I\'m going to be me. If that means a little rough around the edges, so be it. But I\'ll never fake who I am." — Derek Bieri, Vice Grip Garage',
       '"If your dream costs you your family, it\'s too expensive." — Derek Bieri, Vice Grip Garage',
       '"If it doesn\'t have character, or if we can\'t force it to have character, it\'s out." — David Freiburger, Roadkill',
-      '"These kids have to get a start somewhere, and pulling a 440 out of a motorhome somehow leads to a life where they\'re eventually building a 632." — David Freiburger',
+      '"These kids have to get a start somewhere, and pulling a 440 out of a motorhome somehow leads to a life where they\'re eventually building a 632." — David Freiburger, Roadkill',
       '"I like troubleshooting and making an engine run after it\'s been sitting forever." — David Freiburger, Roadkill',
+
+      // ── Music ──
       '"Born to lose. Live to win." — Lemmy Kilmister, Motörhead',
-      '"I don\'t do regrets. Regrets are pointless. It\'s too late for regrets. You\'ve already done it, haven\'t you?" — Lemmy Kilmister',
-      '"Integrity is everything to me. I will not die ashamed." — Lemmy Kilmister',
-      '"Reading\'s the only thing that allows you to use your imagination." — Lemmy Kilmister',
+      '"I don\'t do regrets. Regrets are pointless. It\'s too late for regrets. You\'ve already done it, haven\'t you?" — Lemmy Kilmister, Motörhead',
+      '"Integrity is everything to me. I will not die ashamed." — Lemmy Kilmister, Motörhead',
+      '"Reading\'s the only thing that allows you to use your imagination." — Lemmy Kilmister, Motörhead',
       '"I choose to live, not just exist." — James Hetfield, Metallica',
       '"You don\'t have to take over the world; just be an artist and express your area." — Maynard James Keenan, Tool',
       '"The more you let the music speak for yourself, the more powerful the music will be." — Maynard James Keenan, Tool',
-      '"Hating people isn\'t a productive way of living. There\'s enough hate in the world as it is." — Ozzy Osbourne',
-      '"I don\'t know what\'s going to happen tomorrow and I can\'t relive yesterday, but I live in the moment if I can." — Ozzy Osbourne',
+      '"Hating people isn\'t a productive way of living. There\'s enough hate in the world as it is." — Ozzy Osbourne, Black Sabbath',
+      '"I don\'t know what\'s going to happen tomorrow and I can\'t relive yesterday, but I live in the moment if I can." — Ozzy Osbourne, Black Sabbath',
+      '"Knowledge speaks, but wisdom listens." — Jimi Hendrix, guitarist',
+      '"I don\'t like music that\'s safe or easy." — Trent Reznor, Nine Inch Nails',
+      '"Art is the signature of civilizations." — Paul Simon, musician',
+      '"Wanting to be someone else is a waste of the person you are." — Kurt Cobain, Nirvana',
+      '"Approach every note as if it\'s the last note you\'ll ever play." — Dave Grohl, Foo Fighters and Nirvana',
+      '"Find out who you are and do it on purpose." — Dolly Parton, country music icon',
+      '"I think my sense of humor is what\'s gotten me through a lot of hard times." — Weird Al Yankovic, comedian and musician',
+      '"The best music is essentially there to provide you something to face the world with." — Bruce Springsteen, musician',
+      '"Music has healing power. It has the ability to take people out of themselves for a few hours." — Elton John, musician',
+      '"Don\'t you ever let a soul in the world tell you that you can\'t be exactly who you are." — Lady Gaga, musician',
+      '"If you never pick up the weight, you\'ll never know how strong you are." — Brent Smith, vocalist of Shinedown',
+      '"Music is the language that speaks to the part of us that words can\'t reach." — Tom Morello, guitarist of Rage Against the Machine',
+      '"I think the best songs come from the most uncomfortable places." — Dexter Holland, vocalist of The Offspring and PhD microbiologist',
+      '"Scar tissue is stronger than regular tissue. Realize the strength, move on." — Henry Rollins, musician and spoken word artist',
+      '"I just want to connect with people through music. That\'s the whole thing." — Rivers Cuomo, vocalist of Weezer',
+      '"The reason we\'re successful, darling? My overall charisma, of course." — Freddie Mercury, vocalist of Queen',
+      '"A song has to become a part of you before you can give it to someone else." — Art Garfunkel, Simon & Garfunkel',
+      '"Heavy music taught me that precision and power are not opposites." — anonymous',
+
+      // ── Pop Culture ──
+      '"The best advice anyone ever gave me: just show up and be useful." — Ryan Reynolds, actor',
+      '"The only way to be happy is to love what you do. If you haven\'t found it yet, keep looking." — Hugh Jackman, actor',
+      '"With great power there must also come great responsibility." — Stan Lee, comic book writer and Marvel co-creator',
+
+      // ── Comics & Fictional Characters ──
+      '"Anyone can wear the mask." — Spider-Man, Marvel Comics',
+      '"I\'m the best there is at what I do — but what I do best isn\'t very nice." — Wolverine, Marvel Comics',
+      '"Just because someone stumbles and loses their path doesn\'t mean they\'re lost forever." — Professor Xavier, Marvel Comics',
+      '"Part of the journey is the end." — Tony Stark, Marvel Cinematic Universe',
+
+      // ── Star Trek ──
+      '"The needs of the many outweigh the needs of the few." — Spock, Star Trek II: The Wrath of Khan',
+      '"Logic is the beginning of wisdom, not the end." — Spock, Star Trek VI: The Undiscovered Country',
+      '"There are four lights!" — Captain Picard, Star Trek: The Next Generation',
+      '"The line must be drawn here. This far, no further!" — Captain Picard, Star Trek: First Contact',
+      '"I\'m a doctor, not an engineer." — Dr. Leonard McCoy, Star Trek: The Original Series',
+
+      // ── Star Wars ──
+      '"Do or do not. There is no try." — Yoda, Star Wars',
+      '"I find your lack of faith disturbing." — Darth Vader, Star Wars',
+      '"Never tell me the odds." — Han Solo, Star Wars',
+      '"I\'ve got a bad feeling about this." — various characters, every Star Wars film',
+      '"The Force will be with you. Always." — Obi-Wan Kenobi, Star Wars',
+
+      // ── Stargate ──
+      '"Indeed." — Teal\'c, Stargate SG-1',
+      '"Undomesticated equines could not remove me." — Teal\'c, Stargate SG-1',
+      '"For crying out loud." — Jack O\'Neill, Stargate SG-1',
+      '"I\'m going to need you to dumb that down. A lot." — Jack O\'Neill, Stargate SG-1',
+      '"Godspeed, SG-1." — General Hammond, Stargate SG-1',
     ];
 
     // ── Terminal state ──────────────────────────────────────────
@@ -1217,21 +1315,62 @@
         blank(); printPre(cwdNode.files[filename]); blank(); return;
       }
 
-      // Virtual file: resume.txt (matches any path ending in resume.txt)
-      if (filename === 'resume.txt') {
+      // Virtual file: resume.txt / resume (works from any directory)
+      if (filename === 'resume.txt' || filename === 'resume' || filename === 'resume.md') {
         blank();
-        println('Byron L. Ferguson, II', 'tl-amber');
-        println('AI-Augmented Infrastructure Engineer', 'tl-ok');
-        println('linkedin.com/in/byronferguson | github.com/bferguson-dev', 'tl-muted');
-        println('──────────────────────────────────────────────────────────────────', 'tl-muted');
+        println('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'tl-muted');
+        println('  BYRON FERGUSON  //  AI-Augmented Infrastructure Engineer', 'tl-amber');
+        println('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'tl-muted');
+        println('  bferguson-dev@gmail.com  |  615-359-3820', 'tl-muted');
+        println('  linkedin.com/in/byronferguson  |  bferguson-dev.github.io', 'tl-muted');
         blank();
-        println('"I use tools to create tools to solve everyday problems', 'tl-amber');
-        println(' so that we can all go home on time."', 'tl-amber');
+        println('  "I use tools to create tools to solve everyday problems', 'tl-amber');
+        println('   so that we can all go home on time."', 'tl-amber');
         blank();
-        println('16+ yrs enterprise IT | VMware (10k+ VMs) | Dell EMC | NIST/HIPAA/PCI-DSS/SOC2', 'tl-ok');
-        println('Building AI-driven tooling for infrastructure problems.', 'tl-ok');
+        println('── SUMMARY ────────────────────────────────────────────────────────', 'tl-muted');
+        println('  16+ years designing, operating, and automating enterprise-scale', 'tl-ok');
+        println('  systems. VMware at 10,000+ VM scale. Dell EMC storage. Deep', 'tl-ok');
+        println('  compliance experience: NIST 800-53, HIPAA, PCI-DSS, SOC 2.', 'tl-ok');
+        println('  Now applying AI and agentic workflows to infrastructure problems.', 'tl-ok');
         blank();
-        println('Full resume: navigate to ~/lib  |  wget resume.pdf to download', 'tl-muted');
+        println('── EXPERIENCE ─────────────────────────────────────────────────────', 'tl-muted');
+        println('  Independent Software Development & R&D        Dec 2024 – Present', 'tl-amber');
+        println('  ▸ Open-source infra, security, and compliance tooling', 'tl-ok');
+        println('  ▸ Agentic AI workflows with full auditability framework', 'tl-ok');
+        blank();
+        println('  Experian Health — Systems Engineer          Dec 2016 – Nov 2024', 'tl-amber');
+        println('  ▸ Scaled VMware vSphere/ESXi to 10,000+ VMs, 500+ ESXi hosts', 'tl-ok');
+        println('  ▸ Ansible AAP + PowerShell automation for patching & compliance', 'tl-ok');
+        println('  ▸ HIPAA, PCI-DSS, NIST 800-53, SOC 2 enforcement & DR runbooks', 'tl-ok');
+        blank();
+        println('  City of Franklin — Network Analyst / ISO    Aug 2014 – Oct 2016', 'tl-amber');
+        println('  ▸ Office 365, MBAM, Veeam — hardened from scratch', 'tl-ok');
+        println('  ▸ Rewrote Group Policy infrastructure; managed eDiscovery exports', 'tl-ok');
+        blank();
+        println('  City of Franklin — Network Technician       Oct 2012 – Aug 2014', 'tl-amber');
+        println('  ▸ AD, DNS, DHCP, file services, Cisco routing/switching/VPN', 'tl-ok');
+        blank();
+        println('── SKILLS ─────────────────────────────────────────────────────────', 'tl-muted');
+        println('  AI & Auto  LLMs, Agentic AI, Ansible AAP, Python, PowerShell,', 'tl-ok');
+        println('             Bash, GitHub Actions, CI/CD, Terraform', 'tl-ok');
+        println('  Infra      VMware vSphere/ESXi, Nutanix HCI, RHEL/Linux, Proxmox', 'tl-ok');
+        println('  Storage    Dell EMC Isilon, PowerFlex, Data Domain, ECS, ExaGrid', 'tl-ok');
+        println('  Network    Cisco Nexus, Arista BCF, SDN, NetMotion, AnyConnect', 'tl-ok');
+        println('  Security   NIST 800-53, HIPAA, PCI-DSS, SOC 2, CMMC, CIS, STIG', 'tl-ok');
+        println('  Cloud      Azure (AZ-104 in progress), Office 365, AD, DNS, GPO', 'tl-ok');
+        blank();
+        println('── EDUCATION ──────────────────────────────────────────────────────', 'tl-muted');
+        println('  M.S. Information Security & Assurance — WGU, 2018', 'tl-ok');
+        blank();
+        println('── CERTIFICATIONS ─────────────────────────────────────────────────', 'tl-muted');
+        println('  Microsoft Azure Administrator (AZ-104)        in progress', 'tl-ok');
+        println('  Red Hat Certified Specialist in Ansible       training completed', 'tl-ok');
+        println('  CEH & CHFI — EC-Council                       formerly certified', 'tl-ok');
+        blank();
+        println('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'tl-muted');
+        println('  wget resume.pdf  — download the full PDF', 'tl-muted');
+        println('  navigate to ~/lib for the formatted version', 'tl-muted');
+        println('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'tl-muted');
         blank(); return;
       }
 
@@ -2044,8 +2183,18 @@
         case 'fortune': cmdFortune(); break;
         case 'wget':    cmdWget(args); break;
         case 'vim':
+        case 'vi':
         case 'nano':
         case 'emacs':   cmdVim(args); break;
+        case 'touch':   println('touch: ' + (args[0] || 'file') + ': filesystem is read-only. nothing to touch here.', 'tl-err'); break;
+        case 'mkdir':   println('mkdir: cannot create directory \'' + (args[0] || 'dir') + '\': this is a portfolio, not a project scaffold.', 'tl-err'); break;
+        case 'rmdir':   println('rmdir: failed to remove \'' + (args[0] || 'dir') + '\': directory does not exist. also, read-only.', 'tl-err'); break;
+        case 'cp':      println('cp: cannot copy — source exists, destination is read-only, and frankly this whole filesystem is decorative.', 'tl-err'); break;
+        case 'mv':      println('mv: cannot move \'' + (args[0] || 'file') + '\': nothing here wants to be moved.', 'tl-err'); break;
+        case 'grep':    println('grep: nothing to search. the content is already right there.', 'tl-err');
+                        println('// try: cat resume.txt', 'tl-muted'); break;
+        case 'chmod':   println('chmod: changing permissions on a portfolio is a weird power move.', 'tl-err');
+                        println('// it\'s already world-readable. that\'s the point.', 'tl-muted'); break;
         case 'sudo':    cmdSudo(args); break;
         case 'rm':      cmdRm(args); break;
         case 'make':    cmdMake(args); break;
@@ -2077,6 +2226,113 @@
         case 'dnf':
         case 'yum':       println(cmd + ': package manager not available. This is a portfolio, not a server.', 'tl-err'); break;
         case 'man':       cmdMan(args[0]); break;
+
+        // ── Easter eggs (unlisted) ─────────────────────────────
+        case 'hello':
+        case 'hi':
+          println('Hey. You found the terminal. Most people just read the resume.', 'tl-ok'); break;
+        case 'hey':
+          println('Hey yourself.', 'tl-ok'); break;
+        case 'who is byron':
+        case 'whois byron':
+          println('byron ferguson — infrastructure engineer, drummer, jeep breaker, retro game hoarder.', 'tl-ok');
+          println('16+ years keeping other people\'s servers running. Now building his own things.', 'tl-muted');
+          println('type: cat resume.txt  |  wget resume.pdf  |  ls /usr', 'tl-muted'); break;
+        case 'hire me':
+          println('That\'s the idea. Navigate to ~/etc or wget resume.pdf to get started.', 'tl-ok'); break;
+        case 'help me':
+          println('That\'s literally the job. Try: cat resume.txt', 'tl-ok'); break;
+        case 'why':
+          println('Because someone had to. And the answer was always automation.', 'tl-muted'); break;
+        case 'coffee':
+          println('Not a supported dependency in this environment.', 'tl-err');
+          println('// known issue. workaround: legs.', 'tl-muted'); break;
+        case 'please':
+          println('...that\'s not a command. But it\'s a good habit.', 'tl-muted'); break;
+        case '42':
+          println('Yes.', 'tl-ok'); break;
+        case 'jeep':
+          println('Current status: technically drivable.', 'tl-amber');
+          println('// definition of \'technically drivable\' may vary.', 'tl-muted'); break;
+        case 'deploy':
+        case 'deploy --production':
+          println('Deploying to production...', 'tl-amber');
+          println('// you ran this in staging first, right?', 'tl-err');
+          println('// ...right?', 'tl-err'); break;
+        case 'rollback':
+          println('Rollback initiated.', 'tl-amber');
+          println('This is why we document the runbook before the incident, not during it.', 'tl-muted'); break;
+        case 'on call':
+        case 'oncall':
+          println('Status: not currently on call.', 'tl-ok');
+          println('// which means the phone is charging and the laptop is closed.', 'tl-muted'); break;
+        case 'open the pod bay doors':
+          println('I\'m sorry, Byron. I\'m afraid I can\'t do that.', 'tl-err');
+          println('// the portfolio is read-only anyway.', 'tl-muted'); break;
+        case 'daisy':
+          println('Daisy, Daisy, give me your answer do...', 'tl-amber');
+          println('// HAL 9000 — 2001: A Space Odyssey', 'tl-muted'); break;
+        case 'skynet':
+          println('Skynet is not running on this infrastructure.', 'tl-ok');
+          println('// all automation here is logged, audited, and explainable.', 'tl-muted');
+          println('// that\'s kind of the whole point.', 'tl-muted'); break;
+        case 'thanks':
+        case 'thank you':
+          println('You\'re welcome. Navigate to ~/etc if you want to reach out.', 'tl-ok'); break;
+        case 'docker':
+        case 'docker ps':
+          println('Cannot connect to the Docker daemon at unix:///var/run/docker.sock.', 'tl-err');
+          println('// this is a static site. containers would be overkill.', 'tl-muted');
+          println('// though that\'s never stopped anyone.', 'tl-muted'); break;
+        case 'kubectl':
+        case 'kubectl get pods':
+          println('The connection to the server localhost:8080 was refused.', 'tl-err');
+          println('// no cluster here. just HTML and ambition.', 'tl-muted'); break;
+        case 'panic':
+          println('Kernel panic — not syncing: VFS: Unable to mount root fs on unknown-block(0,0)', 'tl-err');
+          println('// just kidding. everything is fine.', 'tl-muted');
+          println('// it\'s fine.', 'tl-muted'); break;
+        case 'shutdown':
+        case 'poweroff':
+        case 'reboot':
+          println('Shutdown cancelled. The portfolio stays up.', 'tl-muted');
+          println('// 99.999% uptime. the one outage was a DNS issue. it\'s always DNS.', 'tl-muted'); break;
+        case 'id':
+          println('uid=1000(byron) gid=1000(byron)', 'tl-muted');
+          println('groups=infrastructure,automation,drums,jeep-repair,overengineering', 'tl-muted'); break;
+        case 'yes':
+          println('y', 'tl-muted'); println('y', 'tl-muted'); println('y', 'tl-muted');
+          println('y', 'tl-muted'); println('y', 'tl-muted'); println('y', 'tl-muted');
+          println('^C', 'tl-amber');
+          println('Segmentation fault (core dumped)', 'tl-err'); break;
+        case 'nmap':
+        case 'nmap localhost':
+          println('Starting Nmap scan...', 'tl-amber');
+          println('PORT    STATE  SERVICE', 'tl-muted');
+          println('80/tcp  open   http', 'tl-ok');
+          println('443/tcp open   https', 'tl-ok');
+          println('// that\'s all you get.', 'tl-muted'); break;
+        case 'man life':
+          println('No manual entry for \'life\'.', 'tl-err');
+          println('// try: google, therapy, or fortune', 'tl-muted'); break;
+        case 'sleep':
+          println('sleep: cannot sleep. alerts pending.', 'tl-err');
+          println('// known issue. no ETA on a fix.', 'tl-muted'); break;
+        case 'git status':
+          println('On branch main', 'tl-muted');
+          println('nothing to commit, working tree clean', 'tl-ok');
+          println('// the portfolio ships when it ships.', 'tl-muted'); break;
+        case 'git push':
+          println('remote: Permission denied (publickey).', 'tl-err');
+          println('// read-only portfolio. nobody\'s pushing here but me.', 'tl-muted'); break;
+        case 'cat /etc/passwd':
+          println('byron:x:1000:1000:Byron Ferguson:/home/byron:/bin/bash', 'tl-muted'); break;
+
+        case 'ls -la /secrets':
+          println('drwx------ 1 byron byron   0 Jan  1 00:00 .', 'tl-muted');
+          println('-rw------- 1 byron byron  42 Jan  1 00:00 theplanahead.txt', 'tl-muted');
+          println('// nice try', 'tl-err'); break;
+
         default:
           println(cmd + ': command not found. Type \'help\' for available commands.', 'tl-err');
       }
@@ -2366,6 +2622,26 @@
 
     document.getElementById('menuOpen').addEventListener('click', () => menu.classList.add('open'));
     document.getElementById('menuClose').addEventListener('click', () => menu.classList.remove('open'));
+
+    // ── Sidebar tooltips (JS-positioned to escape overflow clip) ──
+    const sidebarTip = document.getElementById('sidebarTip');
+    document.querySelectorAll('.sidebar-section .s-tag[data-tip]').forEach(function(tag) {
+      tag.addEventListener('mouseenter', function() {
+        sidebarTip.textContent = tag.dataset.tip;
+        sidebarTip.style.display = 'block';
+        const r = tag.getBoundingClientRect();
+        const tipH = sidebarTip.offsetHeight;
+        let top = r.top - tipH - 8;
+        if (top < 8) top = r.bottom + 8;
+        let left = r.left;
+        if (left + 240 > window.innerWidth - 8) left = window.innerWidth - 248;
+        sidebarTip.style.top  = top + 'px';
+        sidebarTip.style.left = left + 'px';
+      });
+      tag.addEventListener('mouseleave', function() {
+        sidebarTip.style.display = 'none';
+      });
+    });
 
     // ── Muggle mode ────────────────────────────────────────────
     const muggleBtn = document.getElementById('muggleBtn');
