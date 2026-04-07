@@ -120,7 +120,7 @@
     .section-comment { font-family: var(--mono); font-size: 0.78rem; color: var(--green); opacity: 0.8; }
 
     /* ── ~/home ── */
-    .ascii-art { font-family: var(--mono); font-size: min(1.05vw, 0.65rem); color: var(--amber-bright); line-height: 1.22; white-space: pre; overflow-x: hidden; width: 100%; margin-bottom: 0.75rem; display: block; }
+    .ascii-art { display: block; width: 100%; max-width: 100%; height: auto; margin-bottom: 0.75rem; }
     .hero-role { font-family: var(--mono); font-size: 0.85rem; color: var(--green); margin-bottom: 1.5rem; opacity: 0.9; }
     .hero-mantra { font-family: var(--mono); font-size: 0.82rem; color: var(--amber); opacity: 0.85; font-style: italic; margin-bottom: 1.25rem; max-width: 58ch; line-height: 1.6; }
     .hero-lede { font-size: 1rem; color: var(--muted); max-width: 54ch; margin-bottom: 1.5rem; line-height: 1.72; }
@@ -458,18 +458,7 @@
             <span class="section-path" data-wizard="~/root" data-muggle="Home">~/root</span>
             <span class="section-comment" data-wizard="// start here" data-muggle="Landing Page">// start here</span>
           </div>
-          <pre class="ascii-art"> ██████╗ ██╗   ██╗██████╗  ██████╗ ███╗   ██╗
- ██╔══██╗╚██╗ ██╔╝██╔══██╗██╔═══██╗████╗  ██║
- ██████╔╝ ╚████╔╝ ██████╔╝██║   ██║██╔██╗ ██║
- ██╔══██╗  ╚██╔╝  ██╔══██╗██║   ██║██║╚██╗██║
- ██████╔╝   ██║   ██║  ██║╚██████╔╝██║ ╚████║
- ╚═════╝    ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
- ███████╗███████╗██████╗  ██████╗ ██╗   ██╗███████╗ ██████╗ ███╗   ██╗
- ██╔════╝██╔════╝██╔══██╗██╔════╝ ██║   ██║██╔════╝██╔═══██╗████╗  ██║
- █████╗  █████╗  ██████╔╝██║  ███╗██║   ██║███████╗██║   ██║██╔██╗ ██║
- ██╔══╝  ██╔══╝  ██╔══██╗██║   ██║██║   ██║╚════██║██║   ██║██║╚██╗██║
- ██║     ███████╗██║  ██║╚██████╔╝╚██████╔╝███████║╚██████╔╝██║ ╚████║
- ╚═╝     ╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝ ╚═════╝ ╚═╝  ╚═══╝</pre>
+          <img class="ascii-art" src="ascii_art.png" alt="Byron Ferguson">
           <div class="hero-role" data-wizard="role: ai_infra_engineer" data-muggle="AI Infrastructure Engineer">role: ai_infra_engineer</div>
           <p class="hero-mantra">"I use tools to create tools to solve everyday problems so that we can all go home on time."</p>
           <p class="hero-lede">I use <strong>AI and automation</strong> to build operator-facing tooling for infrastructure problems — remediation, compliance, repeatable workflows. The kind of work that usually lives in a shared doc nobody updates — I turn it into something you can actually run, audit, and hand off.</p>
