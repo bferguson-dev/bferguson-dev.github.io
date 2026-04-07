@@ -36,6 +36,7 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { overflow-x: hidden; }
     body { background: var(--main-bg); color: var(--text); font-family: var(--sans); line-height: 1.6; }
     a { color: inherit; text-decoration: none; }
 
@@ -107,7 +108,7 @@
     .gh-btn:hover { background: var(--amber-bright); }
 
     /* ── Main ── */
-    .main-content { flex: 1; min-width: 0; padding: 2rem 2.5rem calc(var(--term-bar-h) + 2rem); }
+    .main-content { flex: 1; min-width: 0; padding: 2rem 2.5rem calc(var(--term-bar-h) + 2rem); overflow-x: hidden; }
     .content-inner { max-width: var(--max-content); }
     .page { display: none; }
     .page.active { display: block; }
@@ -118,7 +119,7 @@
     .section-comment { font-family: var(--mono); font-size: 0.78rem; color: var(--green); opacity: 0.8; }
 
     /* ── ~/home ── */
-    .ascii-art { font-family: var(--mono); font-size: clamp(0.28rem, 1.05vw, 0.65rem); color: var(--amber-bright); line-height: 1.22; white-space: pre; overflow-x: hidden; margin-bottom: 0.75rem; display: block; }
+    .ascii-art { font-family: var(--mono); font-size: min(1.05vw, 0.65rem); color: var(--amber-bright); line-height: 1.22; white-space: pre; overflow-x: hidden; margin-bottom: 0.75rem; display: block; }
     .hero-role { font-family: var(--mono); font-size: 0.85rem; color: var(--green); margin-bottom: 1.5rem; opacity: 0.9; }
     .hero-mantra { font-family: var(--mono); font-size: 0.82rem; color: var(--amber); opacity: 0.85; font-style: italic; margin-bottom: 1.25rem; max-width: 58ch; line-height: 1.6; }
     .hero-lede { font-size: 1rem; color: var(--muted); max-width: 54ch; margin-bottom: 1.5rem; line-height: 1.72; }
