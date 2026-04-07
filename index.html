@@ -1113,26 +1113,31 @@
 
     function cmdCat(args) {
       if (!args.length) { println('cat: missing operand. Usage: cat [file]', 'tl-err'); return; }
-      const target = resolvePath(args[0]);
-      const node = FS[target];
+      const target   = resolvePath(args[0]);
+      const lastSlash = target.lastIndexOf('/');
+      const parentPath = lastSlash > 0 ? target.substring(0, lastSlash) : '/';
+      const filename   = target.substring(lastSlash + 1);
+      const node   = FS[target];
+      const parent = FS[parentPath];
 
-      // Try target as a file within current dir
-      const parentPath = target.substring(0, target.lastIndexOf('/')) || '/';
-      const filename   = target.split('/').pop();
-      const parent     = FS[parentPath];
-
+      // Directory check
       if (node && node.type === 'dir') {
         println('cat: ' + args[0] + ': Is a directory. Try: ls ' + args[0], 'tl-err'); return;
       }
+
+      // Look up file by resolved parent path + filename (handles any absolute or relative path)
       if (parent && parent.files && parent.files[filename]) {
         blank(); printPre(parent.files[filename]); blank(); return;
       }
-      // try cwd files
+
+      // Fallback: bare filename in cwd (handles plain `cat foo.txt` when parent resolution fails)
       const cwdNode = FS[cwd];
-      if (cwdNode && cwdNode.files && cwdNode.files[args[0]]) {
-        blank(); printPre(cwdNode.files[args[0]]); blank(); return;
+      if (cwdNode && cwdNode.files && cwdNode.files[filename]) {
+        blank(); printPre(cwdNode.files[filename]); blank(); return;
       }
-      if (args[0] === 'resume.txt') {
+
+      // Virtual file: resume.txt (matches any path ending in resume.txt)
+      if (filename === 'resume.txt') {
         blank();
         println('Byron L. Ferguson, II', 'tl-amber');
         println('AI-Augmented Infrastructure Engineer', 'tl-ok');
@@ -1148,6 +1153,7 @@
         println('Full resume: navigate to ~/lib  |  wget resume.pdf to download', 'tl-muted');
         blank(); return;
       }
+
       println('cat: ' + args[0] + ': No such file or directory', 'tl-err');
     }
 
@@ -1512,8 +1518,13 @@
       collapse(!collapsed);
     });
 
+    const SIZE_LABELS = ['compact', 'standard', 'tall'];
     function updateLabel() {
-      termLabel.textContent = collapsed ? 'TERM — click to expand' : 'TERM 80x24';
+      if (collapsed) {
+        termLabel.textContent = 'TERM — click to expand';
+      } else {
+        termLabel.textContent = 'TERM — ' + SIZE_LABELS[sizeIdx];
+      }
     }
 
     // ── Mobile terminal ────────────────────────────────────────
