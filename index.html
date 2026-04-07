@@ -1006,6 +1006,7 @@
 
     // ── Terminal state ──────────────────────────────────────────
     let cwd = '/';
+    let prevCwd = '/';
     let termHistory = [];
     let histIdx = -1;
     let collapsed = false;
@@ -1146,9 +1147,18 @@
     }
 
     function cmdCd(arg) {
-      const target = (!arg || arg === '~') ? '/home' : resolvePath(arg);
+      let target;
+      if (!arg || arg === '~') {
+        target = '/home';
+      } else if (arg === '-') {
+        target = prevCwd;
+        println(target, 'tl-ok');
+      } else {
+        target = resolvePath(arg);
+      }
       if (!FS[target]) { println('cd: ' + (arg || '~') + ': No such file or directory', 'tl-err'); return; }
       if (FS[target].type !== 'dir') { println('cd: ' + arg + ': Not a directory', 'tl-err'); return; }
+      prevCwd = cwd;
       cwd = target;
       refreshPrompt();
     }
@@ -1729,8 +1739,14 @@
 
     // ── Command dispatcher ─────────────────────────────────────
     function runCmd(raw) {
-      const input = raw.trim();
+      let input = raw.trim();
       if (!input) return;
+
+      // !! — repeat last command
+      if (input === '!!') {
+        if (!termHistory.length) { println('!!: no previous command', 'tl-err'); return; }
+        input = termHistory[termHistory.length - 1];
+      }
 
       println(getPrompt() + input, 'tl-cmd');
       termHistory.push(input);
@@ -1946,6 +1962,25 @@
         else { histIdx = termHistory.length; termInput.value = ''; }
       } else if (e.key === 'l' && e.ctrlKey) {
         e.preventDefault(); cmdClear();
+      } else if (e.key === 'c' && e.ctrlKey) {
+        e.preventDefault();
+        println(getPrompt() + termInput.value + '^C', 'tl-muted');
+        termInput.value = '';
+      } else if (e.key === 'a' && e.ctrlKey) {
+        e.preventDefault();
+        termInput.setSelectionRange(0, 0);
+      } else if (e.key === 'e' && e.ctrlKey) {
+        e.preventDefault();
+        termInput.setSelectionRange(termInput.value.length, termInput.value.length);
+      } else if (e.key === 'u' && e.ctrlKey) {
+        e.preventDefault();
+        termInput.value = '';
+      } else if (e.key === 'w' && e.ctrlKey) {
+        e.preventDefault();
+        const val = termInput.value;
+        const trimmed = val.trimEnd();
+        const lastSpace = trimmed.lastIndexOf(' ');
+        termInput.value = lastSpace >= 0 ? val.substring(0, lastSpace + 1) : '';
       }
     });
 
