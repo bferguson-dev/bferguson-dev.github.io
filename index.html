@@ -1831,8 +1831,9 @@
         results.push(isDir ? child + '/' : child);
       }
       if (!dirsOnly && node.files) {
+        const childSet = new Set(node.children || []);
         for (const f of Object.keys(node.files)) {
-          if (f.startsWith(filePart)) results.push(f);
+          if (f.startsWith(filePart) && !childSet.has(f)) results.push(f);
         }
       }
       return { results, dirPart, filePart };
