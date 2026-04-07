@@ -879,7 +879,8 @@
           '.diary': '[ENCRYPTED — just kidding]\n\nDay 1:   set up the lab. everything is broken.\nDay 12:  fixed the lab. broke something else.\nDay 31:  ansible playbook ran clean on the first try.\n          nobody will ever believe me.\nDay 47:  still shipping.\nDay 203: jeep is broken again. unrelated to the lab.',
           '.drum_practice_log': 'practice_log — last 7 entries\n──────────────────────────────\nMon:  skipped (lab was on fire, metaphorically)\nTue:  20 min — paradiddles\nWed:  skipped (lab was on fire, literally this time)\nThu:  45 min — actually pretty good\nFri:  skipped (ansible)\nSat:  1 hr — no one was home, went hard\nSun:  skipped (jeep)',
           '.jeep_repair_notes': 'JEEP REPAIR LOG\n───────────────\nIssue:   it\'s making that sound again\nStatus:  parts ordered\nETA:     "a few days" (3 weeks ago)\nNotes:   its always the serpentine belt\n         actually this time its not the serpentine belt\n         it was the serpentine belt',
-          '.ohio_weather_complaints': '# ohio_weather.conf\n\nJAN="no"\nFEB="no"\nMAR="snow in the morning, 60 degrees by noon, somehow both"\nAPR="mud"\nMAY="okay fine"\nJUN-AUG="actually nice"\nSEP="okay fine"\nOCT="beautiful for 2 weeks then immediately winter"\nNOV="no"\nDEC="no"\n\n# Middle TN is better. fight me.',
+          '.ohio_weather_complaints': '# ohio_weather.conf\n\nJAN="no"\nFEB="no"\nMAR="snow in the morning, 60 degrees by noon, somehow both"\nAPR="mud"\nMAY="okay fine"\nJUN-AUG="actually nice"\nSEP="okay fine"\nOCT="beautiful for 2 weeks then immediately winter"\nNOV="no"\nDEC="no"',
+          '.middletn_weather_complaints': '# middletn_weather.conf\n\nJAN="deceptively mild then ice storm with no warning"\nFEB="same as jan but with more false hope"\nMAR="tornado watch. also 75 degrees. at the same time."\nAPR="tornado season. not a drill."\nMAY="tornado season continues. still not a drill."\nJUN="surface of the sun"\nJUL="surface of the sun but humid"\nAUG="surface of the sun but humid and you\'re mad about it"\nSEP="surface of the sun with a light breeze to mock you"\nOCT="gorgeous for exactly 11 days"\nNOV="winter? maybe? who knows."\nDEC="ice storm. no snow plows. everything closed."\n\n# at least there\'s no mud season\n# (there is a mud season)',
         }
       },
       '/lib': {
@@ -1122,7 +1123,7 @@
       if (showHidden) {
         const hiddenMap = {
           '/':    ['.bashrc', '.gitconfig', '.ssh/', '.ambition', '.humility', '.monster_count'],
-          '/home':['.diary', '.drum_practice_log', '.jeep_repair_notes', '.ohio_weather_complaints'],
+          '/home':['.diary', '.drum_practice_log', '.jeep_repair_notes', '.ohio_weather_complaints', '.middletn_weather_complaints'],
           '/lib': ['.lessons_learned', '.overengineered_drafts', '.burnout_firewall'],
           '/usr': ['.wip', '.abandoned_ideas', '.half_finished_readme'],
           '/etc': ['.secrets', '.do_not_open'],
