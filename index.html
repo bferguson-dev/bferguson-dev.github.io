@@ -865,7 +865,11 @@
         type: 'dir', children: ['intro.txt', 'about.txt'],
         files: {
           'intro.txt': 'Welcome to BYRON_FERGUSON.PORTFOLIO\n\nStart here:\n  ~/root  — the landing page\n  ~/lib   — resume and skills\n  ~/usr   — things I\'ve shipped\n  ~/etc   — contact info\n  ~/home  — who I am\n\nUseful commands:\n  neofetch          system info\n  cat resume.txt    resume summary\n  wget resume.pdf   download full resume\n  ls /usr           browse projects\n  fortune           words of wisdom',
-          'about.txt': 'Byron Ferguson\nAI-Augmented Infrastructure Engineer\n\nGrew up in rural eastern Ohio — three stoplights in the\nwhole county type of place. Joined the Air Force, worked\non AC-130 gunships, MC-130 Talon IIs, and MH-53 Pave Lows\nacross multiple deployments out of Hurlburt Field, FL.\nSettled in Middle Tennessee. Husband and father.\n\n16+ years in infrastructure. Currently building AI-driven\ntooling for infrastructure problems.\n\n"I use tools to create tools to solve everyday problems\n so that we can all go home on time."'
+          'about.txt': 'Byron Ferguson\nAI-Augmented Infrastructure Engineer\n\nGrew up in rural eastern Ohio — three stoplights in the\nwhole county type of place. Joined the Air Force, worked\non AC-130 gunships, MC-130 Talon IIs, and MH-53 Pave Lows\nacross multiple deployments out of Hurlburt Field, FL.\nSettled in Middle Tennessee. Husband and father.\n\n16+ years in infrastructure. Currently building AI-driven\ntooling for infrastructure problems.\n\n"I use tools to create tools to solve everyday problems\n so that we can all go home on time."',
+          '.diary': '[ENCRYPTED — just kidding]\n\nDay 1:   set up the lab. everything is broken.\nDay 12:  fixed the lab. broke something else.\nDay 31:  ansible playbook ran clean on the first try.\n          nobody will ever believe me.\nDay 47:  still shipping.\nDay 203: jeep is broken again. unrelated to the lab.',
+          '.drum_practice_log': 'practice_log — last 7 entries\n──────────────────────────────\nMon:  skipped (lab was on fire, metaphorically)\nTue:  20 min — paradiddles\nWed:  skipped (lab was on fire, literally this time)\nThu:  45 min — actually pretty good\nFri:  skipped (ansible)\nSat:  1 hr — no one was home, went hard\nSun:  skipped (jeep)',
+          '.jeep_repair_notes': 'JEEP REPAIR LOG\n───────────────\nIssue:   it\'s making that sound again\nStatus:  parts ordered\nETA:     "a few days" (3 weeks ago)\nNotes:   its always the serpentine belt\n         actually this time its not the serpentine belt\n         it was the serpentine belt',
+          '.ohio_weather_complaints': '# ohio_weather.conf\n\nJAN="no"\nFEB="no"\nMAR="snow in the morning, 60 degrees by noon, somehow both"\nAPR="mud"\nMAY="okay fine"\nJUN-AUG="actually nice"\nSEP="okay fine"\nOCT="beautiful for 2 weeks then immediately winter"\nNOV="no"\nDEC="no"\n\n# Middle TN is better. fight me.',
         }
       },
       '/lib': {
@@ -873,11 +877,19 @@
         files: {
           'philosophy.txt': '[SHARED LIBRARIES — WHAT I\'M BUILT ON]\n\nAccumulated dependencies. 16+ years of infrastructure\nexperience: VMware at 10k+ VM scale, Dell EMC storage,\ncompliance (NIST 800-53, HIPAA, PCI-DSS, SOC 2), and\nsystems automation via Ansible and PowerShell.\n\nNow applying AI and agentic workflows to infrastructure\nproblems — with full accountability and audit trails.\n\nFull resume: navigate to ~/lib or wget resume.pdf',
           'principles.txt': 'Engineering Communication Principles\n====================================\n- Honest maturity statements over vague claims\n- Documentation that matches what actually ships\n- Scope control over feature creep\n- If it needs a disclaimer, the code needs more work\n- Tribal knowledge is technical debt in disguise',
-          'methodology.txt': 'Engineering Methodology\n=======================\ndefine → scope → document → build → harden\n  → review → test → iterate → audit → document → push\n\nSecurity is not a step. It is a constant.\nDocumentation is not an afterthought. It is the work.'
+          'methodology.txt': 'Engineering Methodology\n=======================\ndefine → scope → document → build → harden\n  → review → test → iterate → audit → document → push\n\nSecurity is not a step. It is a constant.\nDocumentation is not an afterthought. It is the work.',
+          '.lessons_learned': 'LESSONS LEARNED — compiled over 16 years\n─────────────────────────────────────────\n- always run --check first. always. yes, even that one.\n- "it works in dev" is a threat, not a promise.\n- the runbook you don\'t write is the incident you can\'t explain.\n- imposter syndrome is loudest right before something ships.\n- if it\'s not in git, it didn\'t happen.\n- documentation is not done when you write it.\n  it\'s done when someone else understands it.',
+          '.overengineered_drafts': 'OVERENGINEERED DRAFTS — graveyard\n───────────────────────────────────\nv0.1 - failwarden with plugin architecture and 14 config files\n       → scrapped. too clever.\nv0.2 - ymc with ML-based false positive reduction\n       → scrapped. overkill.\nv0.3 - readycheck with a web dashboard\n       → scrapped. it\'s a CLI. stay a CLI.\nv0.4 - this portfolio with a React build pipeline\n       → scrapped immediately.\n\nLesson: the boring thing that ships beats the clever thing that doesn\'t.',
+          '.burnout_firewall': 'burnout_firewall — status: active\n──────────────────────────────────\nrules:\n  DROP  IN  unrealistic_deadlines\n  DROP  IN  meetings_that_could_be_emails\n  DROP  IN  undefined_scope\n  ACCEPT IN  clear_problems\n  ACCEPT IN  interesting_work\n  ACCEPT IN  sleep\n  ACCEPT IN  Monster\n\nlast updated: ongoing\nuptime: holding',
         }
       },
       '/usr': {
-        type: 'dir', children: ['failwarden', 'ymc', 'loadout', 'readycheck', 'my-lab-setup', 'project-prompts']
+        type: 'dir', children: ['failwarden', 'ymc', 'loadout', 'readycheck', 'my-lab-setup', 'project-prompts'],
+        files: {
+          '.wip': 'WORK IN PROGRESS — always\n──────────────────────────\nnext up (probably):\n  [ ] failwarden v2 scope\n  [ ] ymc linux support\n  [ ] that one tool i thought of at 11pm\n  [x] ship the thing\n  [x] document the thing\n  [x] question the thing\n  [x] ship it anyway',
+          '.abandoned_ideas': 'ABANDONED IDEAS\n────────────────\nnone.\n\n(there are no abandoned ideas.\n there are only deferred ones.\n the queue is very long.)',
+          '.half_finished_readme': '# [PROJECT NAME]\n\n## Overview\n\nThis tool does the thing that the other tool does but better\nbecause [TODO: fill in why]\n\n## Installation\n\n```bash\n[TODO]\n```\n\n## Usage\n\n[TODO: write this before you forget how it works]\n\n## Status\n\nworks on my machine\n\n<!-- last edited: 3 weeks ago -->\n<!-- TODO: finish this -->',
+        }
       },
       '/usr/failwarden': {
         type: 'dir', children: ['README.md', 'status.txt'],
@@ -911,7 +923,9 @@
         files: {
           'contact.txt': '[CONTACT CONFIGURATION]\n\nEmail:    [ navigate to ~/etc and click to reveal ]\nPhone:    [ navigate to ~/etc and click to reveal ]\nLinkedIn: linkedin.com/in/byronferguson\nPortfolio: bferguson-dev.github.io\nResume:   wget resume.pdf  (or navigate to ~/lib)\n\nContact details are click-protected. Navigate to ~/etc.',
           'hosts':  '127.0.0.1       localhost\n::1             localhost\n0.0.0.0         imposter-syndrome\n0.0.0.0         burnout',
-          'motd':   'Welcome to BYRON_FERGUSON.PORTFOLIO\nPortfolioOS 2.0.0 — be excellent to each other\nLast login: right now, from your curiosity'
+          'motd':   'Welcome to BYRON_FERGUSON.PORTFOLIO\nPortfolioOS 2.0.0 — be excellent to each other\nLast login: right now, from your curiosity',
+          '.secrets': 'i know what you\'re thinking.\n\nno.',
+          '.do_not_open': 'you opened it.\n\nof course you did.\n\nthere\'s nothing here.\n\n(there was never going to be anything here.\n this was a test of your impulse control.\n you failed.\n we respect that.)',
         }
       }
     };
@@ -1096,8 +1110,15 @@
 
       blank();
       if (showHidden) {
-        println('total ' + (node.children.length + 6), 'tl-muted');
-        const hidden = ['.ambition', '.humility', '.coffee_count', '.bashrc', '.gitconfig', '.ssh'];
+        const hiddenMap = {
+          '/':    ['.bashrc', '.gitconfig', '.ssh/', '.ambition', '.humility', '.monster_count'],
+          '/home':['.diary', '.drum_practice_log', '.jeep_repair_notes', '.ohio_weather_complaints'],
+          '/lib': ['.lessons_learned', '.overengineered_drafts', '.burnout_firewall'],
+          '/usr': ['.wip', '.abandoned_ideas', '.half_finished_readme'],
+          '/etc': ['.secrets', '.do_not_open'],
+        };
+        const hidden = hiddenMap[target] || ['.bashrc', '.gitconfig', '.ssh/', '.ambition', '.humility', '.monster_count'];
+        println('total ' + (node.children.length + hidden.length), 'tl-muted');
         for (const h of hidden) println('drw-r--r--  ' + USERNAME + '  ' + h, 'tl-muted');
       }
       const items = node.children.map(c => {
@@ -1225,7 +1246,7 @@
 
     function cmdUname(args) {
       if (args.includes('-a') || args.length === 0) {
-        println('PortfolioOS 2.0.0 #1 SMP portfolio-kernel x86_64 GNU/Coffee', 'tl-ok');
+        println('PortfolioOS 2.0.0 #1 SMP portfolio-kernel x86_64 GNU/Monster', 'tl-ok');
       } else {
         println('PortfolioOS', 'tl-ok');
       }
@@ -1256,19 +1277,19 @@
         vim:        'vim — Vi IMproved, a text editor\n\nThis is a portfolio, not a text editor.\nIf you got here by reflex, we respect that.\n\nTo exit vim in real life:\n  1. Press Esc\n  2. Type :q!\n  3. Question your life choices\n  4. Repeat until free',
         git:        'git — the stupid content tracker\n\nUsage: git log\n\nShows portfolio commit history.\nAll other subcommands unsupported.\n\ngit blame    — see git log\ngit push -f  — absolutely not\ngit stash    — emotions not accepted',
         rm:         'rm — remove files\n\nUsage: rm [file]\n       rm -rf [path]  (not recommended here or anywhere)\n\nThis filesystem is read-only. All rm attempts are\nlogged, judged, and filed under /dev/null.\nrm -rf is a permanent career event.',
-        make:       'make — build execution utility\n\nUsage: make [target]\n       make coffee  (hardware not found)\n\nExecutes build targets defined in a Makefile.\nNo Makefile was found. As usual.\nThis is not a comment on your organization.',
+        make:       'make — build execution utility\n\nUsage: make [target]\n       make monster  (check the fridge first)\n\nExecutes build targets defined in a Makefile.\nNo Makefile was found. As usual.\nThis is not a comment on your organization.',
         open:       'open — navigate to a project\n\nUsage: open [project]\n\nAvailable projects:\n  failwarden       runbook executor\n  ymc              compliance scanner\n  loadout          workstation setup\n  readycheck       connectivity validator\n  my-lab-setup     lab automation\n  project-prompts  AI governance framework',
         hack:       'hack — initiate hacking sequence\n\nUsage: hack\n       exploit\n\nOutput is entirely cinematic and accomplishes nothing\nof substance. The portfolio survives unharmed.\nSee also: Mr. Robot (2015), every heist movie.',
         ssh:        'ssh — OpenSSH remote login client\n\nUsage: ssh [user@]host\n\nEstablishes encrypted shell sessions to remote hosts.\nOn this system, all connections are refused.\nThis is a portfolio, not a jump box.\n\nFor actual contact: navigate to ~/etc',
         top:        'top — display running processes\n\nDisplays a real-time view of system processes.\nProcess names and resource usage are portfolio-adjacent\nand entirely fictional. Accuracy: vibes-based.',
         ps:         'ps — report process status\n\nUsage: ps\n       ps aux   (full process table)\n\nSnapshots the current process table.\nOn this system, processes reflect genuine concerns.',
         df:         'df — report disk space usage\n\nUsage: df [-h]\n  -h   human-readable sizes\n\nReports filesystem usage. All storage values are\nphilosophically accurate.',
-        env:        'env — print environment\n\nPrints all environment variables for the current session.\nSome variables reflect deeply held engineering values.\nCOFFEE_LEVEL should always be monitored.',
+        env:        'env — print environment\n\nPrints all environment variables for the current session.\nSome variables reflect deeply held engineering values.\nMONSTER_LEVEL should always be monitored.',
         alias:      'alias — list command aliases\n\nDisplays active shell aliases for this session.\nMany exist for safety. Some for speed.\nAt least one exists because of a production incident.',
         curl:       'curl — transfer data from or to a server\n\nUsage: curl [url]\n\nSupports HTTP, HTTPS, and vibes.\ncurl bferguson-dev.github.io — you\'re already here\nSee also: wget for actual file downloads.',
         date:       'date — print the system date and time\n\nPrints the current date and time in your local timezone.\nSetting the date requires elevated privileges\nand a concerning disregard for causality.',
         hostname:   'hostname — show system hostname\n\nPrints the hostname for this system.\nThe hostname is not the username.\nThe username is randomly assigned. The hostname is not.',
-        ansible:    'ansible — run ad-hoc commands\n\nUsage: ansible [host-pattern] -m [module] -a [args]\n\nThis terminal is not an Ansible control node.\nFor real Ansible work: navigate to ~/usr or ~/lib.\n\nFun fact: this portfolio was built by someone who has\nautomated 10,000+ VMs with Ansible. Just saying.',
+        ansible:    'ansible — run ad-hoc commands\n\nUsage: ansible [host-pattern] -m [module] -a [args]\n\nThis terminal is not an Ansible control node.\nFor real Ansible work: navigate to ~/usr or ~/lib.\n\nSee also: ~/lib — the resume speaks for itself.',
         python3:    'python3 — Python language interpreter\n\nUsage: python3\n       python3 -c [code]\n\nInteractive Python interpreter. This is not a real\nPython environment. The projects at /usr are though.\n\nPython 3.12. The walrus operator is allowed.',
         systemctl:  'systemctl — control the system and service manager\n\nUsage: systemctl [command] [service]\n\nCommands: status, start, stop, restart\n\nManages systemd units. On this system, the portfolio\nservice has been running continuously since deployment\nand cannot be stopped.',
         exit:       'exit — close the terminal\n\nUsage: exit\n       quit\n\nCollapses the terminal panel.\nYour session is not saved. Your dignity is intact.\nThe portfolio continues to exist without you.',
@@ -1292,7 +1313,7 @@
         ['    2', USERNAME,   '20',  '0', '  64M', ' 32M', ' 0.0', '0.2', 'vim (suspended, send help)'],
         ['    3', USERNAME,   '20',  '0', ' 256M', '128M', ' 0.3', '0.8', 'ansible-runner'],
         ['    4', USERNAME,   '20',  '0', ' 512M', '256M', ' 1.2', '1.6', 'failwarden-orchestrator'],
-        ['    5', USERNAME,   '20',  '0', '  32M', ' 16M', ' 0.0', '0.1', 'coffee.sh (waiting: no kettle)'],
+        ['    5', USERNAME,   '20',  '0', '  32M', ' 16M', ' 0.0', '0.1', 'monster.sh (waiting: just put in the fridge)'],
         ['  666', 'root',     '20',  '0', '1024M', '512M', ' 0.0', '3.1', 'imposter_syndrome (zombie)'],
         ['    7', USERNAME,   '20',  '0', ' 128M', ' 64M', ' 0.1', '0.4', 'docs-updater'],
         ['    8', USERNAME,   '20',  '0', '  96M', ' 48M', ' 0.0', '0.3', 'fortune --daemon'],
@@ -1317,7 +1338,7 @@
           [USERNAME,   '  1', '0.0', '0.4', '131072', '65536',  'Ss', 'portfolio.js'],
           [USERNAME,   '  2', '0.0', '0.2', ' 65536', '32768',  'T ', 'vim (trapped, probably forever)'],
           [USERNAME,   '  3', '0.3', '0.8', '262144', '131072', 'S ', 'ansible-runner'],
-          [USERNAME,   '  4', '0.0', '0.1', ' 32768', '16384',  'S ', 'coffee.sh <defunct>'],
+          [USERNAME,   '  4', '0.0', '0.1', ' 32768', '16384',  'S ', 'monster.sh <defunct>'],
           ['root',     '666', '0.0', '3.1', '1048576','524288', 'Z ', 'imposter_syndrome <zombie>'],
           [USERNAME,   '  9', '0.0', '0.2', ' 65536', '32768',  'S+', '-portfolio-bash'],
         ];
@@ -1363,7 +1384,7 @@
       println('EDITOR=vim  # (currently suspended, cannot exit)', 'tl-muted');
       println('ANSIBLE_STDOUT_CALLBACK=yaml', 'tl-ok');
       println('ANSIBLE_HOST_KEY_CHECKING=False  # trust but verify the playbook', 'tl-ok');
-      println('COFFEE_LEVEL=critically_low', 'tl-amber');
+      println('MONSTER_LEVEL=critically_low', 'tl-amber');
       println('IMPOSTER_SYNDROME=unset', 'tl-ok');
       println('YEARS_EXPERIENCE=16', 'tl-ok');
       println('VM_COUNT=10000+', 'tl-ok');
@@ -1465,7 +1486,7 @@
       println('}', 'tl-err');
       blank();
       println('// check /usr for real Ansible projects', 'tl-muted');
-      println('// or navigate to ~/lib — 10,000+ VMs automated. it was real.', 'tl-muted');
+      println('// for real Ansible work: navigate to ~/usr or ~/lib', 'tl-muted');
       blank();
     }
 
@@ -1673,8 +1694,9 @@
       if (!args.length) {
         println('make: *** No targets specified and no makefile found. Stop.', 'tl-err');
         println('// the story of every Monday morning', 'tl-muted');
-      } else if (args[0] === 'coffee') {
-        println('make: brewing... Error: no kettle interface found.', 'tl-err');
+      } else if (args[0] === 'monster') {
+        println('make: checking fridge... Error: fridge interface not found.', 'tl-err');
+        println('// manual retrieval required. it\'s in the door.', 'tl-muted');
       } else {
         println('make: *** No rule to make target \'' + args[0] + '\'. Stop.', 'tl-err');
       }
@@ -1751,7 +1773,7 @@
         case ':q!':
         case ':wq':
         case ':q':        println('This isn\'t vim. But respect for the muscle memory.', 'tl-muted'); break;
-        case 'coffee':    println('Error: brew install caffeine failed. Dependency: sleep not found.', 'tl-err'); break;
+        case 'monster':   println('Error: fridge unreachable from this terminal. Dependency: legs.', 'tl-err'); break;
         case 'exit':
         case 'quit':      collapse(true); break;
         case 'apt':
