@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BYRON_FERGUSON.PORTFOLIO</title>
   <meta name="description" content="Portfolio for Byron Ferguson — infrastructure automation and operations tooling.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -375,13 +376,13 @@
 </head>
 <body>
 
-  <button id="muggleBtn">Muggle Mode</button>
+  <button type="button" id="muggleBtn">Muggle Mode</button>
   <div id="sidebarTip"></div>
 
   <!-- Mobile top bar -->
   <div class="mobile-bar">
     <span class="mobile-brand">BYRON_FERGUSON.PORTFOLIO</span>
-    <button class="hamburger" id="menuOpen" aria-label="Open navigation">
+    <button type="button" class="hamburger" id="menuOpen" aria-label="Open navigation">
       <span></span><span></span><span></span><span></span>
     </button>
   </div>
@@ -390,15 +391,15 @@
   <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation">
     <div class="mobile-menu-top">
       <span class="mobile-brand">BYRON_FERGUSON.PORTFOLIO</span>
-      <button class="mobile-close" id="menuClose">[ close ]</button>
+      <button type="button" class="mobile-close" id="menuClose">[ close ]</button>
     </div>
     <nav class="mobile-nav">
-      <button data-target="root" data-wizard="~/root" data-muggle="Home">~/root</button>
-      <button data-target="lib" data-wizard="~/lib" data-muggle="My Resume">~/lib</button>
-      <button data-target="usr" data-wizard="~/usr" data-muggle="My Projects">~/usr</button>
-      <button data-target="etc" data-wizard="~/etc" data-muggle="Contact Me">~/etc</button>
-      <button data-target="home" data-wizard="~/home" data-muggle="About Me">~/home</button>
-      <button id="mobileTermOpen" class="term-only">~/term &mdash; open terminal</button>
+      <button type="button" data-target="root" data-wizard="~/root" data-muggle="Home">~/root</button>
+      <button type="button" data-target="lib" data-wizard="~/lib" data-muggle="My Resume">~/lib</button>
+      <button type="button" data-target="usr" data-wizard="~/usr" data-muggle="My Projects">~/usr</button>
+      <button type="button" data-target="etc" data-wizard="~/etc" data-muggle="Contact Me">~/etc</button>
+      <button type="button" data-target="home" data-wizard="~/home" data-muggle="About Me">~/home</button>
+      <button type="button" id="mobileTermOpen" class="term-only">~/term &mdash; open terminal</button>
     </nav>
     <div class="mobile-facts">
       <div><div class="mobile-fact-label">// focus</div><div class="mobile-fact-value">ai-augmented infrastructure tooling</div></div>
@@ -416,11 +417,11 @@
       <div class="sidebar-section">
         <p class="sidebar-label" data-wizard="// navigate" data-muggle="Navigation">// navigate</p>
         <nav class="path-nav">
-          <button data-target="root" class="active" data-wizard="~/root" data-muggle="Home">~/root</button>
-          <button data-target="lib" data-wizard="~/lib" data-muggle="My Resume">~/lib</button>
-          <button data-target="usr" data-wizard="~/usr" data-muggle="My Projects">~/usr</button>
-          <button data-target="etc" data-wizard="~/etc" data-muggle="Contact Me">~/etc</button>
-          <button data-target="home" data-wizard="~/home" data-muggle="About Me">~/home</button>
+          <button type="button" data-target="root" class="active" data-wizard="~/root" data-muggle="Home">~/root</button>
+          <button type="button" data-target="lib" data-wizard="~/lib" data-muggle="My Resume">~/lib</button>
+          <button type="button" data-target="usr" data-wizard="~/usr" data-muggle="My Projects">~/usr</button>
+          <button type="button" data-target="etc" data-wizard="~/etc" data-muggle="Contact Me">~/etc</button>
+          <button type="button" data-target="home" data-wizard="~/home" data-muggle="About Me">~/home</button>
         </nav>
       </div>
       <div class="sidebar-section">
@@ -466,8 +467,8 @@
           <p class="hero-mantra">"I use tools to create tools to solve everyday problems so that we can all go home on time."</p>
           <p class="hero-lede">I use <strong>AI and automation</strong> to build operator-facing tooling for infrastructure problems — remediation, compliance, repeatable workflows. The kind of work that usually lives in a shared doc nobody updates — I turn it into something you can actually run, audit, and hand off.</p>
           <div class="btn-row">
-            <button class="btn btn-primary" data-target="usr" data-wizard="ls /usr" data-muggle="My Projects">ls /usr</button>
-            <button class="btn btn-primary" data-target="lib" data-wizard="cat resume.txt" data-muggle="My Resume">cat resume.txt</button>
+            <button type="button" class="btn btn-primary" data-target="usr" data-wizard="ls /usr" data-muggle="My Projects">ls /usr</button>
+            <button type="button" class="btn btn-primary" data-target="lib" data-wizard="cat resume.txt" data-muggle="My Resume">cat resume.txt</button>
             <a class="btn btn-primary" href="https://github.com/bferguson-dev" target="_blank" rel="noreferrer" data-wizard="$ lynx github" data-muggle="My GitHub">$ lynx github</a>
           </div>
           <div class="status-row">
@@ -807,11 +808,11 @@
           <div class="contact-grid">
             <div class="contact-item">
               <div class="contact-item-label">Email</div>
-              <div class="contact-item-value" id="ci-e"><button class="reveal-btn" data-key="e">[ click to reveal ]</button></div>
+              <div class="contact-item-value" id="ci-e"><button type="button" class="reveal-btn" data-key="e">[ click to reveal ]</button></div>
             </div>
             <div class="contact-item">
               <div class="contact-item-label">Phone</div>
-              <div class="contact-item-value" id="ci-p"><button class="reveal-btn" data-key="p">[ click to reveal ]</button></div>
+              <div class="contact-item-value" id="ci-p"><button type="button" class="reveal-btn" data-key="p">[ click to reveal ]</button></div>
             </div>
             <div class="contact-item">
               <div class="contact-item-label">LinkedIn</div>
@@ -847,8 +848,8 @@
         <span class="term-label" id="termLabel">TERM 80x24</span>
       </div>
       <div class="term-titlebar-right">
-        <button class="term-tbtn" id="termCycleBtn" title="Resize">&#9650;</button>
-        <button class="term-tbtn" id="termCollapseBtn" title="Collapse">&#9660;</button>
+        <button type="button" class="term-tbtn" id="termCycleBtn" title="Resize">&#9650;</button>
+        <button type="button" class="term-tbtn" id="termCollapseBtn" title="Collapse">&#9660;</button>
       </div>
     </div>
     <div class="term-body" id="termBody">
@@ -863,7 +864,7 @@
       <div id="vimOverlay" style="display:none; flex-direction:column; flex:1; min-height:0; font-family:var(--mono); font-size:0.78rem; line-height:1.55; position:absolute; inset:0; background:#020a04; z-index:10;">
         <div style="flex:1; display:flex; min-height:0; overflow:hidden;" id="vimEditorRow">
           <div id="vimGutter" style="padding:0 8px; color:rgba(57,232,122,0.3); text-align:right; min-width:38px; user-select:none; overflow:hidden; white-space:pre; line-height:1.55; padding-top:0.45rem;"></div>
-          <textarea id="vimTextarea" spellcheck="false" autocorrect="off" autocapitalize="off"
+          <textarea id="vimTextarea" aria-label="Vim editor" spellcheck="false" autocorrect="off" autocapitalize="off"
             style="flex:1; background:transparent; color:#39e87a; border:none; outline:none; resize:none;
                    font-family:var(--mono); font-size:0.78rem; line-height:1.55; padding:0.45rem 0.4rem 0 0;
                    caret-color:#39e87a; overflow-y:auto;"></textarea>
