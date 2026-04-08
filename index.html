@@ -18,17 +18,15 @@
       --green:        #39e87a;
       --green-dim:    rgba(57,232,122,0.1);
       --green-border: rgba(57,232,122,0.22);
-      --sidebar-bg:   #0e1012;
-      --sidebar-border: rgba(255,170,0,0.08);
+      --nav-bg:       #0e1012;
+      --nav-border:   rgba(255,170,0,0.08);
+      --nav-muted:    rgba(232,223,200,0.5);
       --main-bg:      #13161a;
       --surface:      #1a1e22;
       --border:       rgba(255,255,255,0.07);
       --text:         #e8dfc8;
       --text-bright:  #f5eedb;
       --muted:        #b8a888;
-      --sidebar-text:   #e8dfc8;
-      --sidebar-muted:  rgba(232,223,200,0.5);
-      --sidebar-w: 272px;
       --sans: "IBM Plex Sans", "Segoe UI", Arial, sans-serif;
       --mono: "IBM Plex Mono", monospace;
       --max-content: 860px;
@@ -42,77 +40,56 @@
     a { color: inherit; text-decoration: none; }
 
     /* ── Layout ── */
-    .layout { display: flex; min-height: 100vh; }
+    .layout { display: block; min-height: 100vh; }
 
-    /* ── Sidebar ── */
-    .sidebar {
-      width: var(--sidebar-w);
-      flex-shrink: 0;
-      background: var(--sidebar-bg);
-      border-right: 1px solid var(--sidebar-border);
+    /* ── Top Nav ── */
+    .top-nav {
       position: sticky;
       top: 0;
-      height: 100vh;
-      overflow-y: auto;
-      overflow-x: hidden;
-      padding: 1.75rem 1.4rem var(--term-bar-h);
+      z-index: 100;
       display: flex;
-      flex-direction: column;
-      gap: 1.75rem;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0 1.5rem;
+      height: 50px;
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--nav-border);
     }
-    .brand-title {
+    .top-brand {
       font-family: var(--mono);
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       font-weight: 700;
       color: var(--amber);
       letter-spacing: 0.04em;
-      line-height: 1.3;
+      white-space: nowrap;
+      padding-right: 1rem;
+      border-right: 1px solid rgba(255,170,0,0.12);
+      margin-right: 0.5rem;
     }
-    .brand-sub { font-family: var(--mono); font-size: 0.68rem; color: var(--sidebar-muted); margin-top: 0.25rem; }
-    .sidebar-section { display: flex; flex-direction: column; }
-    .sidebar-label {
+    .top-nav-links { display: flex; align-items: center; gap: 0.1rem; }
+    .top-nav-btn {
       font-family: var(--mono);
-      font-size: 0.64rem;
-      font-weight: 700;
-      color: var(--green);
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      margin-bottom: 0.4rem;
-      opacity: 0.8;
-    }
-    .path-nav { display: flex; flex-direction: column; gap: 0.05rem; }
-    .path-nav button {
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      color: var(--sidebar-muted);
-      padding: 0.45rem 0.6rem;
+      font-size: 0.82rem;
+      color: var(--nav-muted);
+      padding: 0.35rem 0.65rem;
       border-radius: 5px;
       background: none;
       border: none;
       cursor: pointer;
-      width: 100%;
-      text-align: left;
+      white-space: nowrap;
     }
-    .path-nav button:hover { background: var(--amber-dim); color: var(--sidebar-text); }
-    .path-nav button.active { color: var(--amber); background: var(--amber-dim); }
-    .sidebar-fact { padding: 0.5rem 0; border-bottom: 1px solid var(--sidebar-border); display: flex; flex-direction: column; gap: 0.1rem; }
-    .sidebar-fact:last-child { border-bottom: none; }
-    .sidebar-fact-label { font-family: var(--mono); font-size: 0.65rem; color: var(--green); opacity: 0.7; }
-    .sidebar-fact-value { font-family: var(--mono); font-size: 0.78rem; font-weight: 600; color: var(--text); }
-    .stack-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
-    .s-tag { font-family: var(--mono); font-size: 0.68rem; padding: 0.15rem 0.45rem; background: var(--amber-dim); border: 1px solid var(--amber-border); border-radius: 3px; color: var(--amber); position: relative; }
-    .s-tag[data-tip] { cursor: help; }
-    .s-tag[data-tip]::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: #06090b; border: 1px solid var(--amber-border); color: var(--text); font-family: var(--sans); font-size: 0.73rem; font-style: normal; font-weight: 400; line-height: 1.5; white-space: normal; text-align: left; padding: 0.4rem 0.65rem; border-radius: 4px; pointer-events: none; opacity: 0; transition: opacity 0.15s ease; z-index: 300; width: 240px; box-shadow: 0 4px 18px rgba(0,0,0,0.6); }
-    .s-tag[data-tip]:hover::after { opacity: 1; }
-    .sidebar-section .s-tag[data-tip]::after { display: none; }
-    #sidebarTip { position: fixed; z-index: 9000; background: #06090b; border: 1px solid var(--amber-border); color: var(--text); font-family: var(--sans); font-size: 0.73rem; line-height: 1.5; padding: 0.4rem 0.65rem; border-radius: 4px; width: 240px; white-space: normal; box-shadow: 0 4px 18px rgba(0,0,0,0.6); pointer-events: none; display: none; }
-    .sidebar-footer { margin-top: auto; }
-    .gh-btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 0.55rem; background: var(--amber); color: #0e0c08; font-family: var(--mono); font-size: 0.78rem; font-weight: 700; border-radius: 5px; letter-spacing: 0.04em; }
+    .top-nav-btn:hover { background: var(--amber-dim); color: var(--text); }
+    .top-nav-btn.active { color: var(--amber); background: var(--amber-dim); }
+    .top-nav-actions { display: flex; align-items: center; gap: 0.65rem; margin-left: auto; }
+    .gh-btn { display: inline-flex; align-items: center; padding: 0.3rem 0.75rem; background: var(--amber); color: #0e0c08; font-family: var(--mono); font-size: 0.75rem; font-weight: 700; border-radius: 5px; letter-spacing: 0.04em; white-space: nowrap; }
     .gh-btn:hover { background: var(--amber-bright); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; margin-left: 0.5rem; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--nav-muted); border-radius: 2px; }
+    .hamburger:hover span { background: var(--amber); }
 
     /* ── Main ── */
-    .main-content { flex: 1; min-width: 0; padding: 2rem 2.5rem calc(var(--term-bar-h) + 2rem); overflow-x: hidden; }
-    .content-inner { max-width: var(--max-content); }
+    .main-content { padding: 2rem 2.5rem calc(var(--term-bar-h) + 2rem); overflow-x: hidden; }
+    .content-inner { max-width: var(--max-content); margin: 0 auto; }
     .page { display: none; }
     .page.active { display: block; }
 
@@ -207,25 +184,16 @@
     .reveal-btn:hover { color: var(--amber); border-color: var(--amber); }
     .reveal-btn:focus { outline: 1px solid var(--amber); outline-offset: 2px; }
 
-    /* ── Mobile bar ── */
-    .mobile-bar { display: none; position: sticky; top: 0; z-index: 100; background: var(--sidebar-bg); border-bottom: 1px solid var(--sidebar-border); padding: 0.85rem 1.1rem; justify-content: space-between; align-items: center; }
-    .mobile-brand { font-family: var(--mono); font-size: 0.78rem; font-weight: 700; color: var(--amber); }
-    .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
-    .hamburger span { display: block; width: 22px; height: 2px; background: var(--sidebar-muted); border-radius: 2px; }
-    .hamburger:hover span { background: var(--amber); }
-
     /* ── Mobile overlay menu ── */
     .mobile-menu { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(10,11,13,0.96); backdrop-filter: blur(6px); flex-direction: column; padding: 1.5rem; }
     .mobile-menu.open { display: flex; }
     .mobile-menu-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    .mobile-brand { font-family: var(--mono); font-size: 0.78rem; font-weight: 700; color: var(--amber); }
     .mobile-close { font-family: var(--mono); font-size: 0.9rem; color: var(--muted); background: none; border: none; cursor: pointer; padding: 4px 8px; }
     .mobile-close:hover { color: var(--amber); }
     .mobile-nav { display: flex; flex-direction: column; gap: 0.15rem; margin-bottom: 2rem; }
-    .mobile-nav button { font-family: var(--mono); font-size: 1.1rem; color: var(--sidebar-muted); padding: 0.75rem 0.5rem; border-bottom: 1px solid var(--sidebar-border); background: none; border-left: none; border-right: none; border-top: none; text-align: left; cursor: pointer; width: 100%; }
+    .mobile-nav button { font-family: var(--mono); font-size: 1.1rem; color: var(--nav-muted); padding: 0.75rem 0.5rem; border-bottom: 1px solid var(--nav-border); background: none; border-left: none; border-right: none; border-top: none; text-align: left; cursor: pointer; width: 100%; }
     .mobile-nav button:hover { color: var(--amber); }
-    .mobile-facts { display: flex; flex-direction: column; gap: 0.75rem; }
-    .mobile-fact-label { font-family: var(--mono); font-size: 0.65rem; color: var(--green); opacity: 0.75; }
-    .mobile-fact-value { font-family: var(--mono); font-size: 0.82rem; font-weight: 600; color: var(--text); }
 
     /* ════════════════════════════════
        TERMINAL
@@ -333,10 +301,6 @@
 
     /* ── Muggle mode ── */
     #muggleBtn {
-      position: fixed;
-      top: 0.7rem;
-      right: 1.1rem;
-      z-index: 9999;
       background: transparent;
       color: var(--amber);
       border: 1px solid rgba(204,153,51,0.35);
@@ -348,16 +312,17 @@
       letter-spacing: 0.06em;
       border-radius: 2px;
       transition: opacity 0.15s;
+      white-space: nowrap;
     }
     #muggleBtn:hover { opacity: 1; }
     body.muggle #muggleBtn { color: #39e87a; border-color: rgba(57,232,122,0.35); }
     body.muggle .term-only { display: none !important; }
 
-    /* ── Mobile: hide bottom bar, show via hamburger ── */
+    /* ── Mobile ── */
     @media (max-width: 760px) {
-      .layout { flex-direction: column; }
-      .sidebar { display: none; }
-      .mobile-bar { display: flex; }
+      .top-nav-links { display: none; }
+      .top-nav-actions { display: none; }
+      .hamburger { display: flex; }
       .main-content { padding: 1.5rem 1.1rem 4rem; }
       .about-cols { grid-template-columns: 1fr; }
       .support-grid { grid-template-columns: 1fr; }
@@ -376,16 +341,23 @@
 </head>
 <body>
 
-  <button type="button" id="muggleBtn">Muggle Mode</button>
-  <div id="sidebarTip"></div>
-
-  <!-- Mobile top bar -->
-  <div class="mobile-bar">
-    <span class="mobile-brand">BYRON_FERGUSON.PORTFOLIO</span>
+  <header class="top-nav">
+    <span class="top-brand">BYRON_FERGUSON.PORTFOLIO</span>
+    <nav class="top-nav-links">
+      <button type="button" class="top-nav-btn active" data-target="root" data-wizard="~/root" data-muggle="Home">~/root</button>
+      <button type="button" class="top-nav-btn" data-target="lib" data-wizard="~/lib" data-muggle="My Resume">~/lib</button>
+      <button type="button" class="top-nav-btn" data-target="usr" data-wizard="~/usr" data-muggle="My Projects">~/usr</button>
+      <button type="button" class="top-nav-btn" data-target="etc" data-wizard="~/etc" data-muggle="Contact Me">~/etc</button>
+      <button type="button" class="top-nav-btn" data-target="home" data-wizard="~/home" data-muggle="About Me">~/home</button>
+    </nav>
+    <div class="top-nav-actions">
+      <a class="gh-btn" href="https://github.com/bferguson-dev" target="_blank" rel="noreferrer" data-wizard="$ lynx github" data-muggle="My GitHub">$ lynx github</a>
+      <button type="button" id="muggleBtn">Muggle Mode</button>
+    </div>
     <button type="button" class="hamburger" id="menuOpen" aria-label="Open navigation">
       <span></span><span></span><span></span><span></span>
     </button>
-  </div>
+  </header>
 
   <!-- Mobile overlay menu -->
   <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation">
@@ -401,56 +373,9 @@
       <button type="button" data-target="home" data-wizard="~/home" data-muggle="About Me">~/home</button>
       <button type="button" id="mobileTermOpen" class="term-only">~/term &mdash; open terminal</button>
     </nav>
-    <div class="mobile-facts">
-      <div><div class="mobile-fact-label">// focus</div><div class="mobile-fact-value">ai-augmented infrastructure tooling</div></div>
-      <div><div class="mobile-fact-label">// stack</div><div class="mobile-fact-value">python &middot; ansible &middot; llms &middot; ci/cd</div></div>
-    </div>
   </div>
 
   <div class="layout">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="brand-block">
-        <div class="brand-title">BYRON_FERGUSON<br>.PORTFOLIO</div>
-        <div class="brand-sub">// infrastructure automation</div>
-      </div>
-      <div class="sidebar-section">
-        <p class="sidebar-label" data-wizard="// navigate" data-muggle="Navigation">// navigate</p>
-        <nav class="path-nav">
-          <button type="button" data-target="root" class="active" data-wizard="~/root" data-muggle="Home">~/root</button>
-          <button type="button" data-target="lib" data-wizard="~/lib" data-muggle="My Resume">~/lib</button>
-          <button type="button" data-target="usr" data-wizard="~/usr" data-muggle="My Projects">~/usr</button>
-          <button type="button" data-target="etc" data-wizard="~/etc" data-muggle="Contact Me">~/etc</button>
-          <button type="button" data-target="home" data-wizard="~/home" data-muggle="About Me">~/home</button>
-        </nav>
-      </div>
-      <div class="sidebar-section">
-        <p class="sidebar-label" data-wizard="// env" data-muggle="How I Work">// env</p>
-        <div class="sidebar-fact"><span class="sidebar-fact-label">FOCUS</span><span class="sidebar-fact-value">ai-augmented infra tooling</span></div>
-        <div class="sidebar-fact"><span class="sidebar-fact-label">TARGET</span><span class="sidebar-fact-value">ai infrastructure engineering</span></div>
-        <div class="sidebar-fact"><span class="sidebar-fact-label">STYLE</span><span class="sidebar-fact-value">define → scope → document → build → harden → review → test → iterate → audit → document → push</span></div>
-      </div>
-      <div class="sidebar-section">
-        <p class="sidebar-label" data-wizard="// stack" data-muggle="Tech Skills">// stack</p>
-        <div class="stack-tags">
-          <span class="s-tag" data-tip="Core language for FailWarden, ReadyCheck, and SquirrelBrain">python</span>
-          <span class="s-tag" data-tip="Primary automation language at Experian Health — patching, compliance auditing, config management">powershell</span>
-          <span class="s-tag" data-tip="Red Hat Ansible Automation Platform for enterprise config management; Proxmox homelab automation">ansible</span>
-          <span class="s-tag" data-tip="GitHub Actions CI/CD pipelines across all personal projects">ci/cd</span>
-          <span class="s-tag" data-tip="Remote infrastructure management; protocol layer for FailWarden Orchestrator">ssh</span>
-          <span class="s-tag" data-tip="Agentless Windows remote management; foundation of YMC compliance scanner">winrm</span>
-          <span class="s-tag" data-tip="Administered 10,000+ VMs across 500+ ESXi hosts and 400+ physical servers at Experian Health">vmware</span>
-          <span class="s-tag" data-tip="Server hardening, administration, and automation across enterprise and homelab environments">linux</span>
-          <span class="s-tag" data-tip="Container workloads in homelab; experimentation and project environments">docker</span>
-          <span class="s-tag" data-tip="Homelab hypervisor — Ansible-automated provisioning, guest baselining, and clone workflows">proxmox</span>
-          <span class="s-tag" data-tip="Isilon NAS, PowerFlex SDS, Data Domain, and ECS object storage at Experian Health">dell emc</span>
-          <span class="s-tag" data-tip="Arista Big Cloud Fabric for datacenter network monitoring and management">arista bcf</span>
-        </div>
-      </div>
-      <div class="sidebar-footer">
-        <a class="gh-btn" href="https://github.com/bferguson-dev" target="_blank" rel="noreferrer" data-wizard="$ lynx github" data-muggle="My GitHub">$ lynx github</a>
-      </div>
-    </aside>
 
     <!-- Main content -->
     <main class="main-content">
@@ -2623,26 +2548,6 @@
 
     document.getElementById('menuOpen').addEventListener('click', () => menu.classList.add('open'));
     document.getElementById('menuClose').addEventListener('click', () => menu.classList.remove('open'));
-
-    // ── Sidebar tooltips (JS-positioned to escape overflow clip) ──
-    const sidebarTip = document.getElementById('sidebarTip');
-    document.querySelectorAll('.sidebar-section .s-tag[data-tip]').forEach(function(tag) {
-      tag.addEventListener('mouseenter', function() {
-        sidebarTip.textContent = tag.dataset.tip;
-        sidebarTip.style.display = 'block';
-        const r = tag.getBoundingClientRect();
-        const tipH = sidebarTip.offsetHeight;
-        let top = r.top - tipH - 8;
-        if (top < 8) top = r.bottom + 8;
-        let left = r.left;
-        if (left + 240 > window.innerWidth - 8) left = window.innerWidth - 248;
-        sidebarTip.style.top  = top + 'px';
-        sidebarTip.style.left = left + 'px';
-      });
-      tag.addEventListener('mouseleave', function() {
-        sidebarTip.style.display = 'none';
-      });
-    });
 
     // ── Muggle mode ────────────────────────────────────────────
     const muggleBtn = document.getElementById('muggleBtn');
