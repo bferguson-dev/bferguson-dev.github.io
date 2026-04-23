@@ -104,13 +104,13 @@
     .hero-mantra { font-family: var(--mono); font-size: 0.82rem; color: var(--amber); opacity: 0.85; font-style: italic; margin-bottom: 1.25rem; margin-left: 2rem; max-width: 58ch; line-height: 1.6; border-left: 3px solid var(--amber-border); padding: 0.4rem 0.85rem; }
     .hero-lede { font-size: 1rem; color: var(--muted); margin-bottom: 1.5rem; line-height: 1.72; }
     .hero-lede strong { color: var(--text-bright); font-weight: 600; }
-    .btn-row { display: flex; gap: 0.65rem; flex-wrap: wrap; margin-bottom: 1.75rem; }
+    .btn-row { display: flex; gap: 0.65rem; flex-wrap: wrap; margin-bottom: 1.75rem; justify-content: center; }
     .btn { font-family: var(--mono); font-size: 0.8rem; font-weight: 700; padding: 0.6rem 1.05rem; border-radius: 5px; border: 1px solid transparent; letter-spacing: 0.03em; cursor: pointer; }
     .btn-primary { background: var(--amber); color: #0e0c08; }
     .btn-primary:hover { background: var(--amber-bright); }
     .btn-ghost { border-color: var(--border); color: var(--muted); }
     .btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.15); }
-    .status-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .status-row { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
     .chip { display: inline-flex; align-items: center; gap: 0.35rem; font-family: var(--mono); font-size: 0.74rem; padding: 0.22rem 0.6rem; background: var(--surface); border: 1px solid var(--border); border-radius: 3px; color: var(--muted); }
     .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
     .dot-ok { background: var(--green); }
@@ -156,10 +156,15 @@
     .exp-company { font-family: var(--mono); font-size: 0.9rem; font-weight: 700; color: var(--amber); display: block; }
     .exp-meta { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); margin: 0.12rem 0 0.5rem; display: block; }
     .exp-bullets { list-style: none; padding: 0; margin: 0; }
-    .exp-bullets li { font-size: 0.87rem; color: var(--muted); padding: 0.14rem 0; display: flex; gap: 0.5rem; line-height: 1.58; }
-    .exp-bullets li::before { content: "\25B8"; color: var(--green); flex-shrink: 0; opacity: 0.7; font-size: 0.72rem; margin-top: 0.22rem; }
+    .exp-bullets li { font-size: 0.87rem; color: var(--muted); padding: 0.14rem 0 0.14rem 1.1rem; position: relative; line-height: 1.58; }
+    .exp-bullets li::before { content: "\25B8"; color: var(--green); opacity: 0.7; font-size: 0.72rem; position: absolute; left: 0; top: 0.22rem; }
     .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1.1rem; }
     .skill-cat-label { font-family: var(--mono); font-size: 0.63rem; color: var(--green); opacity: 0.7; margin-bottom: 0.45rem; text-transform: uppercase; letter-spacing: 0.12em; display: block; }
+    .stack-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+    .s-tag { font-family: var(--mono); font-size: 0.68rem; padding: 0.15rem 0.45rem; background: var(--amber-dim); border: 1px solid var(--amber-border); border-radius: 3px; color: var(--amber); position: relative; }
+    .s-tag[data-tip] { cursor: help; }
+    .s-tag[data-tip]::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: #06090b; border: 1px solid var(--amber-border); color: var(--text); font-family: var(--sans); font-size: 0.73rem; font-style: normal; font-weight: 400; line-height: 1.5; white-space: normal; text-align: left; padding: 0.4rem 0.65rem; border-radius: 4px; pointer-events: none; opacity: 0; transition: opacity 0.15s ease; z-index: 300; width: 240px; box-shadow: 0 4px 18px rgba(0,0,0,0.6); }
+    .s-tag[data-tip]:hover::after { opacity: 1; }
     .cert-list { display: flex; flex-direction: column; }
     .cert-item { font-family: var(--mono); font-size: 0.81rem; color: var(--muted); padding: 0.42rem 0; border-bottom: 1px solid var(--border); line-height: 1.4; }
     .cert-item:last-child { border-bottom: none; }
@@ -351,8 +356,7 @@
       <button type="button" class="top-nav-btn" data-target="home" data-wizard="~/home" data-muggle="About Me">~/home</button>
     </nav>
     <div class="top-nav-actions">
-      <a class="gh-btn" href="https://github.com/bferguson-dev" target="_blank" rel="noreferrer" data-wizard="$ lynx github" data-muggle="My GitHub">$ lynx github</a>
-      <button type="button" id="muggleBtn">Muggle Mode</button>
+      <button type="button" id="muggleBtn">Wizard Mode</button>
     </div>
     <button type="button" class="hamburger" id="menuOpen" aria-label="Open navigation">
       <span></span><span></span><span></span><span></span>
@@ -388,7 +392,7 @@
             <span class="section-comment" data-wizard="// start here" data-muggle="Landing Page">// start here</span>
           </div>
           <img class="ascii-art" src="ascii_art.png" alt="Byron Ferguson">
-          <div class="hero-role" data-wizard="role: ai_infra_engineer" data-muggle="AI Infrastructure Engineer">role: ai_infra_engineer</div>
+          <div class="hero-role" data-wizard="role: infra_engineer::builder::architect" data-muggle="Infrastructure Engineer · Builder · Automation Architect">role: infra_engineer::builder::architect</div>
           <p class="hero-mantra">"I use tools to create tools to solve everyday problems so that we can all go home on time."</p>
           <p class="hero-lede">I use <strong>AI and automation</strong> to build operator-facing tooling for infrastructure problems — remediation, compliance, repeatable workflows. The kind of work that usually lives in a shared doc nobody updates — I turn it into something you can actually run, audit, and hand off.</p>
           <div class="btn-row">
@@ -449,75 +453,91 @@
 
           <p class="resume-mantra">"I've automated a lot of things. None of them were things I enjoyed doing manually."</p>
 
-          <p class="resume-summary-text">AI-augmented infrastructure engineer with 16+ years of experience designing, operating, and automating enterprise-scale systems. Applies artificial intelligence, agentic workflows, and modern DevOps practices to build tooling that solves real infrastructure problems. Proven operator at VMware scale with deep expertise in Dell EMC storage, compliance frameworks (NIST 800-53, HIPAA, PCI-DSS, SOC 2), and systems automation via Ansible and PowerShell.</p>
+          <p class="resume-summary-text">Infrastructure engineer with 16+ years of experience who treats infrastructure as a product — something to architect, automate, and evolve. Deep operator background in high-volume, distributed systems (10,000+ VMs, 500+ ESXi hosts) transitioning into cloud-native and platform engineering. Open source contributor with shipped tooling for compliance automation, observability, and runbook execution. Builds tooling for infrastructure engineers: high-level languages operators already know, human-readable YAML configuration, modular architecture with a solid core and pluggable components, and documentation written for the person running the tool — not the person who built it. Applies AI and agentic workflows as a force multiplier to reduce manual operations, build self-documenting systems, and rapidly accelerate delivery — the kind of engineer who reduces the on-call queue by eliminating the conditions that create them.</p>
 
           <span class="resume-section-label" data-wizard="// professional_experience" data-muggle="Professional Experience">// professional_experience</span>
           <div class="exp-timeline">
 
             <div class="exp-entry">
-              <span class="exp-company">Independent Software Development &amp; R&amp;D</span>
+              <span class="exp-company">Self-Directed — Independent Software Development &amp; R&amp;D</span>
               <span class="exp-meta">Dec 2024 – Present</span>
               <ul class="exp-bullets">
-                <li>Designed and built a portfolio of open-source infrastructure, security, and compliance tooling</li>
-                <li>Applied agentic AI and advanced prompt engineering using Claude, OpenAI, Gemini, and Ollama as engineering force multipliers</li>
-                <li>Built AI governance and auditability framework for accountable, traceable AI-assisted development</li>
-                <li>Implemented CI/CD pipelines via GitHub Actions; applied DevOps-first discipline across all projects</li>
-                <li>Pursuing Microsoft Azure Administrator (AZ-104) certification</li>
+                <li><strong>Infrastructure as product:</strong> Designed and shipped open-source tooling for compliance automation, runbook execution, and connectivity validation — treating every tool as a deployable artifact with CI/CD, docs, and testable interfaces</li>
+                <li><strong>Operator-first design:</strong> Standalone tools built around operator ergonomics — YAML-driven configuration, modular architecture where components can be added or removed independently, and documentation written for infrastructure engineers already familiar with PowerShell or Bash</li>
+                <li><strong>Parallel AI agent orchestration:</strong> Operates Cline Kanban to run Claude Code and Codex as parallel workers in isolated git worktrees — managing task dependency chains, reviewing diffs, leaving line-level feedback for agent correction loops, and gated commits and PRs</li>
+                <li><strong>AI governance &amp; auditability:</strong> Built structured frameworks using Claude, Codex, Gemini, and Ollama as engineering force multipliers; versioned prompt rules and session logging for full traceability of AI-assisted development</li>
+                <li><strong>Terraform:</strong> Used to define, provision, and manage homelab infrastructure as code — all lab environments version-controlled and reproducible from a single apply</li>
+                <li><strong>CI/CD &amp; DevOps discipline:</strong> All projects shipped with GitHub Actions pipelines, atomic artifact writes, dry-run modes, and provenance headers — zero manual deploy steps</li>
+                <li><strong>Platform breadth:</strong> Proxmox homelab as a real cloud-native testbed: Cloudflare Tunnel, SSH key auth, GitLab CE, Kanban, Docker, LXC workloads, remote dev environment — built and operated end-to-end</li>
+                <li>Pursuing AWS Certified Cloud Practitioner (CLF-C02) certification</li>
               </ul>
             </div>
 
             <div class="exp-entry">
               <span class="exp-company">Experian Health</span>
-              <span class="exp-meta">Systems Engineer &middot; Dec 2016 – Nov 2024 &middot; Remote / Nashville, TN</span>
+              <span class="exp-meta">Systems Engineer / Infrastructure Engineer &middot; Dec 2016 – Nov 2024 &middot; Remote / Nashville, TN</span>
               <ul class="exp-bullets">
-                <li>Scaled VMware vSphere/ESXi infrastructure to 10,000+ virtual machines across 500+ ESXi hosts and 400+ physical servers</li>
-                <li>Automated patching, configuration management, and compliance auditing via PowerShell and Ansible Automation Platform</li>
-                <li>Managed Dell EMC storage platforms: Isilon, PowerFlex, Data Domain, ECS, and ExaGrid</li>
-                <li>Enforced HIPAA, PCI-DSS, and NIST 800-53 compliance through internal audits, documentation, and staff training</li>
-                <li>Designed disaster recovery runbooks and conducted regular DR tests to validate business continuity posture</li>
-                <li>Deployed Nutanix HCI; administered Active Directory, DNS, DHCP, and GPO at enterprise scale</li>
-                <li>Hardened Windows Server and Linux environments; mentored junior engineers</li>
+                <li><strong>Scaled distributed infrastructure</strong> to 10,000+ virtual machines across 500+ ESXi hosts and 400+ physical servers with near five nines availability — reliability engineering and automation at a scale where manual processes aren't an option</li>
+                <li><strong>Multi-region data center operations:</strong> Operated 3 geographically separated data centers across middle Tennessee, distributing compute load, backup duties, and DR failover across all three — active production, warm spare, and DR tiers running simultaneously</li>
+                <li><strong>Distributed SQL &amp; low-latency workloads:</strong> Administered physically separated SQL Server nodes in an active/spare/DR configuration across geographically distinct locations — engineered for low latency and automatic failover</li>
+                <li><strong>VMware + Nutanix HCI clustering:</strong> Operated 16-node physical host clusters with automatic VM and container workload distribution and load balancing — distributed compute without manual intervention</li>
+                <li><strong>Major data center migrations:</strong> Core team member on 2 large-scale DC migrations involving tens of millions of dollars of equipment — ESXi hosts, storage arrays, tape backups, network gear, racks, and cabling — executed with zero unplanned downtime</li>
+                <li><strong>Object storage &amp; file protocols:</strong> Administered Dell ECS (S3-compatible object storage) including bucket management; served multi-departmental file shares from remote data centers; executed file share data migrations; restored systems from both disk and tape</li>
+                <li><strong>Data security:</strong> Enforced encryption at rest and in transit across storage and network platforms for HIPAA and PCI-DSS requirements</li>
+                <li><strong>Eliminated manual operations</strong> via PowerShell and Ansible Automation Platform: automated patching cycles, configuration drift remediation, and compliance auditing across the entire fleet</li>
+                <li><strong>Compliance automation:</strong> Enforced HIPAA, PCI-DSS, NIST 800-53, and SOC 2 through automated internal audits, structured documentation, and runbook-driven remediation — compliance without developer friction</li>
+                <li><strong>Disaster recovery engineering:</strong> Designed and executed DR runbooks with regular test cycles; built business continuity posture from documentation through live failover validation</li>
+                <li><strong>Monitoring &amp; observability:</strong> Administered Splunk for SIEM and log aggregation; SolarWinds for infrastructure and network monitoring; Dell OpenManage Enterprise for hardware-level alerting across 400+ physical nodes; VMware vCenter and Nutanix Prism for unified virtualization visibility; exposure to vRealize Operations (vROps) for performance monitoring</li>
+                <li><strong>Storage at scale:</strong> Managed Dell EMC Isilon, PowerFlex, Data Domain, ECS, and ExaGrid — multi-platform enterprise storage with documented runbooks and full auditability</li>
+                <li>On-call rotation: 1 week per month across the full infrastructure stack — continuous on-call posture maintained since 2016</li>
+                <li>Hardened Windows Server and RHEL/Linux environments; mentored junior engineers</li>
               </ul>
             </div>
 
             <div class="exp-entry">
-              <span class="exp-company">City of Franklin — Network Analyst / ISO</span>
-              <span class="exp-meta">Aug 2014 – Oct 2016 &middot; Franklin, TN</span>
+              <span class="exp-company">City of Franklin</span>
+              <span class="exp-meta">Data Center Engineer / City Information Security Officer &middot; Oct 2012 – Oct 2016 &middot; Franklin, TN</span>
               <ul class="exp-bullets">
-                <li>Led deployment of MBAM, Veeam, and Office 365 with security and compliance configurations</li>
-                <li>Rewrote Group Policy infrastructure for consistent workstation and server security posture</li>
-                <li>Administered DNS, ExaGrid storage, and managed legal PST exports for eDiscovery</li>
-                <li>Trained staff and served as interim support lead during team shortages</li>
+                <li><strong>Data center migration &amp; infrastructure build-out:</strong> Led standup of Cisco UCS compute platform with Nexus switching as part of a full DC migration — racked, cabled, and commissioned the environment from the ground up</li>
+                <li><strong>Exchange hybrid migration:</strong> Administered Exchange Online and led migration from on-prem Exchange to a hybrid Exchange Online environment integrated with Azure Active Directory; administered Microsoft Exchange Online Protection</li>
+                <li><strong>Security platform administration:</strong> Stood up and administered Mandiant FireEye network threat prevention platform; administered Cisco IronPort web filter for organization-wide web security enforcement</li>
+                <li><strong>VMware vSphere administration:</strong> Administered vSphere environment as part of broader data center build-out and ongoing operations</li>
+                <li><strong>Enterprise patching program:</strong> Owned and operated the organization-wide patching program across workstations, servers, and network gear — full-environment coverage as part of the ISO function</li>
+                <li><strong>Infrastructure monitoring:</strong> Deployed and administered SolarWinds for network and infrastructure monitoring across the environment</li>
+                <li>On-call rotation: 1 week on / 1 week off — responsible for full-environment incident response covering infrastructure, security, and network</li>
+                <li>Rewrote Group Policy infrastructure for consistent, auditable workstation and server security posture; deployed MBAM, Veeam, and Office 365 with security and compliance configurations</li>
+                <li>Administered DNS, ExaGrid, AD/DNS/DHCP, and file services; managed workstation imaging; supported Cisco routing, switching, and VPN (NetMotion, AnyConnect)</li>
               </ul>
             </div>
 
+          </div>
+
+          <span class="resume-section-label" data-wizard="// open_source_projects" data-muggle="Open Source Projects">// open_source_projects</span>
+          <div class="exp-timeline">
+
             <div class="exp-entry">
-              <span class="exp-company">City of Franklin — Network Technician</span>
-              <span class="exp-meta">Oct 2012 – Aug 2014 &middot; Franklin, TN</span>
-              <ul class="exp-bullets">
-                <li>Maintained Active Directory, DNS, DHCP, and file services across Windows Server environments</li>
-                <li>Executed KACE/WSUS patching cycles; managed workstation imaging with Symantec Ghost</li>
-                <li>Supported Cisco routing, switching, and VPN solutions including NetMotion and AnyConnect</li>
-              </ul>
+              <span class="exp-company">YMC / YMC-L <span style="font-weight:400;font-family:var(--mono);font-size:0.8rem;color:var(--muted)">Python &middot; PowerShell &middot; Go &middot; WinRM &middot; Docker</span></span>
+              <p style="margin:0.4rem 0 0;font-size:0.88rem;color:var(--muted);line-height:1.65;">Agentless compliance scanners for Windows and Linux, mapping checks to NIST 800-53, SOC 2, HIPAA, PCI DSS, and ISO 27001 with audit-ready structured output. Both platforms are active and currently being ported to Go as distributed container workloads.</p>
             </div>
 
             <div class="exp-entry">
-              <span class="exp-company">Comcast</span>
-              <span class="exp-meta">Communications Technician III &middot; Feb 2008 – Aug 2010 &middot; Nashville, TN</span>
-              <ul class="exp-bullets">
-                <li>Delivered residential and commercial video, internet, and VoIP installation and service</li>
-                <li>Trained and certified new field technicians in technical procedures and service standards</li>
-              </ul>
+              <span class="exp-company">The Collective <span style="font-weight:400;font-family:var(--mono);font-size:0.8rem;color:var(--muted)">Go &middot; Docker &middot; Kubernetes &middot; k3s &middot; Python &middot; actively in development</span></span>
+              <p style="margin:0.4rem 0 0;font-size:0.88rem;color:var(--muted);line-height:1.65;">Orchestration platform for distributed compliance scanning across enterprise environments. Scanner nodes (YMC/YMC-L) deploy as lightweight Go containers close to target endpoints eliminating single-point bandwidth saturation and avoiding network security policy triggers. Nodes report findings to a centralized aggregation layer. Designed for Kubernetes orchestration.</p>
             </div>
 
             <div class="exp-entry">
-              <span class="exp-company">United States Air Force</span>
-              <span class="exp-meta">Electronic Warfare Craftsman &middot; Jul 2000 – Jul 2006 &middot; Hurlburt Field, FL</span>
-              <ul class="exp-bullets">
-                <li>Supervised 15-person avionics maintenance team ensuring mission-critical systems readiness</li>
-                <li>Authored annual performance reports; delivered mentorship and leadership training to personnel</li>
-                <li>Completed Airman Leadership School — 5-week NCO professional military education</li>
-              </ul>
+              <span class="exp-company">FailWarden <span style="font-weight:400;font-family:var(--mono);font-size:0.8rem;color:var(--muted)">Python &middot; SSH &middot; GitHub Actions</span></span>
+              <p style="margin:0.4rem 0 0;font-size:0.88rem;color:var(--muted);line-height:1.65;">YAML-driven runbook executor for infrastructure remediation over SSH. Compile-time validation, audit logging, dry-run mode, and a library of shipped runbooks — the kind of tool that turns an on-call incident into a documented, repeatable, one-command fix.</p>
+            </div>
+
+            <div class="exp-entry">
+              <span class="exp-company">ReadyCheck <span style="font-weight:400;font-family:var(--mono);font-size:0.8rem;color:var(--muted)">Python &middot; CLI</span></span>
+              <p style="margin:0.4rem 0 0;font-size:0.88rem;color:var(--muted);line-height:1.65;">Connectivity validation CLI that compares observed network behavior against declared intent and emits structured review artifacts.</p>
+            </div>
+
+            <div class="exp-entry">
+              <span class="exp-company">project-prompts <span style="font-weight:400;font-family:var(--mono);font-size:0.8rem;color:var(--muted)">AI Governance &middot; Prompt Engineering &middot; CLI</span></span>
+              <p style="margin:0.4rem 0 0;font-size:0.88rem;color:var(--muted);line-height:1.65;">Structured library of versioned prompt engineering guidelines and session logging tooling for AI-assisted development — governance and auditability for agentic workflows at the project level.</p>
             </div>
 
           </div>
@@ -525,103 +545,115 @@
           <span class="resume-section-label" data-wizard="// technical_skills" data-muggle="Technical Skills">// technical_skills</span>
           <div class="skills-grid">
             <div>
-              <span class="skill-cat-label">AI &amp; Automation</span>
-              <div class="stack-tags">
-                <span class="s-tag" data-tip="Integrated Claude, OpenAI, Gemini, and Ollama into development and automation workflows">LLMs</span>
-                <span class="s-tag" data-tip="Built structured prompt libraries and project-scoped guidelines for consistent, accountable AI output">Prompt Eng.</span>
-                <span class="s-tag" data-tip="Designed multi-step agentic workflows for automated tooling, research, and code generation">Agentic AI</span>
-                <span class="s-tag" data-tip="Primary LLM for all personal projects and tooling — used daily">Claude</span>
-                <span class="s-tag" data-tip="Used for agentic workflows and code generation in personal projects">OpenAI</span>
-                <span class="s-tag" data-tip="Used for research and multi-modal tasks across development workflows">Gemini</span>
-                <span class="s-tag" data-tip="Runs local LLM inference in homelab for offline and privacy-sensitive workflows">Ollama</span>
-                <span class="s-tag" data-tip="Red Hat Ansible Automation Platform for enterprise configuration management at Experian Health">Ansible AAP</span>
-                <span class="s-tag" data-tip="Infrastructure as Code for declarative resource provisioning in lab and projects">Terraform</span>
-                <span class="s-tag" data-tip="Applied IaC principles across homelab, automation projects, and CI/CD pipelines">IaC</span>
-                <span class="s-tag" data-tip="Primary automation language at Experian Health — patching, compliance auditing, config management">PowerShell</span>
-                <span class="s-tag" data-tip="Core language for FailWarden, ReadyCheck, and SquirrelBrain">Python</span>
-                <span class="s-tag" data-tip="Shell scripting for automation, CI/CD pipelines, and lab operations">Bash</span>
-                <span class="s-tag" data-tip="CI/CD pipelines across personal repos — automated testing, validation, and deployment">GitHub Actions</span>
-                <span class="s-tag" data-tip="Continuous integration and deployment pipelines across all active repositories">CI/CD</span>
-              </div>
-            </div>
-            <div>
-              <span class="skill-cat-label">Infrastructure</span>
+              <span class="skill-cat-label">Infrastructure &amp; Cloud</span>
               <div class="stack-tags">
                 <span class="s-tag" data-tip="Administered 10,000+ VMs across 500+ ESXi hosts and 400+ physical servers at Experian Health">VMware vSphere/ESXi</span>
-                <span class="s-tag" data-tip="Deployed and integrated Nutanix HCI into existing infrastructure at Experian Health">Nutanix HCI</span>
-                <span class="s-tag" data-tip="Primary hypervisor for personal homelab — VM and container orchestration">Proxmox</span>
-                <span class="s-tag" data-tip="Homelab container experience — learning and experimentation, not production-validated">Docker (lab)</span>
-                <span class="s-tag" data-tip="Homelab K8s experience — studied and tested, not production-validated">Kubernetes (lab)</span>
-                <span class="s-tag" data-tip="Enterprise administration from 2003R2 through 2022 at Experian Health and City of Franklin">Windows Server</span>
-                <span class="s-tag" data-tip="Server hardening, administration, and automation across enterprise and lab environments">RHEL/Linux</span>
+                <span class="s-tag" data-tip="Deployed and integrated Nutanix HCI into existing infrastructure at Experian Health — 16-node clusters with automatic workload distribution">Nutanix HCI</span>
+                <span class="s-tag" data-tip="AWS Certified Cloud Practitioner (CLF-C02) currently in progress">AWS (CLF-C02 in progress)</span>
+                <span class="s-tag" data-tip="Container workloads in Proxmox homelab; The Collective scanner nodes containerized as Docker images">Docker</span>
+                <span class="s-tag" data-tip="Designed The Collective for Kubernetes/k3s orchestration; homelab k3s cluster for testing and validation">Kubernetes / k3s</span>
+                <span class="s-tag" data-tip="Primary hypervisor for personal homelab — VM and container orchestration, Cloudflare Tunnel, GitLab CE">Proxmox</span>
+                <span class="s-tag" data-tip="Server hardening, administration, and automation across enterprise and lab environments">Linux / RHEL / Windows</span>
               </div>
             </div>
             <div>
-              <span class="skill-cat-label">Storage &amp; Backup</span>
+              <span class="skill-cat-label">Automation &amp; IaC</span>
               <div class="stack-tags">
-                <span class="s-tag" data-tip="NAS platform administration at Experian Health">Dell EMC Isilon</span>
-                <span class="s-tag" data-tip="Software-defined block storage administration at Experian Health">PowerFlex</span>
-                <span class="s-tag" data-tip="Backup appliance management at Experian Health">Data Domain</span>
-                <span class="s-tag" data-tip="Object storage administration at Experian Health">ECS</span>
-                <span class="s-tag" data-tip="Deduplication backup appliance management at Experian Health and City of Franklin">ExaGrid</span>
-                <span class="s-tag" data-tip="Designed DR runbooks and ran regular tests at Experian Health; MS thesis focused on DR/BCP">Disaster Recovery</span>
-                <span class="s-tag" data-tip="MS thesis: full BCP program for a B2B government contractor, grounded in NIST 800-53 controls">Business Continuity</span>
+                <span class="s-tag" data-tip="Used to define, provision, and manage homelab infrastructure as code — all lab environments version-controlled and reproducible">Terraform</span>
+                <span class="s-tag" data-tip="Red Hat Ansible Automation Platform for enterprise configuration management and compliance auditing at Experian Health">Ansible</span>
+                <span class="s-tag" data-tip="Familiar with Chef concepts and configuration management patterns">Chef (familiar)</span>
+                <span class="s-tag" data-tip="Primary automation language at Experian Health — patching, compliance auditing, config management; Exchange and AD administration">PowerShell</span>
+                <span class="s-tag" data-tip="Core language for FailWarden, ReadyCheck, YMC, and The Collective">Python</span>
+                <span class="s-tag" data-tip="Used for The Collective distributed scanner nodes and YMC-L port — performance-focused systems work">Go</span>
+                <span class="s-tag" data-tip="Shell scripting for automation, CI/CD pipelines, and lab operations">Bash</span>
+                <span class="s-tag" data-tip="CI/CD pipelines across all personal repos — automated testing, validation, and deployment with zero manual deploy steps">GitHub Actions CI/CD</span>
               </div>
             </div>
             <div>
-              <span class="skill-cat-label">Networking</span>
+              <span class="skill-cat-label">Observability &amp; Monitoring</span>
               <div class="stack-tags">
-                <span class="s-tag" data-tip="Data center switching infrastructure at Experian Health">Cisco Nexus</span>
-                <span class="s-tag" data-tip="Arista Big Cloud Fabric configuration and management">Arista BCF</span>
-                <span class="s-tag" data-tip="Software-Defined Networking concepts applied in enterprise and lab environments">SDN</span>
-                <span class="s-tag" data-tip="Deployed and administered NetMotion mobile VPN solution at City of Franklin">NetMotion</span>
-                <span class="s-tag" data-tip="Cisco AnyConnect VPN administration and end-user support">AnyConnect</span>
+                <span class="s-tag" data-tip="Administered Splunk for SIEM and log aggregation at Experian Health">Splunk (SIEM)</span>
+                <span class="s-tag" data-tip="Infrastructure and network monitoring at Experian Health and City of Franklin">SolarWinds</span>
+                <span class="s-tag" data-tip="Hardware-level alerting across 400+ physical nodes at Experian Health">Dell OpenManage Enterprise</span>
+                <span class="s-tag" data-tip="Unified virtualization monitoring and management across 10,000+ VM environment">VMware vCenter</span>
+                <span class="s-tag" data-tip="Nutanix platform monitoring and infrastructure visibility at Experian Health">Nutanix Prism</span>
+                <span class="s-tag" data-tip="Exposure to vRealize Operations for performance monitoring and capacity planning">vROps</span>
               </div>
             </div>
             <div>
               <span class="skill-cat-label">Security &amp; Compliance</span>
               <div class="stack-tags">
-                <span class="s-tag" data-tip="Implemented controls at Experian Health; MS thesis grounded in NIST 800-53 for DR/BCP">NIST 800-53</span>
+                <span class="s-tag" data-tip="Implemented controls at Experian Health; MS thesis grounded in NIST 800-53 for DR/BCP; YMC maps checks to NIST">NIST 800-53</span>
                 <span class="s-tag" data-tip="Enforced compliance at Experian Health through internal audits, documentation, and staff training">HIPAA</span>
-                <span class="s-tag" data-tip="Supported PCI compliance initiatives at Experian Health">PCI-DSS</span>
-                <span class="s-tag" data-tip="Automated SOC 2 evidence collection via YMC across Windows Server environments">SOC 2</span>
-                <span class="s-tag" data-tip="Automated CMMC evidence collection via YMC across Windows Server environments">CMMC</span>
-                <span class="s-tag" data-tip="Automated ISO 27001 evidence collection via YMC across Windows Server environments">ISO 27001</span>
+                <span class="s-tag" data-tip="Supported PCI compliance initiatives at Experian Health; encryption at rest and in transit">PCI-DSS</span>
+                <span class="s-tag" data-tip="YMC maps checks to SOC 2 controls; automated evidence collection across Windows Server environments">SOC 2</span>
+                <span class="s-tag" data-tip="YMC maps checks to ISO 27001 controls across Windows Server environments">ISO 27001</span>
                 <span class="s-tag" data-tip="Applied CIS benchmarks for system hardening in enterprise and lab environments">CIS Benchmarks</span>
                 <span class="s-tag" data-tip="Applied DISA STIGs for Windows Server and Linux hardening">DISA STIG</span>
+                <span class="s-tag" data-tip="Enforced encryption at rest and in transit across storage and network platforms at Experian Health">Encryption at rest/transit</span>
                 <span class="s-tag" data-tip="Enterprise server and workstation hardening at Experian Health and City of Franklin">System Hardening</span>
               </div>
             </div>
             <div>
-              <span class="skill-cat-label">Cloud &amp; Identity</span>
+              <span class="skill-cat-label">Storage &amp; Data</span>
               <div class="stack-tags">
-                <span class="s-tag" data-tip="Currently studying for AZ-104 Azure Administrator Associate certification">Microsoft Azure</span>
-                <span class="s-tag" data-tip="Deployed and administered Office 365 including Exchange Online and compliance configurations">Office 365</span>
-                <span class="s-tag" data-tip="Enterprise AD administration at Experian Health and City of Franklin">Active Directory</span>
-                <span class="s-tag" data-tip="DNS administration across enterprise environments at Experian Health and City of Franklin">DNS</span>
-                <span class="s-tag" data-tip="DHCP administration and scope management across enterprise environments">DHCP</span>
-                <span class="s-tag" data-tip="Rewrote GPO infrastructure at City of Franklin; enterprise GPO management at Experian Health">Group Policy</span>
+                <span class="s-tag" data-tip="NAS platform administration at Experian Health">Dell EMC Isilon</span>
+                <span class="s-tag" data-tip="Software-defined block storage administration at Experian Health">PowerFlex</span>
+                <span class="s-tag" data-tip="Backup appliance management at Experian Health">Data Domain</span>
+                <span class="s-tag" data-tip="S3-compatible object storage administration at Experian Health including bucket management and data migrations">ECS (S3-compatible)</span>
+                <span class="s-tag" data-tip="Deduplication backup appliance management at Experian Health and City of Franklin">ExaGrid</span>
+                <span class="s-tag" data-tip="Backup software deployed and administered at City of Franklin with security and compliance configurations">Veeam</span>
+                <span class="s-tag" data-tip="Restored systems from both disk and tape at Experian Health; managed full backup lifecycle">Disk/tape backup</span>
+                <span class="s-tag" data-tip="Executed file share data migrations across remote data centers at Experian Health">Data migration</span>
+                <span class="s-tag" data-tip="Served multi-departmental file shares from remote data centers; administered file protocols at enterprise scale">File protocols</span>
+              </div>
+            </div>
+            <div>
+              <span class="skill-cat-label">Networking</span>
+              <div class="stack-tags">
+                <span class="s-tag" data-tip="Data center switching infrastructure; led standup of Cisco UCS/Nexus platform at City of Franklin">Cisco Nexus / IOS</span>
+                <span class="s-tag" data-tip="Arista Big Cloud Fabric configuration and management at Experian Health">Arista BCF SDN</span>
+                <span class="s-tag" data-tip="DNS and DHCP administration across enterprise environments at Experian Health and City of Franklin">DNS/DHCP at enterprise scale</span>
+                <span class="s-tag" data-tip="Cloudflare Tunnel used in Proxmox homelab for secure remote access without port exposure">Cloudflare Tunnel</span>
+                <span class="s-tag" data-tip="Cisco IronPort web filter administered at City of Franklin for organization-wide web security enforcement">Cisco IronPort</span>
+                <span class="s-tag" data-tip="Mandiant FireEye network threat prevention platform stood up and administered at City of Franklin">Mandiant FireEye</span>
+              </div>
+            </div>
+            <div>
+              <span class="skill-cat-label">API &amp; Integration</span>
+              <div class="stack-tags">
+                <span class="s-tag" data-tip="REST API consumption and integration across tooling and automation projects">REST APIs</span>
+                <span class="s-tag" data-tip="WinRM used by YMC for agentless Windows compliance scanning without agent install">WinRM</span>
+                <span class="s-tag" data-tip="SSH used by FailWarden for secure remote runbook execution across infrastructure">SSH</span>
+                <span class="s-tag" data-tip="S3-compatible API experience from Dell ECS administration and YMC-L tooling development">S3-compatible APIs</span>
+                <span class="s-tag" data-tip="Webhook-based integrations used in CI/CD pipelines and notification workflows">Webhook integrations</span>
+              </div>
+            </div>
+            <div>
+              <span class="skill-cat-label">AI &amp; Tooling</span>
+              <div class="stack-tags">
+                <span class="s-tag" data-tip="Integrated Claude, Codex, Gemini, and Ollama into development and automation workflows">LLMs</span>
+                <span class="s-tag" data-tip="Built structured prompt libraries and project-scoped guidelines; project-prompts repo for versioned governance">Prompt Engineering</span>
+                <span class="s-tag" data-tip="Operates Cline Kanban to run Claude Code and Codex as parallel workers in isolated git worktrees">Agentic AI</span>
+                <span class="s-tag" data-tip="Manages Claude Code and Codex as parallel agents via Kanban — dependency chains, diff review, correction loops">Kanban agent orchestration</span>
+                <span class="s-tag" data-tip="Versioned prompt rules and session logging for full traceability of AI-assisted development; project-prompts framework">AI governance &amp; auditability</span>
               </div>
             </div>
           </div>
 
           <span class="resume-section-label" data-wizard="// certifications" data-muggle="Certifications">// certifications</span>
           <div class="cert-list">
-            <div class="cert-item"><span class="cert-name">Microsoft Azure Administrator Associate (AZ-104)</span><span class="cert-status"> — in progress</span></div>
+            <div class="cert-item"><span class="cert-name">AWS Certified Cloud Practitioner (CLF-C02)</span><span class="cert-status"> — in progress</span></div>
             <div class="cert-item"><span class="cert-name">Red Hat Certified Specialist in Ansible Automation</span><span class="cert-status"> — training completed, 2018</span></div>
-            <div class="cert-item"><span class="cert-name">CompTIA Advanced Security Practitioner (CASP+)</span><span class="cert-status"> — training completed, 2014</span></div>
-            <div class="cert-item"><span class="cert-name">Implementing Cisco Network Security (IINS) — New Horizons</span><span class="cert-status"> — training completed, 2014</span></div>
-            <div class="cert-item"><span class="cert-name">PowerShell for Systems Administration — New Horizons</span><span class="cert-status"> — training completed, 2016</span></div>
-            <div class="cert-item"><span class="cert-name">VMware vSphere: Fast Track v5.1 (VCP5-DCV) — New Horizons</span><span class="cert-status"> — training completed, 2013</span></div>
-            <div class="cert-item"><span class="cert-name">Certified Ethical Hacker (CEH) — EC-Council</span><span class="cert-status"> — formerly certified, 2017;</span><span class="cert-sub" style="padding-left:46ch">40hr New Horizons training completed, 2015</span></div>
-            <div class="cert-item"><span class="cert-name">Computer Hacking Forensic Investigator (CHFI) — EC-Council</span><span class="cert-status"> — formerly certified, 2017</span></div>
+            <div class="cert-item"><span class="cert-name">Certified Ethical Hacker (CEH) &amp; CHFI — EC-Council</span><span class="cert-status"> — formerly certified, 2018</span></div>
+            <div class="cert-item"><span class="cert-name">CompTIA CASP+ &middot; PowerShell for Systems Administration — New Horizons</span><span class="cert-status"> — training completed, 2015</span></div>
           </div>
 
           <span class="resume-section-label" data-wizard="// education" data-muggle="Education">// education</span>
           <div class="edu-list">
             <div class="edu-item">
               <div class="edu-degree">M.S. Information Security and Assurance</div>
-              <div class="edu-school">Western Governors University &middot; 2016 – 2018</div>
+              <div class="edu-school">Western Governors University &middot; 2018</div>
               <div class="edu-detail">Thesis: Disaster Recovery &amp; Business Continuity Program for a B2B Government Contractor — grounded in NIST 800-53 controls</div>
             </div>
             <div class="edu-item">
@@ -631,15 +663,6 @@
             <div class="edu-item">
               <div class="edu-degree">A.A.S. Computer Networking Systems</div>
               <div class="edu-school">ITT Technical Institute &middot; 2010 – 2012 &middot; 4.0 GPA &middot; Valedictorian</div>
-            </div>
-            <div class="edu-item">
-              <div class="edu-degree">Airman Leadership School</div>
-              <div class="edu-school">United States Air Force &middot; 5 weeks / 24 duty days</div>
-              <div class="edu-detail">NCO professional military education — leadership, supervision, communication, and group dynamics</div>
-            </div>
-            <div class="edu-item">
-              <div class="edu-degree">Electronic Warfare &amp; Avionics Technical School</div>
-              <div class="edu-school">United States Air Force &middot; ~1,600 combined instruction hours</div>
             </div>
           </div>
 
@@ -657,28 +680,33 @@
           <p class="resume-section-label" data-wizard="// infrastructure_tooling" data-muggle="Infrastructure Tools">// infrastructure_tooling</p>
           <article class="project-featured">
             <div class="tag-row">
-              <span class="tag warn">featured</span><span class="tag green">python</span><span class="tag green">infrastructure</span>
-              <span class="tag green">v0.2.0</span><span class="tag warn">prod_validated: partial</span>
+              <span class="tag warn">featured</span><span class="tag green">python</span><span class="tag green">powershell</span><span class="tag green">go</span><span class="tag green">winrm</span><span class="tag green">docker</span><span class="tag warn">compliance</span>
             </div>
-            <p class="proj-name">FailWarden Orchestrator</p>
-            <p class="proj-desc">A constrained YAML runbook executor for infrastructure remediation over SSH. Compile-time validation, audit logging, notifier support, dry-run mode, and included runbooks. It doesn't try to be Ansible — it tries to be the thing you hand to an operator at 2am.</p>
+            <p class="proj-name">YMC / YMC-L — You Must Comply</p>
+            <p class="proj-desc">Agentless compliance scanners for Windows (YMC) and Linux (YMC-L). Framework-mapped checks for NIST 800-53, SOC 2, HIPAA, PCI DSS, and ISO 27001 with audit-ready structured output. No agent install required — runs over WinRM and SSH respectively. Both platforms active and currently being ported to Go as distributed container workloads.</p>
             <ul class="proj-points">
-              <li>current release: v0.2.0</li>
-              <li>V1 and V1.5 implemented</li>
-              <li>strong unit and controlled local integration coverage</li>
-              <li>not yet validated against live production infrastructure</li>
+              <li>Windows and Linux coverage — two platforms, one compliance story</li>
+              <li>Framework-mapped checks: NIST 800-53, SOC 2, HIPAA, PCI DSS, ISO 27001</li>
+              <li>Audit-ready structured output — built for hand-off, not just inspection</li>
+              <li>Porting to Go as distributed container workloads (see: The Collective)</li>
             </ul>
             <div class="link-row">
-              <a class="text-link" href="projects/failwarden-orchestrator/" data-wizard="./project-page" data-muggle="Project Page">./project-page</a>
-              <a class="text-link" href="https://github.com/bferguson-dev/FailWarden-Orchestrator" target="_blank" rel="noreferrer" data-wizard="github.com/…" data-muggle="GitHub">github.com/&hellip;</a>
+              <a class="text-link" href="projects/ymc/" data-wizard="./project-page" data-muggle="Project Page">./project-page</a>
+              <a class="text-link" href="https://github.com/bferguson-dev/YMC" target="_blank" rel="noreferrer" data-wizard="github.com/…" data-muggle="GitHub">github.com/&hellip;</a>
             </div>
           </article>
           <div class="support-grid">
             <article class="support-card">
-              <div class="tag-row"><span class="tag green">python</span><span class="tag green">powershell</span><span class="tag green">winrm</span><span class="tag warn">compliance</span></div>
-              <p class="support-name">YMC</p>
-              <p class="support-desc">Agentless Windows compliance scanner over WinRM. Framework-mapped checks, audit-ready output. No agent install required.</p>
-              <div class="support-links"><a class="text-link" href="projects/ymc/" data-wizard="./project-page" data-muggle="Project Page">./project-page</a><a class="text-link" href="https://github.com/bferguson-dev/YMC" target="_blank" rel="noreferrer" data-wizard="github" data-muggle="GitHub">github</a></div>
+              <div class="tag-row"><span class="tag green">go</span><span class="tag green">docker</span><span class="tag green">kubernetes</span><span class="tag green">k3s</span><span class="tag warn">in development</span></div>
+              <p class="support-name">The Collective</p>
+              <p class="support-desc">Orchestration platform for distributed compliance scanning. YMC/YMC-L scanner nodes deploy as lightweight Go containers close to target endpoints. Findings aggregate to a central layer (the Queen). Designed for Kubernetes orchestration.</p>
+              <div class="support-links"><a class="text-link" href="https://github.com/bferguson-dev" target="_blank" rel="noreferrer" data-wizard="github" data-muggle="GitHub">github</a></div>
+            </article>
+            <article class="support-card">
+              <div class="tag-row"><span class="tag green">python</span><span class="tag green">infrastructure</span><span class="tag green">v0.2.0</span><span class="tag warn">prod_validated: partial</span></div>
+              <p class="support-name">FailWarden Orchestrator</p>
+              <p class="support-desc">A constrained YAML runbook executor for infrastructure remediation over SSH. Compile-time validation, audit logging, dry-run mode, and included runbooks — the thing you hand to an operator at 2am.</p>
+              <div class="support-links"><a class="text-link" href="projects/failwarden-orchestrator/" data-wizard="./project-page" data-muggle="Project Page">./project-page</a><a class="text-link" href="https://github.com/bferguson-dev/FailWarden-Orchestrator" target="_blank" rel="noreferrer" data-wizard="github" data-muggle="GitHub">github</a></div>
             </article>
             <article class="support-card">
               <div class="tag-row"><span class="tag green">powershell</span><span class="tag green">wpf</span><span class="tag green">windows</span></div>
@@ -691,12 +719,6 @@
               <p class="support-name">ReadyCheck</p>
               <p class="support-desc">Connectivity validation CLI comparing observed network behavior against declared intent and emits review artifacts.</p>
               <div class="support-links"><a class="text-link" href="projects/readycheck/" data-wizard="./project-page" data-muggle="Project Page">./project-page</a><a class="text-link" href="https://github.com/bferguson-dev/ReadyCheck" target="_blank" rel="noreferrer" data-wizard="github" data-muggle="GitHub">github</a></div>
-            </article>
-            <article class="support-card">
-              <div class="tag-row"><span class="tag green">proxmox</span><span class="tag green">ansible</span><span class="tag green">automation</span><span class="tag warn">lab</span></div>
-              <p class="support-name">My Lab Setup</p>
-              <p class="support-desc">Sanitized Proxmox + Ansible lab automation — provisioning phases, guest baselining, and clone workflows. Where I actually break things first.</p>
-              <div class="support-links"><a class="text-link" href="projects/my-lab-setup/" data-wizard="./project-page" data-muggle="Project Page">./project-page</a><a class="text-link" href="https://github.com/bferguson-dev/My-Lab-Setup" target="_blank" rel="noreferrer" data-wizard="github" data-muggle="GitHub">github</a></div>
             </article>
           </div>
 
@@ -843,7 +865,7 @@
         type: 'dir', children: ['intro.txt', 'about.txt'],
         files: {
           'intro.txt': 'Welcome to BYRON_FERGUSON.PORTFOLIO\n\nStart here:\n  ~/root  — the landing page\n  ~/lib   — resume and skills\n  ~/usr   — things I\'ve built\n  ~/etc   — contact info\n  ~/home  — whoami\n\nUseful commands:\n  neofetch          system info\n  cat resume.txt    resume summary\n  wget resume.pdf   download full resume\n  ls /usr           browse projects\n  fortune           words of wisdom',
-          'about.txt': 'Byron Ferguson\nAI-Augmented Infrastructure Engineer\n\nGrew up in rural eastern Ohio — three stoplights in the\nwhole county type of place. Joined the Air Force, worked\non AC-130 gunships, MC-130 Talon IIs, and MH-53 Pave Lows\nacross multiple deployments out of Hurlburt Field, FL.\nSettled in Middle Tennessee. Husband and father.\n\n16+ years in infrastructure. Currently building AI-driven\ntooling for infrastructure problems.\n\n"I use tools to create tools to solve everyday problems\n so that we can all go home on time."',
+          'about.txt': 'Byron Ferguson\nInfrastructure Engineer · Builder · Automation Architect\n\nGrew up in rural eastern Ohio — three stoplights in the\nwhole county type of place. Joined the Air Force, worked\non AC-130 gunships, MC-130 Talon IIs, and MH-53 Pave Lows\nacross multiple deployments out of Hurlburt Field, FL.\nSettled in Middle Tennessee. Husband and father.\n\n16+ years in infrastructure. Treats infra as a product —\narchitect it, automate it, evolve it. Currently building\nopen-source tooling for compliance automation, runbook\nexecution, and distributed observability.\n\n"I use tools to create tools to solve everyday problems\n so that we can all go home on time."',
           '.diary': '[ENCRYPTED — just kidding]\n\nDay 1:   set up the lab. everything is broken.\nDay 12:  fixed the lab. broke something else.\nDay 31:  ansible playbook ran clean on the first try.\n          nobody will ever believe me.\nDay 47:  still building.\nDay 203: jeep is broken again. unrelated to the lab.',
           '.drum_practice_log': 'practice_log — last 7 entries\n──────────────────────────────\nMon:  skipped (lab was on fire, metaphorically)\nTue:  20 min — paradiddles\nWed:  skipped (lab was on fire, literally this time)\nThu:  45 min — actually pretty good\nFri:  skipped (ansible)\nSat:  1 hr — no one was home, went hard\nSun:  skipped (jeep)',
           '.jeep_repair_notes': 'JEEP REPAIR LOG\n───────────────\nIssue:   it\'s making that sound again\nStatus:  parts ordered\nETA:     "a few days" (3 weeks ago)\nNotes:   its always the serpentine belt\n         actually this time its not the serpentine belt\n         it was the serpentine belt',
@@ -854,7 +876,7 @@
       '/lib': {
         type: 'dir', children: ['philosophy.txt', 'principles.txt', 'methodology.txt'],
         files: {
-          'philosophy.txt': '[SHARED LIBRARIES — WHAT I\'M BUILT ON]\n\nAccumulated dependencies. 16+ years of infrastructure\nexperience: VMware at 10k+ VM scale, Dell EMC storage,\ncompliance (NIST 800-53, HIPAA, PCI-DSS, SOC 2), and\nsystems automation via Ansible and PowerShell.\n\nNow applying AI and agentic workflows to infrastructure\nproblems — with full accountability and audit trails.\n\nFull resume: navigate to ~/lib or wget resume.pdf',
+          'philosophy.txt': '[SHARED LIBRARIES — WHAT I\'M BUILT ON]\n\nAccumulated dependencies. 16+ years of infrastructure\nexperience: VMware at 10k+ VM scale, 3-DC operations,\nDell EMC storage, Splunk, compliance automation across\nNIST 800-53, HIPAA, PCI-DSS, SOC 2, and ISO 27001.\n\nTreats infrastructure as a product — architect it,\nautomate it, evolve it. Open source contributor with\nshipped tooling for compliance, runbook execution, and\ndistributed observability. Uses AI and agentic workflows\nas force multipliers — with full traceability.\n\nFull resume: navigate to ~/lib or wget resume.pdf',
           'principles.txt': 'Engineering Communication Principles\n====================================\n- Honest maturity statements over vague claims\n- Documentation that matches what actually gets built\n- Scope control over feature creep\n- If it needs a disclaimer, the code needs more work\n- Tribal knowledge is technical debt in disguise',
           'methodology.txt': 'Engineering Methodology\n=======================\ndefine → scope → document → build → harden\n  → review → test → iterate → audit → document → push\n\nSecurity is not a step. It is a constant.\nDocumentation is not an afterthought. It is the work.',
           '.lessons_learned': 'LESSONS LEARNED — compiled over 16 years\n─────────────────────────────────────────\n- always run --check first. always. yes, even that one.\n- "it works in dev" is a threat, not a promise.\n- the runbook you don\'t write is the incident you can\'t explain.\n- imposter syndrome is loudest right before something ships.\n- if it\'s not in git, it didn\'t happen.\n- documentation is not done when you write it.\n  it\'s done when someone else understands it.',
@@ -863,7 +885,7 @@
         }
       },
       '/usr': {
-        type: 'dir', children: ['failwarden', 'ymc', 'loadout', 'readycheck', 'my-lab-setup', 'project-prompts'],
+        type: 'dir', children: ['failwarden', 'ymc', 'the-collective', 'loadout', 'readycheck', 'my-lab-setup', 'project-prompts'],
         files: {
           '.wip': 'WORK IN PROGRESS — always\n──────────────────────────\nnext up (probably):\n  [ ] failwarden v2 scope\n  [ ] ymc linux support\n  [ ] that one tool i thought of at 11pm\n  [x] build the thing\n  [x] document the thing\n  [x] question the thing\n  [x] push it anyway',
           '.abandoned_ideas': 'ABANDONED IDEAS\n────────────────\nnone.\n\n(there are no abandoned ideas.\n there are only deferred ones.\n the queue is very long.)',
@@ -873,29 +895,44 @@
       '/usr/failwarden': {
         type: 'dir', children: ['README.md', 'status.txt'],
         files: {
-          'README.md': 'FailWarden Orchestrator\n=======================\nConstrained YAML runbook executor for infra remediation over SSH.\n\nFeatures: compile-time validation, audit logging, notifier\nsupport, dry-run mode, shipped runbooks.\n\nRelease:    v0.2.0\nStatus:     V1 and V1.5 implemented\nValidation: strong unit + controlled local integration\nNote:       not yet validated against live prod infrastructure\n\nIt doesn\'t try to be Ansible.\nIt tries to be the thing you hand an operator at 2am.\n\nGitHub: github.com/bferguson-dev/FailWarden-Orchestrator',
-          'status.txt': 'v0.2.0 — STABLE\nprod_validated: partial\ntest_coverage: strong\nnext: V2 scope planning'
+          'README.md': 'FailWarden Orchestrator\n=======================\nConstrained YAML runbook executor for infrastructure\nremediation over SSH. Designed for documented workflows\nthat still need to run consistently and leave a trail.\n\nThe problem:\n  Incident happens. Runbook lives in a Google Doc.\n  Someone runs half of it wrong. No audit trail.\n  You spend the next hour figuring out what state\n  things are actually in.\n\nThe solution:\n  YAML runbooks with compile-time validation.\n  Every step logged. Every variable accounted for.\n  Dry-run before you touch anything.\n\nFeatures:\n  Compile-time runbook validation\n  Strict variable rendering (no silent failures)\n  SSH execution for Linux and Windows (PowerShell over SSH)\n  Linked step orchestration with retries and branching\n  Slack webhook and SMTP email notifications\n  SQLite-backed execution history with audit artifacts\n  Dry-run preview mode\n\nShipped runbooks:\n  linux_service_down      restart and verify a failed service\n  windows_service_down    same, via PowerShell over SSH\n  disk_full               identify and clean safe targets\n  ntp_drift               diagnose and correct time sync issues\n  http_endpoint_down      probe, trace, and escalate\n\nRelease:    v0.2.0\nV1 + V1.5:  implemented\nV2 scope:   PSRP, HTTP execution, metrics, dashboarding\n\nIt doesn\'t try to be Ansible.\nIt tries to be the thing you hand an operator at 2am.\n\nGitHub: github.com/bferguson-dev/FailWarden-Orchestrator',
+          'status.txt': 'FailWarden — v0.2.0 — STABLE\n─────────────────────────────\nprod_validated:  partial (lab + controlled integration)\ntest_coverage:   strong unit + local integration\ndocs:            current\nplatform:        Python 3.10+ / SSH target\n\nimplemented:\n  [x] V1  — core engine, notifiers, persistence, audit log\n  [x] V1.5 — CLI output, JSON export, GitHub Actions CI\n\nnext (V2):\n  [ ] PSRP execution target\n  [ ] HTTP execution target\n  [ ] optional metrics output\n  [ ] notifier fault isolation\n  [ ] optional dashboard'
         }
       },
       '/usr/ymc': {
-        type: 'dir', children: ['README.md'],
-        files: { 'README.md': 'YMC\n===\nAgentless Windows compliance scanner over WinRM.\nFramework-mapped checks. Audit-ready output.\nNo agent install required.\n\nGitHub: github.com/bferguson-dev/YMC' }
+        type: 'dir', children: ['README.md', 'status.txt'],
+        files: {
+          'README.md': 'YMC — You Must Comply\n=====================\n"Resistance is futile." — The Borg\n\nAgentless Windows compliance scanner over WinRM.\nNo agent install. No GPO changes. No footprint.\n\nHow it works:\n  Connects via WinRM, runs read-only PowerShell checks,\n  maps findings to framework controls, emits structured\n  output. Designed for environments where you cannot\n  touch endpoints.\n\nFramework coverage (checks per profile):\n  NIST SP 800-53 Rev 5     — 110 checks\n  PCI DSS 4.0              —  82 checks\n  ISO 27001:2022           —  77 checks\n  SOC 2 (TSC)              —  77 checks\n  CMMC 2.0 Level 2         —  76 checks\n  NIST SP 800-171 Rev 2    —  76 checks\n  FedRAMP Moderate         —  76 checks\n  DISA STIG (Win Server)   —  75 checks\n  HIPAA Security Rule      —  53 checks\n\nOutput:\n  JSON and plain-text audit reports.\n  Per-control pass/fail with evidence snippets.\n  Designed to drop into an audit package without cleanup.\n\nBuilt because the commercial scanners require agents,\ncredentialed scans, or a $40k contract. This needs WinRM.\n\nGitHub: github.com/bferguson-dev/YMC',
+          'status.txt': 'YMC — v0.1.0 — ACTIVE DEVELOPMENT\n──────────────────────────────────\nprod_validated:  no (lab-only so far)\ntest_coverage:   unit + local WinRM integration\ndocs:            current\nplatform:        Windows (WinRM required)\nprofiles:        NIST 800-53, PCI DSS, ISO 27001, SOC 2, CMMC,\n                 HIPAA, NIST 800-171, FedRAMP Moderate, DISA STIG\ntotal checks:    114 check IDs across 9 profiles\n\nnext:\n  [ ] Linux support via SSH\n  [ ] HTML report output\n  [ ] delta scanning (compare runs)\n  [ ] scheduled scan mode'
+        }
       },
       '/usr/loadout': {
-        type: 'dir', children: ['README.md'],
-        files: { 'README.md': 'Loadout\n=======\nPortable PowerShell + WPF workstation setup tool.\nFor infrastructure professionals who are tired of\nmanually rebuilding their toolchain on every fresh box.\n\nGitHub: github.com/bferguson-dev/Loadout' }
+        type: 'dir', children: ['README.md', 'status.txt'],
+        files: {
+          'README.md': 'Loadout\n=======\nPortable, self-updating workstation setup tool for\nWindows infrastructure professionals.\n\nThe problem:\n  You rebuild a workstation. You install 40 tools manually.\n  You forget three of them until two weeks later.\n  You do it again six months from now.\n\nThe solution:\n  One script. Everything in its place.\n\nArchitecture:\n  PowerShell core + WPF GUI frontend\n  Checks for updates on launch, patches itself\n  YAML-defined tool manifest — add a tool, it shows up\n  Idempotent: reruns are safe\n\nWhat it installs / configures:\n  Dev tooling  — git, VS Code, Windows Terminal, Python\n  Infra tools  — Ansible, Terraform, kubectl, SSH\n  Shell config — PSProfile, aliases, prompt, fonts\n  Custom mods  — anything in the manifest\n\nDesigned for:\n  The engineer who has strong opinions about their environment\n  and strong feelings about rebuilding it from scratch.\n\nGitHub: github.com/bferguson-dev/Loadout',
+          'status.txt': 'Loadout — v1.0.0 — STABLE\n──────────────────────────\nprod_validated:  yes (personal use daily)\ntest_coverage:   manual validation\ndocs:            current\nplatform:        Windows (PowerShell 5.1+)\n\nnext:\n  [ ] Linux/macOS dotfiles variant\n  [ ] Chocolatey + winget source toggle\n  [ ] manifest schema validation\n  [x] self-update mechanism\n  [x] WPF GUI frontend\n  [x] idempotent reruns'
+        }
       },
       '/usr/readycheck': {
-        type: 'dir', children: ['README.md'],
-        files: { 'README.md': 'ReadyCheck\n==========\nConnectivity validation CLI. Compares observed network\nbehavior against declared allow/deny intent.\nEmits review artifacts. Designed for auditable change verification.\n\nGitHub: github.com/bferguson-dev/ReadyCheck' }
+        type: 'dir', children: ['README.md', 'status.txt'],
+        files: {
+          'README.md': 'ReadyCheck\n==========\nConnectivity validation CLI.\nCompares observed network behavior against declared intent.\n\nThe problem:\n  You make a firewall change. You think it worked.\n  You find out it didn\'t at 11pm during a DR test.\n\nThe solution:\n  Declare what should and should not be reachable.\n  Run ReadyCheck. Get a diff between intent and reality.\n  Get a review artifact you can attach to the change ticket.\n\nHow it works:\n  YAML intent file defines expected allow/deny pairs.\n  CLI probes each target:port combination.\n  Results compared against declared intent.\n  Emits pass/fail per rule with timestamped artifact.\n\nUse cases:\n  Pre/post firewall change validation\n  DR runbook connectivity verification\n  Environment readiness checks before deployments\n  Auditable proof that a network change did what it said\n\nDesigned to be run by an operator, not a network team.\nIf you can SSH to a box, you can run ReadyCheck from it.\n\nGitHub: github.com/bferguson-dev/ReadyCheck',
+          'status.txt': 'ReadyCheck — v0.2.0 — ACTIVE DEVELOPMENT\n──────────────────────────────────────────\nprod_validated:  partial (used in lab DR tests)\ntest_coverage:   unit + integration\ndocs:            current\nplatform:        Python 3.10+ (cross-platform)\n\nnext:\n  [ ] ICMP / ping check mode\n  [ ] CI pipeline integration mode\n  [ ] HTML diff report\n  [ ] multi-host parallel probing\n  [x] YAML intent file format\n  [x] timestamped review artifacts\n  [x] pass/fail per rule output'
+        }
       },
       '/usr/my-lab-setup': {
-        type: 'dir', children: ['README.md'],
-        files: { 'README.md': 'My Lab Setup\n============\nSanitized Proxmox + Ansible lab automation.\nProvisioning phases, guest baselining, clone workflows.\n\nWhere I actually break things before pushing elsewhere.\n\nGitHub: github.com/bferguson-dev/My-Lab-Setup' }
+        type: 'dir', children: ['README.md', 'status.txt'],
+        files: {
+          'README.md': 'My Lab Setup\n============\nSanitized Proxmox + Ansible homelab automation.\nWhere I break things before pushing them anywhere else.\n\nHardware:\n  Primary hypervisor  — Proxmox VE (bare metal)\n  Network             — VLAN-segmented, pfSense\n  Storage             — ZFS pool + NFS shares\n  Management          — Ansible control node (dedicated VM)\n\nWhat\'s automated:\n  Proxmox guest provisioning from cloud-init templates\n  Ansible-driven baselining: packages, SSH hardening, NTP\n  Clone workflows for repeatable test environments\n  DNS and DHCP configuration via Ansible\n  Cron-driven snapshot policy\n\nWhat\'s in the repo:\n  Ansible roles — baseline, harden, monitor\n  Proxmox playbooks — provision, clone, snapshot\n  Inventory templates — hosts vars, group vars\n  Cloud-init seed configs for Ubuntu and Rocky Linux\n\nThis is where FailWarden, YMC, and ReadyCheck\nget tested before they touch anything real.\n\nSanitized — no IPs, no credentials, no production config.\nUseful as a reference for building your own.\n\nGitHub: github.com/bferguson-dev/My-Lab-Setup',
+          'status.txt': 'My Lab Setup — ONGOING\n───────────────────────\nprod_validated:  n/a (this IS the lab)\ntest_coverage:   it\'s a lab. everything is a test.\ndocs:            current (ish)\nhypervisor:      Proxmox VE\nautomation:      Ansible\n\ncurrently running:\n  [x] Proxmox cluster (3 nodes)\n  [x] Ansible control node\n  [x] pfSense router/firewall\n  [x] Docker host (homelab services)\n  [x] Monitoring stack\n\nnext:\n  [ ] k3s cluster for container workloads\n  [ ] Vault for secret management\n  [ ] automated baseline drift detection'
+        }
       },
       '/usr/project-prompts': {
-        type: 'dir', children: ['README.md'],
-        files: { 'README.md': 'project-prompts\n===============\nStructured library of project-scoped prompt engineering\nguidelines for accountable, auditable AI-assisted development.\n\nAI is a force multiplier — but only if you can trust what\nit produced and reproduce how it got there.\n\nFeatures:\n- Project-scoped guidelines that constrain AI behavior\n- Standardized direction, review, and constraint rules\n- Paired with session logging for full audit trail\n- Treats AI tooling like any external dependency:\n  version it, document it, own it.\n\nGitHub: github.com/bferguson-dev/project-prompts' }
+        type: 'dir', children: ['README.md', 'status.txt'],
+        files: {
+          'README.md': 'project-prompts\n===============\nA structured AI governance framework for engineers\nwho use AI as a development tool and want to be\nable to explain what happened afterward.\n\nThe problem:\n  AI writes code. You ship it. Six months later,\n  nobody knows why it works or whether it still does.\n  The prompt is gone. The context is gone. The audit\n  trail is a vibe.\n\nThe solution:\n  Treat AI tooling like any other external dependency.\n  Version it. Document it. Own the output.\n\nWhat\'s in the framework:\n  /prompts     — reusable task-scoped prompt templates\n  /governance  — project guidelines and constraint rules\n  /sessions    — structured session log format\n  /reviews     — AI output review checklists\n\nHow it works:\n  Each project gets a scoped CLAUDE.md / prompt config.\n  Sessions are logged: what was asked, what was produced,\n  what was accepted or rejected, and why.\n  Reviews are structured, not vibes.\n  Output is attributable, reproducible, and auditable.\n\nThis is what I use across all personal projects.\nEvery commit touched by AI has a session log behind it.\n\nIf you can\'t explain what the AI did, you don\'t own\nwhat it built.\n\nGitHub: github.com/bferguson-dev/project-prompts',
+          'status.txt': 'project-prompts — v1.0.0 — ACTIVE USE\n───────────────────────────────────────\nprod_validated:  yes (used on every project here)\ntest_coverage:   n/a (governance framework)\ndocs:            current\nmodels:          Claude, OpenAI, Gemini, Ollama\n\nintegrated with:\n  [x] FailWarden development\n  [x] YMC development\n  [x] ReadyCheck development\n  [x] This portfolio site\n\nnext:\n  [ ] public template release\n  [ ] per-model prompt tuning guides\n  [ ] automated session log parsing'
+        }
       },
       '/etc': {
         type: 'dir', children: ['contact.txt', 'hosts', 'motd'],
@@ -1245,51 +1282,58 @@
       if (filename === 'resume.txt' || filename === 'resume' || filename === 'resume.md') {
         blank();
         println('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'tl-muted');
-        println('  BYRON FERGUSON  //  AI-Augmented Infrastructure Engineer', 'tl-amber');
+        println('  BYRON FERGUSON  //  Infrastructure Engineer · Builder · Architect', 'tl-amber');
         println('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'tl-muted');
         println('  bferguson-dev@gmail.com  |  615-359-3820', 'tl-muted');
-        println('  linkedin.com/in/byronferguson  |  bferguson-dev.github.io', 'tl-muted');
-        blank();
-        println('  "I use tools to create tools to solve everyday problems', 'tl-amber');
-        println('   so that we can all go home on time."', 'tl-amber');
+        println('  linkedin.com/in/byronferguson  |  bferguson.dev', 'tl-muted');
         blank();
         println('── SUMMARY ────────────────────────────────────────────────────────', 'tl-muted');
-        println('  16+ years designing, operating, and automating enterprise-scale', 'tl-ok');
-        println('  systems. VMware at 10,000+ VM scale. Dell EMC storage. Deep', 'tl-ok');
-        println('  compliance experience: NIST 800-53, HIPAA, PCI-DSS, SOC 2.', 'tl-ok');
-        println('  Now applying AI and agentic workflows to infrastructure problems.', 'tl-ok');
+        println('  16+ years treating infrastructure as a product — architect,', 'tl-ok');
+        println('  automate, and evolve. Deep operator background: 10,000+ VMs,', 'tl-ok');
+        println('  500+ ESXi hosts. Transitioning into cloud-native and platform', 'tl-ok');
+        println('  engineering. Open source contributor with shipped tooling for', 'tl-ok');
+        println('  compliance automation, observability, and runbook execution.', 'tl-ok');
         blank();
         println('── EXPERIENCE ─────────────────────────────────────────────────────', 'tl-muted');
-        println('  Independent Software Development & R&D        Dec 2024 – Present', 'tl-amber');
-        println('  ▸ Open-source infra, security, and compliance tooling', 'tl-ok');
-        println('  ▸ Agentic AI workflows with full auditability framework', 'tl-ok');
+        println('  Self-Directed / Independent R&D               Dec 2024 – Present', 'tl-amber');
+        println('  ▸ Infra-as-product: CI/CD, docs, testable interfaces on all tools', 'tl-ok');
+        println('  ▸ Parallel AI agent orchestration via Cline Kanban + git worktrees', 'tl-ok');
+        println('  ▸ Terraform homelab IaC; Proxmox, Cloudflare Tunnel, GitLab CE', 'tl-ok');
+        println('  ▸ Pursuing AWS Cloud Practitioner (CLF-C02)', 'tl-ok');
         blank();
-        println('  Experian Health — Systems Engineer          Dec 2016 – Nov 2024', 'tl-amber');
-        println('  ▸ Scaled VMware vSphere/ESXi to 10,000+ VMs, 500+ ESXi hosts', 'tl-ok');
-        println('  ▸ Ansible AAP + PowerShell automation for patching & compliance', 'tl-ok');
-        println('  ▸ HIPAA, PCI-DSS, NIST 800-53, SOC 2 enforcement & DR runbooks', 'tl-ok');
+        println('  Experian Health — Systems / Infrastructure Eng  Dec 2016 – Nov 2024', 'tl-amber');
+        println('  ▸ 10,000+ VMs, 500+ ESXi hosts, 3 geographically separated DCs', 'tl-ok');
+        println('  ▸ 2 large-scale DC migrations, zero unplanned downtime', 'tl-ok');
+        println('  ▸ Splunk SIEM, SolarWinds, OpenManage, vCenter, Nutanix Prism', 'tl-ok');
+        println('  ▸ HIPAA, PCI-DSS, NIST 800-53, SOC 2 — automated enforcement', 'tl-ok');
+        println('  ▸ On-call 1 week/month — full stack, every month since 2016', 'tl-ok');
         blank();
-        println('  City of Franklin — Network Analyst / ISO    Aug 2014 – Oct 2016', 'tl-amber');
-        println('  ▸ Office 365, MBAM, Veeam — hardened from scratch', 'tl-ok');
-        println('  ▸ Rewrote Group Policy infrastructure; managed eDiscovery exports', 'tl-ok');
+        println('  City of Franklin — DC Eng / City ISO        Oct 2012 – Oct 2016', 'tl-amber');
+        println('  ▸ Cisco UCS + Nexus DC build-out from the ground up', 'tl-ok');
+        println('  ▸ FireEye, Cisco IronPort, Exchange hybrid migration to O365', 'tl-ok');
+        println('  ▸ Enterprise patching, Group Policy rewrite, on-call rotation', 'tl-ok');
         blank();
-        println('  City of Franklin — Network Technician       Oct 2012 – Aug 2014', 'tl-amber');
-        println('  ▸ AD, DNS, DHCP, file services, Cisco routing/switching/VPN', 'tl-ok');
+        println('── OPEN SOURCE ────────────────────────────────────────────────────', 'tl-muted');
+        println('  YMC / YMC-L    Agentless compliance scanner — Win/Linux, porting to Go', 'tl-ok');
+        println('  The Collective  Distributed compliance orchestration — K8s/k3s/Docker', 'tl-ok');
+        println('  FailWarden     YAML runbook executor over SSH — infra remediation', 'tl-ok');
+        println('  ReadyCheck     Connectivity validation CLI vs declared intent', 'tl-ok');
+        println('  project-prompts  AI governance and versioned prompt engineering', 'tl-ok');
         blank();
         println('── SKILLS ─────────────────────────────────────────────────────────', 'tl-muted');
-        println('  AI & Auto  LLMs, Agentic AI, Ansible AAP, Python, PowerShell,', 'tl-ok');
-        println('             Bash, GitHub Actions, CI/CD, Terraform', 'tl-ok');
-        println('  Infra      VMware vSphere/ESXi, Nutanix HCI, RHEL/Linux, Proxmox', 'tl-ok');
-        println('  Storage    Dell EMC Isilon, PowerFlex, Data Domain, ECS, ExaGrid', 'tl-ok');
-        println('  Network    Cisco Nexus, Arista BCF, SDN, NetMotion, AnyConnect', 'tl-ok');
-        println('  Security   NIST 800-53, HIPAA, PCI-DSS, SOC 2, CMMC, CIS, STIG', 'tl-ok');
-        println('  Cloud      Azure (AZ-104 in progress), Office 365, AD, DNS, GPO', 'tl-ok');
+        println('  Infra/Cloud  VMware, Nutanix, AWS, Docker, K8s/k3s, Proxmox', 'tl-ok');
+        println('  Automation   Terraform, Ansible, PowerShell, Python, Go, Bash', 'tl-ok');
+        println('  Observ.      Splunk (SIEM), SolarWinds, OpenManage, vCenter, vROps', 'tl-ok');
+        println('  Security     NIST, HIPAA, PCI-DSS, SOC 2, ISO 27001, CIS, STIG', 'tl-ok');
+        println('  Storage      Isilon, PowerFlex, Data Domain, ECS (S3), ExaGrid', 'tl-ok');
+        println('  Network      Cisco Nexus/IOS, Arista BCF, Cloudflare, FireEye', 'tl-ok');
+        println('  AI           LLMs, Agentic AI, Kanban orchestration, AI governance', 'tl-ok');
         blank();
         println('── EDUCATION ──────────────────────────────────────────────────────', 'tl-muted');
         println('  M.S. Information Security & Assurance — WGU, 2018', 'tl-ok');
         blank();
         println('── CERTIFICATIONS ─────────────────────────────────────────────────', 'tl-muted');
-        println('  Microsoft Azure Administrator (AZ-104)        in progress', 'tl-ok');
+        println('  AWS Cloud Practitioner (CLF-C02)              in progress', 'tl-ok');
         println('  Red Hat Certified Specialist in Ansible       training completed', 'tl-ok');
         println('  CEH & CHFI — EC-Council                       formerly certified', 'tl-ok');
         blank();
@@ -2559,8 +2603,7 @@
       });
       muggleBtn.textContent = muggle ? 'Wizard Mode' : 'Muggle Mode';
       const url = new URL(window.location);
-      if (muggle) url.searchParams.set('mode', 'muggle');
-      else url.searchParams.delete('mode');
+      url.searchParams.set('mode', muggle ? 'muggle' : 'wizard');
       history.replaceState(null, '', url);
     }
 
@@ -2568,7 +2611,9 @@
       setMode(!document.body.classList.contains('muggle'));
     });
 
-    if (new URLSearchParams(window.location.search).get('mode') === 'muggle') {
+    if (new URLSearchParams(window.location.search).get('mode') === 'wizard') {
+      setMode(false);
+    } else {
       setMode(true);
     }
 
